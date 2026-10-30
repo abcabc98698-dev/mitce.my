@@ -24,10 +24,10 @@ const minutes = readingTime(post);
   </div>
   <div class="post__m">
     <em>{post.data.category}</em>
-    {showDate && <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</time>}
-    <span>{minutes} min read</span>
+    {showDate && <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}</time>}
+    <span>{minutes} 分钟阅读</span>
   </div>
   <Heading class="d4"><a href={href}>{post.data.title}</a></Heading>
   <p>{post.data.description}</p>
-  <span class="arrow arrow--heat" aria-hidden="true"><span>Read the note</span><Icon name="arrow-right" /></span>
+  <span class="arrow arrow--heat" aria-hidden="true"><span>阅读测评</span><Icon name="arrow-right" /></span>
 </article>

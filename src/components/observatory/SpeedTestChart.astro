@@ -1,0 +1,204 @@
+---
+import type { SpeedTestNode } from '../../data/brands';
+
+interface Props {
+  brandName: string;
+  testDate?: string;
+  testEnvironment?: string;
+  nodes?: SpeedTestNode[];
+  summaryNote?: string;
+}
+
+const {
+  brandName,
+  testDate = '2026-10-19 晚高峰 20:30',
+  testEnvironment = 'Clash Verge Rev (Mihomo) · 联通千兆宽带基准',
+  nodes = [
+    { node: '香港 IEPL 01', latency: '22ms', download: '529Mbps' },
+    { node: '新加坡 专线 01', latency: '46ms', download: '387Mbps' },
+    { node: '日本 东京 专线', latency: '57ms', download: '135Mbps' },
+    { node: '台湾 专线 01', latency: '41ms', download: '114Mbps' },
+    { node: '美国 洛杉矶 专线', latency: '143ms', download: '18Mbps' },
+  ],
+  summaryNote = '全节点丢包率 0% · 晚高峰专线出口稳定无抖动',
+} = Astro.props;
+
+// Calculate progress percentage relative to 600Mbps
+function getWidth(dl: string): number {
+  const num = parseInt(dl, 10);
+  if (isNaN(num)) return 40;
+  return Math.min(100, Math.max(8, Math.round((num / 600) * 100)));
+}
+---
+
+<div class="obs-box">
+  <div class="obs-head">
+    <div class="obs-head__title">
+      <span class="obs-indicator"></span>
+      <b>{brandName} 专线测速面板 (Performance Monitoring)</b>
+    </div>
+    <span class="obs-tag">Measured Data · 实测数据</span>
+  </div>
+
+  <div class="obs-sub">
+    <span>测试环境: {testEnvironment}</span>
+    <span>采样时间: {testDate}</span>
+  </div>
+
+  <div class="obs-body">
+    {nodes.map((item) => {
+      const pct = getWidth(item.download);
+      const isFast = parseInt(item.download, 10) > 300;
+      return (
+        <div class="obs-row">
+          <div class="obs-row__meta">
+            <span class="obs-dot"></span>
+            <span class="obs-name">{item.node}</span>
+            <span class="obs-ping">延迟: <em>{item.latency}</em></span>
+            <span class="obs-speed">下行: <strong>{item.download}</strong></span>
+          </div>
+          <div class="obs-bar-track">
+            <div class:list={['obs-bar-fill', { 'obs-bar-fill--hot': isFast }]} style={`width: ${pct}%`} />
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <div class="obs-foot">
+    <span>指标汇总: {summaryNote}</span>
+    <span class="obs-watermark">MITCE Observatory [mitce.my]</span>
+  </div>
+</div>
+
+<style>
+  .obs-box {
+    background: #0B0F17;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 20px;
+    color: #E2E8F0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    margin: 20px 0;
+  }
+  .obs-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .obs-head__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #F8FAFC;
+  }
+  .obs-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 10px #10B981;
+    display: inline-block;
+  }
+  .obs-tag {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34D399;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .obs-sub {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: #94A3B8;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .obs-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .obs-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .obs-row__meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .obs-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00E676;
+  }
+  .obs-name {
+    font-weight: 600;
+    color: #F1F5F9;
+    min-width: 140px;
+  }
+  .obs-ping {
+    color: #94A3B8;
+  }
+  .obs-ping em {
+    color: #38BDF8;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .obs-speed {
+    color: #94A3B8;
+    margin-left: auto;
+  }
+  .obs-speed strong {
+    color: #00E676;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .obs-bar-track {
+    height: 7px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .obs-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0284C7, #38BDF8);
+    border-radius: 4px;
+    transition: width 0.6s ease;
+  }
+  .obs-bar-fill--hot {
+    background: linear-gradient(90deg, #10B981, #00E676);
+  }
+  .obs-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: #64748B;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .obs-watermark {
+    color: rgba(255, 255, 255, 0.35);
+    font-family: monospace;
+  }
+</style>

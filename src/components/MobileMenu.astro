@@ -5,14 +5,32 @@ import { url } from '../utils/url';
 import { ariaCurrent } from '../utils/nav';
 
 const path = Astro.url.pathname;
+const isExternalCta = /^https?:\/\//.test(siteConfig.cta.href);
 ---
 
 <div class="mob" id="mob" role="dialog" aria-modal="true" aria-label="Menu" hidden>
   <button class="mob__x" id="mobX" type="button" aria-label="Close menu">&times;</button>
   <nav class="mob__nav" aria-label="Mobile">
-    {mobileNav.map((item) => (
-      <a href={url(item.href)} aria-current={ariaCurrent(item, path)}>{item.label}</a>
-    ))}
+    {mobileNav.map((item) => {
+      const isExt = /^https?:\/\//.test(item.href);
+      return (
+        <a
+          href={url(item.href)}
+          target={isExt ? '_blank' : undefined}
+          rel={isExt ? 'nofollow sponsored noopener' : undefined}
+          aria-current={ariaCurrent(item, path)}
+        >
+          {item.label}
+        </a>
+      );
+    })}
   </nav>
-  <a href={url(siteConfig.cta.href)} class="btn btn--heat">{siteConfig.cta.label}</a>
+  <a
+    href={url(siteConfig.cta.href)}
+    target={isExternalCta ? '_blank' : undefined}
+    rel={isExternalCta ? 'nofollow sponsored noopener' : undefined}
+    class="btn btn--heat"
+  >
+    {siteConfig.cta.label}
+  </a>
 </div>

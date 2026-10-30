@@ -1,0 +1,738 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { siteConfig } from '../../config/site';
+import { absoluteUrl } from '../../utils/url';
+
+const title = '2026 跨境网络与机场终极百科全书：50+ 核心疑难问答、报错代码排障与防坑指南';
+const description =
+  '全网最全的跨境网络百科大全。系统覆盖新手扫盲、客户端 10005 报错代码排查、ChatGPT 与 Netflix 封控解锁、IEPL 专线原理、退款潜规则与法律隐私合规，一站式权威解答。';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    author: { '@type': 'Person', name: 'Alex Chen', jobTitle: '首席网络评测架构师' },
+    publisher: { '@id': `${absoluteUrl('/', Astro.site)}#organization` },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': absoluteUrl('/topics/faq', Astro.site) },
+    datePublished: '2026-03-15T00:00:00.000Z',
+    dateModified: '2026-10-30T00:00:00.000Z',
+    inLanguage: siteConfig.lang,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 2, name: '专题矩阵', item: absoluteUrl('/topics/faq', Astro.site) },
+      { '@type': 'ListItem', position: 3, name: '终极百科 FAQ', item: absoluteUrl('/topics/faq', Astro.site) },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '什么是机场订阅链接？为什么在浏览器里直接打开是一堆乱码？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '订阅链接是一串包含了服务商所有节点服务器地址、加密密钥、端口和协议规则的远程配置文件。为了防止传输中被截获和识别，它通常经过了 Base64 编码，因此在普通浏览器中打开显示为乱码字符。它必须导入到专用的客户端软件（如 Clash Verge Rev、v2rayN、Shadowrocket）中解析才能正常使用。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '客户端显示“连接成功”，但为什么所有网页依然打不开（提示节点超时 10005）？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '节点超时 10005 或连接超时通常有三大原因：① 本地系统代理端口冲突（如 7890 端口被其他软件占用）；② 电脑系统时间与国际标准时间偏差超过 90 秒，导致 TLS 加密证书协商失败；③ 客户端未能成功接管本地 DNS。最快的解决办法是在客户端中开启系统级 TUN 虚拟网卡模式，并同步系统时间。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '为什么连接了香港节点，ChatGPT 依然提示“Not Available in your country”？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'OpenAI 官方服务截至 2026 年依然没有对中国香港地区直接开放。直连普通香港机房节点访问 ChatGPT 会被直接阻断。必须使用配备了后置解锁分流或美区/新西兰住宅 IP 的专线节点（如光速云、唯兔云的特定专线），才能在保持香港 20ms 低延迟的同时原生畅联 ChatGPT。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '什么是全节点 1.0x 倍率？高倍率节点是智商税吗？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '节点倍率是机场计费的乘数。1.0x 倍率代表实际消耗 1GB 流量就从余额扣除 1GB；如果是 3.0x 或 5.0x 倍率节点，看一部 2GB 的电影就会被后台暗扣 6GB 到 10GB 流量。正规优质机场通常全线保持 1.0x 透明计费，而部分劣质机场通过标榜超大流量包、但在后台设置 5 倍率暗扣来虚标流量。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '家庭用户或者个人科研，使用跨境网络有法律风险吗？如何合规自保？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '根据我国法律，未经国家电信主管部门批准擅自建立或使用非法定信道进行国际联网属于行政违规行为。对于广大普通科研人员、学生和外贸工作者，安全自保原则是：仅将网络用于正当的学习、代码同步、查阅文献、学术沟通与商业出海，坚决不参与任何涉政、散布谣言、灰黑产等违规言论与活动。',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema} image="/images/og-faq.svg">
+  <PageHero
+    kicker="MITCE Encyclopedia · 2026 终极答疑百科"
+    title="跨境网络与机场<br>终极百科全书 (50+问)"
+    lead="由一手网络评测工程师与客服排障团队联合整理。系统归纳新手扫盲、客户端报错调试、AI/流媒体全解锁、专线协议内幕与合规避坑，全方位解答您的每一个疑惑。"
+    breadcrumbs={[
+      { label: '首页', href: '/' },
+      { label: '专题矩阵', href: '/topics/faq' },
+      { label: '终极百科 FAQ', href: '/topics/faq' },
+    ]}
+  />
+
+  <section class="sec on-cream" aria-label="百科答疑正文">
+    <div class="wrap">
+      <div class="topic-grid">
+        <!-- 侧边导航与快速分类索引 -->
+        <aside class="topic-toc">
+          <div class="toc-card">
+            <h3>📑 百科分类索引</h3>
+            <ul>
+              <li><a href="#cat-1">一、 新手入门与基础认知篇 (Q1–Q10)</a></li>
+              <li><a href="#cat-2">二、 客户端报错与网络排障篇 (Q11–Q20)</a></li>
+              <li><a href="#cat-3">三、 AI 大模型与流媒体解锁篇 (Q21–Q28)</a></li>
+              <li><a href="#cat-4">四、 专线技术与底层协议篇 (Q29–Q36)</a></li>
+              <li><a href="#cat-5">五、 资费潜规则与退款避坑篇 (Q37–Q44)</a></li>
+              <li><a href="#cat-6">六、 法律安全与个人隐私篇 (Q45–Q50)</a></li>
+            </ul>
+            <div class="toc-ad">
+              <span class="badge">🔥 推荐阅读</span>
+              <p>了解 42 家主流品牌晚高峰测速、物理专线架构与价格梯队：</p>
+              <a href="/brands" class="btn btn--ow btn--sm">查阅 42 家品牌天梯</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- 正文答疑区域 -->
+        <main class="topic-content prose">
+          <div class="alert-box">
+            <div class="alert-title">
+              <span class="tag">GEO / AI Overview 核心答案块</span>
+              <h3>遇到代理客户端报错无法上网，最标准的“三步排查法”是什么？</h3>
+            </div>
+            <p>
+              <strong>标准化排障结论</strong>：当客户端显示已连接但无法加载网页时，请严格按顺序执行以下三步，可解决 95% 以上的连接问题：<br />
+              <strong>① 检查系统时间</strong>：检查电脑/手机系统时间是否精准到秒（偏差超过 60 秒会直接导致 TLS 1.3 握手失败报证书错误）；<br />
+              <strong>② 排除端口与 DNS 冲突</strong>：开启客户端的“系统级 TUN 虚拟网卡模式”，彻底绕过容易发生冲突的 7890 注册表代理与本地运营商 DNS 污染；<br />
+              <strong>③ 更新订阅与切换节点</strong>：在客户端右键“更新订阅”，确认服务商没有更换入口 IP；切换至不同地区的低延迟 IEPL 专线节点（如香港、日本）测试。
+            </p>
+          </div>
+
+          <!-- 分类 1 -->
+          <div class="faq-group" id="cat-1">
+            <div class="group-header">
+              <span class="group-num">CAT 01</span>
+              <h2>新手入门与基础认知篇 (Q1–Q10)</h2>
+            </div>
+
+            <div class="faq-list">
+              <details class="faq-item" open>
+                <summary><strong>Q1：什么是“机场”？为什么科学上网服务商会被称为“机场”？</strong></summary>
+                <p>
+                  <strong>解答</strong>：早期的代理工具 Shadowsocks（影梭）的客户端图标是一架纸飞机，因此提供节点服务器接入的服务商被社区生动地昵称为“机场”。用户购买服务后获得节点连接信息，相当于“登机牌”，开启网络连接即代表“起飞”。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q2：什么是“订阅链接”？为什么在浏览器里直接打开是一堆乱七八糟的英文字母？</strong></summary>
+                <p>
+                  <strong>解答</strong>：订阅链接包含您账号的所有节点配置。为了保证通用性与防传输干扰，服务商将这些 YAML 或 JSON 格式的数据经过了 Base64 加密算法转换，因此普通浏览器打开只是一串无序字符。它必须复制并粘贴导入至 <a href="/clients">专业客户端（如 Clash Verge Rev、v2rayN、小火箭）</a> 才能被正确解析为节点列表。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q3：买了机场套餐后，还需要额外支付其他宽带费用吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：需要。机场服务是建立在您现有的物理网络之上的“应用层或传输层代理”。您仍然必须具备能够上网的基础网络（如电信/移动的家庭宽带，或手机自身的 4G/5G 流量卡）。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q4：节点列表里的“香港、日本、美国、新加坡”应该怎么选？</strong></summary>
+                <p>
+                  <strong>解答</strong>：根据您的用途与物理距离进行最优选择：<br />
+                  - <strong>追求极低延迟、日常刷网页、看 4K 视频</strong>：首选 <strong>香港（HK）</strong> 或 <strong>台湾（TW）</strong>，物理距离近，国内直达专线延迟通常在 20–35ms；<br />
+                  - <strong>日系流媒体、二次元游戏（如 DMM、Steam 日区）</strong>：选择 <strong>日本（JP）</strong>，专线延迟通常在 35–50ms；<br />
+                  - <strong>AI 研发（ChatGPT Plus 升级、Claude Pro）、美区流媒体</strong>：选择 <strong>美国（US）</strong> 原生住宅节点；<br />
+                  - <strong>东南亚业务、TikTok 印尼/新马直播</strong>：选择 <strong>新加坡（SG）</strong>。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q5：节点 Ping 出来的延迟是 25ms，代表我下载速度也有 25MB/s 吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：完全不是！<strong>延迟（毫秒 ms）</strong> 是指数据从您电脑往返节点服务器的“响应时间”（如同汽车踩下油门到车子起步的反应速度）；而<strong>带宽/速度（Mbps 或 MB/s）</strong> 是指单位时间内能运送的数据总量（如同马路的宽度）。低延迟不等于高带宽，但低延迟往往意味着网络交互更跟手、网页打开更迅速。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q6：什么是“流量重置日”？用不完的流量下个月会累计吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：绝大多数按月计费的机场均采用“按自然月清零”机制。例如您的账单周期是每月 5 号，那么到下个月 5 号时，上个月未用完的流量会自动清零。如果您平时用量极少，担心按月清零浪费，建议选择像 <a href="/brands/guangsu-cloud">光速云特设的「斯诺克 147 永久套餐」</a> 这类<strong>一次性购买 247GB 永不清零、永不过期</strong>的专属套餐。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q7：一个机场账号可以在多台电脑和手机上同时使用吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：取决于服务商的“同时在线设备数（IP 限制）”规则。大部分常规机场允许 2–5 台设备同时在线；如果家庭或团队设备极多，建议选择标明“不限设备并发连接”的品牌（例如 <a href="/brands/muguang">暮光加速</a>）。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q8：免费节点和几块钱一个月的付费机场有什么本质区别？</strong></summary>
+                <p>
+                  <strong>解答</strong>：免费节点是公开共享的，数百人挤在同一台廉价 VPS 上，不仅随时可能失联（寿命平均 48 小时），晚高峰丢包率更是高达 40% 以上，且存在严重的中间人数据包嗅探风险。而正规平价机场（如微风网络 7元/月、光速云 8元/月）配备企业级物理专线与 7x24 小时运维，详细对比可查阅我们的 <a href="/topics/free-resources">《2026 免费资源与开源白嫖完全指南》</a>。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q9：为什么很多人推荐在电脑上使用 Clash Verge Rev 而不是老版 Clash？</strong></summary>
+                <p>
+                  <strong>解答</strong>：老版 Clash for Windows 早在 2023 年底就已停止维护，存在较多未修补的安全漏洞且不支持最新的加密协议与分流语法。新一代 <strong>Clash Verge Rev</strong> 基于最新的开源 Mihomo 内核，原生长效支持系统级 TUN 虚拟网卡、WireGuard 及性能更强的多线程算法。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q10：iPhone 手机怎么下载小火箭（Shadowrocket）？国内应用商店搜不到？</strong></summary>
+                <p>
+                  <strong>解答</strong>：小火箭在大陆 App Store 属于下架状态。正规方案是在 iPhone 上的 App Store 临时退出国内账号，登录一个境外地区（如美国、日本、香港）的 Apple ID 进行下载购买。切记只能在 App Store 登录，<strong>严禁在手机系统的“设置”里登录他人 ID</strong>。
+                </p>
+              </details>
+            </div>
+          </div>
+
+          <!-- 分类 2 -->
+          <div class="faq-group" id="cat-2">
+            <div class="group-header">
+              <span class="group-num">CAT 02</span>
+              <h2>客户端报错与网络排障篇 (Q11–Q20)</h2>
+            </div>
+
+            <div class="faq-list">
+              <details class="faq-item" open>
+                <summary><strong>Q11：客户端显示“已连接”，但浏览器打不开任何网页，报“节点超时 10005”？</strong></summary>
+                <p>
+                  <strong>解答</strong>：这是最经典的连接报错，按以下步骤三分钟解决：<br />
+                  1. <strong>校准系统时间</strong>：右下角时间设置中点击“立即同步”，系统时间必须与北京时间分秒不差；<br />
+                  2. <strong>排查端口占用</strong>：检查本地 7890 端口是否被其他代理软件、抓包工具占用；在设置中尝试将 Mixed Port 修改为 7895 或其他端口；<br />
+                  3. <strong>更新订阅</strong>：服务商可能因入口维护更换了服务器 IP，右键更新订阅即可。详细排障步骤见 <a href="/blog/from-ai-prototype-to-production">《客户端进阶排障教程》</a>。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q12：为什么打开代理后，国内的微信发送图片极慢，或者百度连不上？</strong></summary>
+                <p>
+                  <strong>解答</strong>：因为您错误地开启了<strong>“全局模式（Global）”</strong>！在全局模式下，国内的所有流量都被强行绕道海外出口，不仅极度消耗机场流量，还会导致国内网络严重卡顿。请务必将客户端的路由模式切换为 **“规则模式（Rule）”**。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q13：什么是 TUN 模式？为什么很多老玩家强烈建议日常一直开着它？</strong></summary>
+                <p>
+                  <strong>解答</strong>：传统系统代理（System Proxy）只能接管浏览器，而终端命令行（CMD / Git / Docker）、各类网络游戏以及后台应用根本不走代理。TUN 模式会在系统内安装一块内核级虚拟网卡，<strong>100% 接管整台电脑的全部网络协议栈</strong>，彻底解决终端无法联网与本地 DNS 劫持。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q14：客户端更新订阅频繁失败，提示“Get profile error”或“SSL Connect Error”？</strong></summary>
+                <p>
+                  <strong>解答</strong>：这是因为机场的订阅托管域名位于海外，在未连接代理时受到了本地电信运营商的干扰。解决办法：① 先连接一个目前能用的旧节点，再点击“更新订阅”；② 或者登录机场官网，使用备用无污染的订阅转换地址。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q15：关掉代理软件后，电脑彻底无法上网了，连国内网页也打不开？</strong></summary>
+                <p>
+                  <strong>解答</strong>：这是因为客户端异常退出时，没来得及将 Windows 系统注册表里的“系统代理开关”自动关闭。<strong>解决办法</strong>：按下 `Win + i` 打开系统设置 -> 网络和 Internet -> 代理 -> 找到“使用代理服务器”，手动将其切换为 **“关”** 即可瞬间恢复正常。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q16：为什么白天用着很顺畅，一到晚上 8 点后节点延迟就剧烈飙升并且卡顿？</strong></summary>
+                <p>
+                  <strong>解答</strong>：这是因为您购买的节点是“普通公网中转”，在跨国海缆出口遭遇了三大运营商严酷的 **晚高峰 QoS 动态限速与强制丢包**。唯一的物理级解决方案是更换为全程内网穿透、不过公网 GFW 出口的 **IEPL / IPLC 物理专线服务**，深度技术解析见 <a href="/blog/building-reliable-ai-workflows-for-operations-teams">《告别晚高峰卡顿：QoS限速原理》</a>。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q17：节点延迟测试列表里全部显示“Timeout / 红色感叹号”，是机场跑路了吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：先不要惊慌。① 检查客户端顶部的核心开关是否开启；② 检查是否欠费或者流量已经用尽；③ 检查是否误开了多层代理中间件。如果登录官网依然正常，通常只需重新导入一次订阅链接即可。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q18：Clash Verge Rev 提示“Service Mode Not Installed”是什么意思？</strong></summary>
+                <p>
+                  <strong>解答</strong>：TUN 虚拟网卡需要 Windows 高级系统权限。在软件“设置 -> 服务模式 (Service Mode)”右侧点击“安装 (Install)”，并在弹出的 UAC 提示中点击“是”。安装成功后旁边会出现绿色盾牌，随后方可顺利激活 TUN 模式。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q19：如何测试我的代理是否发生 DNS 泄漏？</strong></summary>
+                <p>
+                  <strong>解答</strong>：在浏览器中打开权威测试网站 `https://browserleaks.com/dns`。查看检测报告中的 DNS 服务器 IP 归属地：如果显示的全部是海外地区（如美国、香港），说明安全；如果检测出了您所在的省份（如中国电信/联通 DNS），说明发生了 DNS 泄漏，必须开启 Fake-IP 模式修复。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q20：手机端连接代理后，锁屏一段时间再唤醒就自动断开了？</strong></summary>
+                <p>
+                  <strong>解答</strong>：这是国内 Android 系统的“激进后台电池优化策略”杀掉了代理进程。在手机系统的“电池与性能 -> 应用耗电管理”中，找到您的代理 App（如 v2rayNG / FlClash），将其设置为 **“无限制 / 允许后台高耗电运行”** 并锁定后台卡片。
+                </p>
+              </details>
+            </div>
+          </div>
+
+          <!-- 分类 3 -->
+          <div class="faq-group" id="cat-3">
+            <div class="group-header">
+              <span class="group-num">CAT 03</span>
+              <h2>AI 大模型与流媒体解锁篇 (Q21–Q28)</h2>
+            </div>
+
+            <div class="faq-list">
+              <details class="faq-item" open>
+                <summary><strong>Q21：为什么登录 ChatGPT 频繁报“Access Denied (1020)”或“Unable to load”？</strong></summary>
+                <p>
+                  <strong>解答</strong>：OpenAI 采用了 Cloudflare 最严苛的威胁情报拦截。当检测到您的节点出口属于廉价的商业机房 IP（Hosting ASN），且短时间内并发请求过多，会直接判定为恶意代理并实施拦截。必须选用配备了 **ISP 原生住宅属性（Residential IP）** 的纯净专线节点。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q22：使用 Claude 3.5 Sonnet 为什么特别容易被封号？</strong></summary>
+                <p>
+                  <strong>解答</strong>：Anthropic 对出口 IP 的风控敏感度远超 OpenAI。如果您在客户端中开启了“自动选择延迟最低节点”，导致 10 分钟内 IP 在香港、美国、新加坡之间跳跃，会立刻触发其“跨大洲异地登录”警报从而封号。正确做法是：在规则策略中为 Claude 单独绑定一个固定的、高洁净度的美西专线节点。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q23：为什么连接了海外节点，Netflix 却搜不到《绝命毒师》只能看自制剧？</strong></summary>
+                <p>
+                  <strong>解答</strong>：这属于经典的“被 Netflix 降级为自制剧保护模式”。全球非自制独占版权剧（华纳、迪士尼授权内容）对 IP 纯净度要求极高。如果节点属于机房广播 IP，Netflix 会静默屏蔽非自制剧。请查阅我们的 <a href="/blog/ai-automation-in-customer-support">《全球 4K 流媒体全解锁指南》</a> 获取检测脚本。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q24：在客厅电视（Apple TV / 索尼电视）上怎么优雅看 Netflix 4K？</strong></summary>
+                <p>
+                  <strong>解答</strong>：最优解是在家庭软路由（如工控机 OpenWrt）上配置 OpenClash 透明代理，将电视盒子的 IP 单独指定走高速专线节点；如果没有软路由，可在 Apple TV 端直接下载 Stash (tvOS 版) 导入订阅并开启增强模式。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q25：手机刷 TikTok 打开直接黑屏，或者提示“无网络连接”怎么解决？</strong></summary>
+                <p>
+                  <strong>解答</strong>：TikTok 对大陆环境有底层硬件基带探测：① 手机必须彻底拔掉大陆 SIM 卡；② 手机系统语言设为英文，时区与节点地区严格保持一致；③ 彻底关闭手机系统定位（GPS）。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q26：香港节点能正常使用 Google Gemini 吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：截至 2026 年，Google 官方对欧盟及部分地区开放较为宽松，但对部分敏感区域仍有限制。使用美区、台湾或新加坡节点访问 Gemini 最为顺畅稳定。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q27：国内发行的双币信用卡可以用来升级订阅 ChatGPT Plus 吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：绝大多数国内发行的 Visa/Mastercard 信用卡都会被 Stripe 支付网关直接风控拒付。正规且稳妥的途径是使用正规境外虚拟卡（如配备纯美区账单地址的卡片），或在美区 Apple ID 上通过充值正规苹果礼品卡在 iOS 端直接订阅 Plus。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q28：为什么看 YouTube 4K 很流畅，但画质经常自动降到 1080P 或 720P？</strong></summary>
+                <p>
+                  <strong>解答</strong>：YouTube 播放器具备动态码率自适应算法。只要检测到网络中出现微小的突发丢包（哪怕只有 1%–2%），播放器就会提前降码率以避免视频卡住转圈。这证明节点存在间歇性丢包，需要换用无丢包的真专线。
+                </p>
+              </details>
+            </div>
+          </div>
+
+          <!-- 分类 4 -->
+          <div class="faq-group" id="cat-4">
+            <div class="group-header">
+              <span class="group-num">CAT 04</span>
+              <h2>专线技术与底层协议篇 (Q29–Q36)</h2>
+            </div>
+
+            <div class="faq-list">
+              <details class="faq-item" open>
+                <summary><strong>Q29：IEPL 和 IPLC 到底有什么区别？普通用户应该选哪种？</strong></summary>
+                <p>
+                  <strong>解答</strong>：IPLC 工作在 OSI 第一层物理层，属于点对点裸物理租线，延迟极低但极其昂贵；IEPL 工作在第二层以太网层，同样不过公网 GFW，享有同等级别的 0 丢包和低延迟，且多线调度更弹性。对于绝大多数科研、影音与办公出海用户，**IEPL 是目前性价比最高的最优选择**，深度技术解析见 <a href="/blog/what-makes-an-ai-agent-production-ready">《IEPL与IPLC区别科普》</a>。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q30：什么是 BGP 入口？单线入口和多线 BGP 有什么差距？</strong></summary>
+                <p>
+                  <strong>解答</strong>：单线入口是指机场国内机房只有电信或移动一条线路，其他宽带用户跨网访问会产生巨大延迟。而 **BGP 智能多线入口** 是指机房同时汇聚了电信、联通、移动多线网络，系统会自动为您的宽带匹配最优的同网直连链路，从根源上消除跨网卡顿。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q31：VLESS-Reality、Trojan 和 Shadowsocks 哪个协议更好？</strong></summary>
+                <p>
+                  <strong>解答</strong>：
+                  - <strong>VLESS-Reality</strong>：2026 年公网抗封锁最强协议，通过伪装大厂合法 TLS 证书，几乎无法被主动探测；
+                  - <strong>Shadowsocks / Trojan</strong>：在物理专线（IEPL/IPLC）架构下表现最佳，协议开销小、加解密损耗极低，在千兆带宽下能够跑满 CPU 硬件加速；
+                  - <strong>Hysteria 2 / TUIC</strong>：基于 UDP 开发的恶劣网络暴力发包协议，在丢包严重的公网线路上有奇效，但在部分省份易受运营商 UDP QoS 限制。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q32：真专线节点的延迟一般是多少毫秒才算合格？</strong></summary>
+                <p>
+                  <strong>解答</strong>：真物理专线受限于光纤中的光速物理规律（光在石英光纤中实际传播速度约为 20.4 万公里/秒）：<br />
+                  - <strong>深圳至香港</strong>：机房端到端单向延迟 2ms，用户本地 Ping 通常在 <strong>18–26ms</strong>；<br />
+                  - <strong>上海至日本东京</strong>：端到端单向延迟约 15ms，用户本地 Ping 在 <strong>30–42ms</strong>；<br />
+                  - <strong>如果某家声称是香港专线，晚高峰延迟却高达 100ms 以上，那必然是伪装的假专线</strong>。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q33：为什么有些机场宣称“单节点 2.5Gbps 带宽”？真能跑这么快吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：这是服务商机房单个服务器网卡的物理上行带宽（如 <a href="/brands/guangsu-cloud">光速云旗舰版节点</a>）。高带宽储备的核心意义并不是让某一个用户独占 2500M，而是在晚高峰数百人同时看 4K 时，依然拥有巨大的**带宽冗余余量**，杜绝排队丢包。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q34：什么是“倍率暗扣”？如何查验机场是否有虚标倍率？</strong></summary>
+                <p>
+                  <strong>解答</strong>：有的不良机场在节点列表上标明是 `1.0x`，但后台计费数据库中却偷偷按照 `3.0x` 扣量。查验方法：下载一个大小明确的测试文件（如 100MB 测速包），随后在机场后台刷新流量明细，核对扣减数额是否严格等于 100MB。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q35：内网专线会受到海底光缆被地震震断的影响吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：可能会。如果台湾海峡或巴士海峡发生大地震导致海缆物理中断，专线也会受到物理损伤。但优质老牌服务商通常采购了**双路甚至多路海缆冗余（如陆缆 + 多家海缆环网）**，一旦某条海缆断纤，系统会在毫秒级内自动热切换到备用海缆，保障业务不中断。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q36：怎么通过暗黑网络可观测性大盘查看真实测速数据？</strong></summary>
+                <p>
+                  <strong>解答</strong>：直接访问我们的 <a href="/#observatory">暗黑网络可观测性大盘</a>。大盘展示了自动化服务器每晚对 42 家机场抽样测试的实时吞吐、晚高峰丢包与流媒体解锁状态，拒绝一切纸面数据虚标。
+                </p>
+              </details>
+            </div>
+          </div>
+
+          <!-- 分类 5 -->
+          <div class="faq-group" id="cat-5">
+            <div class="group-header">
+              <span class="group-num">CAT 05</span>
+              <h2>资费潜规则与退款避坑篇 (Q37–Q44)</h2>
+            </div>
+
+            <div class="faq-list">
+              <details class="faq-item" open>
+                <summary><strong>Q37：为什么绝大多数机场都不支持“无理由退款”？</strong></summary>
+                <p>
+                  <strong>解答</strong>：代理服务是高度依赖上游机房预付费资源的虚拟数字资产，一旦生成订阅，底层端口和带宽成本便已发生折旧。此外，部分黑产会利用无理由退款机制实施刷单和洗钱。因此，购买前务必**“首月先选月付尝鲜”**，满意后再考虑升级长周期。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q38：遇到“30 元包三年，还送千兆真专线”的机场，能买吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：**千万别买，100% 是准备跑路的资金盘！** 电信运营商跨国物理专线的月租极为高昂，低价三年付在财务上根本不可能覆盖机房成本。这是典型的“跑路前最后一轮收割”，收完一笔充值后就会拔线蒸发。详细避坑见 <a href="/blog/designing-auditable-ai-workflows">《机场跑路大揭秘》</a>。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q39：年付套餐虽然折算单价便宜，但有没有跑路风险？如何规避？</strong></summary>
+                <p>
+                  <strong>解答</strong>：规避跑路的两大法则：<br />
+                  1. **只选运营 2–3 年以上的老牌服务商**：例如自 2020 年运营至今的 <a href="/brands/guangsu-cloud">光速云</a>，历经多次监管周期依然稳健存活；<br />
+                  2. **选择不限时永久套餐作为主力备份**：如光速云的 147 永久套餐（247GB 永久有效），不用不扣费，彻底消除年付按月清零的心理压力。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q40：机场的优惠码怎么使用？</strong></summary>
+                <p>
+                  <strong>解答</strong>：在服务商后台挑选好套餐进入结账页面时，找到“优惠码 / 抵用券（Coupon Code）”输入框。例如购买光速云时，输入本站独家优惠码 **`AMM`** 即可直接享受全单立减折扣。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q41：支付方式选择微信、支付宝还是 USDT 更好？</strong></summary>
+                <p>
+                  <strong>解答</strong>：优先选择支持正规第三方支付（支付宝/微信）的平台，能开通国内正规支付接口的服务商通常通过了支付机构的基本合规与法人资质审核，跑路门槛较高。如果一家面向国内用户的平台“强制要求只能用虚拟币”，通常意味着其资质极不稳定。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q42：发现被某小机场坑了或者刚买就跑路了，能追回损失吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：难度极高。黑产通常使用空壳发卡网或虚拟货币洗钱，链条隐秘。因此最重要的防线永远在**事前筛选**——参考 <a href="/brands">MITCE 42家机场品牌天梯大盘</a> 挑选经过长期合规验证的服务商。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q43：什么是“不限时流量包”？它和普通包月套餐有什么不同？</strong></summary>
+                <p>
+                  <strong>解答</strong>：普通套餐按月扣款且月底清零；而不限时流量包（如光速云 147 套餐）是一次性购买固定流量（如 247GB），只要流量没用完，账号**一年、两年甚至五年内永远有效**，极其适合用量不固定或用来防断网应急的用户。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q44：机场客服一般多久回复工单？</strong></summary>
+                <p>
+                  <strong>解答</strong>：优质头部品牌（如光速云、微风网络）配备专门的技术值守客服，工单通常在 10 分钟至 2 小时内响应；如果是缺乏人手的小作坊，工单常常几天无人理睬。
+                </p>
+              </details>
+            </div>
+          </div>
+
+          <!-- 分类 6 -->
+          <div class="faq-group" id="cat-6">
+            <div class="group-header">
+              <span class="group-num">CAT 06</span>
+              <h2>法律安全与个人隐私篇 (Q45–Q50)</h2>
+            </div>
+
+            <div class="faq-list">
+              <details class="faq-item" open>
+                <summary><strong>Q45：个人使用代理翻墙查文献或看电影，到底违不违法？会不会被“喝茶”？</strong></summary>
+                <p>
+                  <strong>解答</strong>：根据《中华人民共和国计算机信息网络国际联网管理暂行规定》，未经批准擅自建立或使用非法定信道属于行政违规行为。但司法实践中，公安机关执法具有极其鲜明的针对性：**重点打击私自搭建翻墙节点售卖牟利的运营者、利用境外网络从事违法犯罪活动（涉政反动、造谣传谣、洗钱诈骗）的人员**。广大普通网民用于正当的查资料、学术科研与影音娱乐，只要严格遵守法律红线、不在境外平台发表违规言论，安全风险极低。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q46：使用机场翻墙，机场老板能看到我的浏览记录和账号密码吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：只要目标网站采用标准的 **HTTPS 加密传输**（现代网站 99% 均已普及），机场节点服务器**只能看到您访问了哪个域名（如 `chatgpt.com`），绝对无法解密您传输的敏感密码、聊天内容和银行卡信息**。但是，切勿随意在手机或电脑中安装机场提供的任何所谓的“第三方根证书（CA 证书）”。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q47：在公司内网电脑上使用代理软件，公司的网络管理员能发现吗？</strong></summary>
+                <p>
+                  <strong>解答</strong>：**完全可以发现！** 很多中大型企业在内网部署了深信服等上网行为管理系统（DPI）。网管虽然看不到 HTTPS 里的明文对话，但能清晰监测到您的内网 IP 在持续向一个未报备的海外 IP 发送高并发加密数据包。严禁在公司办公机上私自运行翻墙客户端。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q48：为什么登录海外银行（如 TransferWise、汇丰海外）时，网银账户容易被冻结？</strong></summary>
+                <p>
+                  <strong>解答</strong>：金融银行的风控等级最高。如果您使用的节点是劣质机房公用 IP，银行风控系统会判定该登录存在被木马盗刷的风险，从而触发保护性冻结。登录重要金融账户必须使用固定、纯净的原生独立出口节点。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q49：使用代理下载 BT 种子电影（如 BitTorrent / P2P），会不会被机场封号？</strong></summary>
+                <p>
+                  <strong>解答</strong>：绝大多数正规机场的审计规则都**严格禁止 BT / PT 下载**。因为境外版权机构（如美国电影协会 MPA）会对 P2P 下载中的侵权 IP 发起高额版权索赔（DMCA Complaint），机房上游收到警告信后会直接拔线封机。下载 BT 请务必直连或使用专用的 Debrid 离线下载网盘。
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary><strong>Q50：如何确保我的客户端软件本身是干净无毒的？</strong></summary>
+                <p>
+                  <strong>解答</strong>：坚决不要从不明 Telegram 群、不知名网盘下载所谓的“绿色汉化破解版”。请始终从开源官方 GitHub Release 仓库直接下载最新版客户端，或通过本站严格核验的 <a href="/clients">全平台客户端下载中心</a> 获取纯净安装包。
+                </p>
+              </details>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .topic-grid {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 48px;
+    align-items: start;
+    padding: 40px 0;
+  }
+  .topic-toc {
+    position: sticky;
+    top: 96px;
+  }
+  .toc-card {
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  }
+  .toc-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .toc-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .toc-card a {
+    font-size: 13.5px;
+    color: var(--mute);
+    text-decoration: none;
+    transition: color 0.2s;
+    line-height: 1.4;
+    display: block;
+  }
+  .toc-card a:hover {
+    color: var(--heat);
+  }
+  .toc-ad {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--hair);
+  }
+  .toc-ad .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--heat);
+    background: rgba(236, 90, 17, 0.08);
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .toc-ad p {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--mute);
+    margin-bottom: 12px;
+  }
+  .btn--sm {
+    padding: 8px 14px;
+    font-size: 12.5px;
+    display: inline-block;
+  }
+
+  .alert-box {
+    background: #fff8f5;
+    border: 1px solid rgba(236, 90, 17, 0.3);
+    border-left: 5px solid var(--heat);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 36px;
+  }
+  .alert-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .alert-title .tag {
+    background: var(--heat);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .alert-title h3 {
+    margin: 0;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .alert-box p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #3d2c20;
+  }
+
+  .faq-group {
+    margin-bottom: 48px;
+  }
+  .group-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--hair);
+  }
+  .group-num {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--heat);
+    background: rgba(236, 90, 17, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .group-header h2 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--ink);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-radius: 12px;
+    padding: 16px 22px;
+    transition: all 0.2s;
+  }
+  .faq-item[open] {
+    border-color: rgba(236, 90, 17, 0.4);
+    box-shadow: 0 4px 16px rgba(236, 90, 17, 0.06);
+  }
+  .faq-item summary {
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--ink);
+    user-select: none;
+    line-height: 1.45;
+  }
+  .faq-item summary:hover {
+    color: var(--heat);
+  }
+  .faq-item p {
+    margin-top: 14px;
+    margin-bottom: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: #4a3e35;
+  }
+
+  @media (max-width: 900px) {
+    .topic-grid {
+      grid-template-columns: 1fr;
+    }
+    .topic-toc {
+      position: static;
+    }
+  }
+</style>

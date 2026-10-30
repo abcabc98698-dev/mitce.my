@@ -1,0 +1,247 @@
+---
+interface Props {
+  brandName?: string;
+  lineType?: 'IEPL' | 'IPLC' | 'BGP中转';
+}
+
+const {
+  brandName = '光速云',
+  lineType = 'IEPL',
+} = Astro.props;
+---
+
+<div class="topo-box">
+  <div class="topo-head">
+    <div class="topo-head__title">
+      <span class="topo-icon">🗺️</span>
+      <b>{brandName} {lineType} 专线网络拓扑架构 (Network Path Observatory)</b>
+    </div>
+    <span class="topo-badge">Zero QoS / 物理内网直连</span>
+  </div>
+
+  <div class="topo-canvas">
+    <!-- Step 1: User Device -->
+    <div class="topo-node topo-node--device">
+      <div class="topo-node__icon">💻 📱 📡</div>
+      <div class="topo-node__name">用户本地终端</div>
+      <div class="topo-node__detail">Win / Mac / iOS / Android / 软路由</div>
+      <div class="topo-node__pill">VLESS / Trojan / SS 加密</div>
+    </div>
+
+    <!-- Line 1 -->
+    <div class="topo-path">
+      <span class="topo-path__line"></span>
+      <span class="topo-path__arrow">▶</span>
+      <span class="topo-path__tag">TLS 强加密数据流</span>
+    </div>
+
+    <!-- Step 2: Domestic BGP Ingress -->
+    <div class="topo-node topo-node--ingress">
+      <div class="topo-node__icon">🏢 ⚡</div>
+      <div class="topo-node__name">国内中转前置机房</div>
+      <div class="topo-node__detail">上海 / 广州 / 深圳 BGP 多线接入</div>
+      <div class="topo-node__pill topo-node__pill--cyan">隐藏真实 IP · 三网智能优化</div>
+    </div>
+
+    <!-- Line 2: The IEPL / IPLC Dedicated Tunnel -->
+    <div class="topo-path topo-path--dedicated">
+      <span class="topo-path__line topo-path__line--double"></span>
+      <span class="topo-path__arrow">▶</span>
+      <span class="topo-path__tag topo-path__tag--gold">
+        🛡️ {lineType} 点对点内网专线（不走公网国际出口，晚高峰 0 丢包）
+      </span>
+    </div>
+
+    <!-- Step 3: Overseas Egress -->
+    <div class="topo-node topo-node--egress">
+      <div class="topo-node__icon">🌐 🚀</div>
+      <div class="topo-node__name">海外原生落地枢纽</div>
+      <div class="topo-node__detail">香港 / 新加坡 / 日本 / 洛杉矶</div>
+      <div class="topo-node__pill topo-node__pill--green">原生住宅 / 机房原生 IP 洁净池</div>
+    </div>
+
+    <!-- Line 3 -->
+    <div class="topo-path">
+      <span class="topo-path__line"></span>
+      <span class="topo-path__arrow">▶</span>
+      <span class="topo-path__tag">直连访问目标业务</span>
+    </div>
+
+    <!-- Step 4: Target Services -->
+    <div class="topo-node topo-node--target">
+      <div class="topo-node__icon">🤖 🎬 🌍</div>
+      <div class="topo-node__name">全球目标互联网服务</div>
+      <div class="topo-node__detail">ChatGPT · Claude · Netflix · TikTok</div>
+      <div class="topo-node__pill topo-node__pill--purple">4K/8K 秒开 · 极低风控验证</div>
+    </div>
+  </div>
+
+  <div class="topo-foot">
+    <span>架构优势: 跨境链路采用运营商底层专线物理穿透，摆脱公网 GFW 干扰与晚高峰跨国拥堵，保障 7×24 小时低延迟与 0 丢包率。</span>
+    <span class="topo-watermark">[mitce.my]</span>
+  </div>
+</div>
+
+<style>
+  .topo-box {
+    background: #0B0F17;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 24px;
+    color: #E2E8F0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    margin: 20px 0;
+  }
+  .topo-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .topo-head__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #F8FAFC;
+  }
+  .topo-badge {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    background: rgba(236, 90, 17, 0.15);
+    border: 1px solid rgba(236, 90, 17, 0.3);
+    color: #FF8A3D;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .topo-canvas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  @media (min-width: 900px) {
+    .topo-canvas {
+      display: grid;
+      grid-template-columns: 1.1fr auto 1.2fr auto 1.2fr auto 1.1fr;
+      align-items: center;
+      gap: 6px;
+    }
+  }
+  .topo-node {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .topo-node:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+  .topo-node__icon {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+  }
+  .topo-node__name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    margin-bottom: 4px;
+  }
+  .topo-node__detail {
+    font-size: 0.73rem;
+    color: #94A3B8;
+    margin-bottom: 8px;
+  }
+  .topo-node__pill {
+    display: inline-block;
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #CBD5E1;
+    font-weight: 500;
+  }
+  .topo-node__pill--cyan {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38BDF8;
+  }
+  .topo-node__pill--green {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+  }
+  .topo-node__pill--purple {
+    background: rgba(168, 85, 247, 0.15);
+    color: #C084FC;
+  }
+
+  /* Connecting path */
+  .topo-path {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 6px;
+    position: relative;
+  }
+  .topo-path__line {
+    width: 2px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  @media (min-width: 900px) {
+    .topo-path__line {
+      width: 100%;
+      min-width: 28px;
+      height: 2px;
+    }
+  }
+  .topo-path__arrow {
+    font-size: 0.7rem;
+    color: #64748B;
+    margin-top: 2px;
+  }
+  @media (min-width: 900px) {
+    .topo-path__arrow {
+      margin-top: -6px;
+    }
+  }
+  .topo-path__tag {
+    font-size: 0.66rem;
+    color: #64748B;
+    text-align: center;
+    margin-top: 4px;
+    white-space: normal;
+  }
+  .topo-path--dedicated .topo-path__line--double {
+    background: repeating-linear-gradient(90deg, #F59E0B, #F59E0B 4px, transparent 4px, transparent 8px);
+    height: 3px;
+  }
+  .topo-path__tag--gold {
+    color: #FBBF24;
+    font-weight: 600;
+  }
+
+  .topo-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.76rem;
+    color: #64748B;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    line-height: 1.5;
+  }
+  .topo-watermark {
+    color: rgba(255, 255, 255, 0.35);
+    white-space: nowrap;
+  }
+</style>

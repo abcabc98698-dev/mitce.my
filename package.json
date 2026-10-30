@@ -1,19 +1,18 @@
 {
-  "name": "st-ai-agency",
+  "name": "mitce-ai",
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "description": "ST AI Agency — a free Astro theme for AI agencies, AI automation studios and AI agent platforms.",
-  "author": "StrivioThemes",
+  "description": "MITCE AI — Enterprise Autonomous AI Agents & Workflow Automation Platform.",
+  "author": "MITCE",
   "license": "MIT",
   "keywords": [
-    "astro",
-    "astro-theme",
     "ai",
-    "agency",
-    "landing-page",
-    "blog",
-    "withastro"
+    "ai-agents",
+    "automation",
+    "enterprise",
+    "workflow-automation",
+    "astro"
   ],
   "engines": {
     "node": ">=22.12.0"

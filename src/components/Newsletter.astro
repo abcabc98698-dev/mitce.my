@@ -20,8 +20,8 @@ const { newsletterAction, netlify } = siteConfig.forms;
   >
     {netlify && <input type="hidden" name="form-name" value="newsletter" />}
     <div class="nlt__f">
-      <label for="nl-email" class="sr-only">Email address</label>
-      <input id="nl-email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
+      <label for="nl-email" class="sr-only">电子邮箱</label>
+      <input id="nl-email" name="email" type="email" placeholder="输入您的电子邮箱（如 you@example.com）" autocomplete="email" required />
       <button class="btn btn--heat" type="submit">{newsletter.submitLabel}</button>
     </div>
     <p class="form__status" role="status" aria-live="polite"></p>

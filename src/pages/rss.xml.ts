@@ -7,9 +7,9 @@ export async function GET(context: APIContext) {
   const posts = await getPosts();
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   return rss({
-    title: `${siteConfig.name} — Insights`,
+    title: `${siteConfig.name} — 深度测评与出海指南`,
     description: siteConfig.description,
-    site: new URL(import.meta.env.BASE_URL, context.site ?? 'https://st-ai-agency.vercel.app').href,
+    site: new URL(import.meta.env.BASE_URL, context.site ?? 'https://mitce.my').href,
     items: posts.map((post) => ({
       title: post.data.title,
       description: post.data.description,

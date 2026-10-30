@@ -2,33 +2,33 @@ import type { FAQItem } from '../types';
 
 export const faqs: FAQItem[] = [
   {
-    question: 'Do we need our own AI team first?',
+    question: '什么是 IEPL / IPLC 专线？相比普通中转有什么优势？',
     answer:
-      'No. Most clients start with an operations lead and one engineer who can grant access. We supply the agent engineering; you supply the domain judgement about what a correct answer looks like. By month three your ops lead is usually shipping changes without us.',
+      'IEPL（国际以太网私有专线）和 IPLC（国际私有租用线路）是端到端点对点的内网物理专线，数据包在海底物理光缆或陆地专线中传输，直接穿透边境，完全不经过公网国际海缆出口与 GFW 防火墙。因此在晚高峰公网大面积拥堵时，专线依然保持 0 丢包率、极低延迟与极高稳定性。',
   },
   {
-    question: 'Where does our data go?',
+    question: '为什么光速云被列为本站综合主推第一位？',
     answer:
-      'Into your infrastructure by default. On Scale we deploy into your cloud account; on Embedded we run fully on premise. Nothing trains a model, retention windows are set by you, and every third-party call is listed in the data map we hand over in week one.',
+      '光速云自 2020 年稳定运营至今已历经多年考验，口碑扎实；采用 IEPL+企业内网专线双架构，单节点最高达 2.5Gbps 带宽；同时兼备新手自研客户端（登录即连）与 Clash/Shadowrocket 通用订阅导入；更有折合约 8 元/月超低门槛年付及独家「斯诺克 147 永久不限时套餐」，在稳定性、价格与易用性上达到罕见的均衡。',
   },
   {
-    question: 'What happens when the agent gets it wrong?',
+    question: '为什么有的机场节点打不开 ChatGPT 或提示“Access Denied”？',
     answer:
-      'It should stop rather than guess — that is what the confidence thresholds and refusal rules are for. When something still slips through, you replay the run step by step, see which tool call caused it, add the case to the test set, and the regression suite blocks it from happening twice.',
+      'OpenAI、Claude 等顶级 AI 平台对访问 IP 的风控级别极高，会定期屏蔽机房（IDC）广播 IP 或多用户滥用过的脏 IP 池。想要稳定使用 AI，必须选择配备原生住宅 IP 或经过清洗的商用专线原生节点（如光速云、微风、Firefly），并配合 TUN 模式完全接管 DNS 防泄漏。',
   },
   {
-    question: 'Which models do you use?',
+    question: '新手应该用自研专属客户端，还是 Clash / 小火箭？',
     answer:
-      'Whichever wins on your evaluation set, re-tested quarterly. We are deliberately not tied to one provider — routing is a configuration file, not a rewrite. If compliance restricts you to a specific list, we fix routing to that list and show you the quality cost.',
+      '如果您完全没有网络分流经验，不想折腾订阅转换、策略组与报错排查，强烈建议直接使用机场官方自研客户端（如光速云、飞猫云专属 App），下载安装登录即可一键连接；如果您有多设备分流、局域网共享或定制去广告规则需求，推荐使用开源客户端 Clash Verge Rev（PC/Mac）或 Shadowrocket（iOS）。',
   },
   {
-    question: 'How long until we see something real?',
+    question: '购买年付套餐虽然折算便宜，但有没有跑路风险？如何避坑？',
     answer:
-      'An agent running against real data in a sandbox by the end of week three. Production traffic usually lands in week six, gated behind the security review and a passing evaluation run. If we are going to miss that, you hear it in week two, not week five.',
+      '任何机场都有潜在风险。我们建议避坑原则：① 优选运营时间 2–3 年以上的老牌服务商（如光速云 2020 年至今、微风网络 2023 年至今）；② 初次尝试务必先选择月付或小额季度套餐，在真实晚高峰验证网速满意后，再考虑年付；③ 可以常备一个如光速云「斯诺克 147 永久套餐」这类不限时包作为应急备用。',
   },
   {
-    question: 'Can we take it in-house later?',
+    question: '光速云的「斯诺克 147 永久套餐」适合哪些人群？',
     answer:
-      'Yes, and it is written into the contract. You own the code, prompts, evaluation set and infrastructure definitions from day one. Handover is a four-week programme with shadowing, runbook review and a final on-call swap. No exit fee.',
+      '该套餐一次性付费 147 元包含 247GB 专线流量，最大特点是永久不过期、每月不清零。非常适合平时翻墙频次不高、只用于查学术文献/偶尔追剧，或者不想每月按时续费、寻找高品质备用梯子的用户。',
   },
 ];

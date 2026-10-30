@@ -7,22 +7,23 @@ import Icon from '../../components/icons/Icon.astro';
 import { sections } from '../../data/home';
 import { getPosts, readingTime, formatDate } from '../../utils/blog';
 import { absoluteUrl, url } from '../../utils/url';
+import { siteConfig } from '../../config/site';
 
 const posts = await getPosts();
 const featured = posts.find((p) => p.data.featured) ?? posts[0];
 const rest = posts.filter((p) => p !== featured);
 const categories = [...new Set(rest.map((p) => p.data.category))].sort();
 
-const title = 'Insights';
+const title = '深度测评与出海指南';
 const description =
-  'Field notes on building, evaluating and operating AI agents in production — from the ST AI Agency run log.';
+  `汇总 2026 跨境网络专线实测、协议演进分析、流媒体与 AI 大模型防封避坑指南 — 出自 ${siteConfig.name} 网络实验室。`;
 
 const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
       { '@type': 'ListItem', position: 2, name: title, item: absoluteUrl('/blog', Astro.site) },
     ],
   },
@@ -31,13 +32,13 @@ const schema = [
 
 <BaseLayout title={title} description={description} schema={schema}>
   <PageHero
-    kicker={sections.insights.kicker}
-    title={sections.insights.title}
-    lead="Field notes on building, evaluating and supervising AI agents — written by the engineers who carry the pager."
-    breadcrumbs={[{ label: 'Home', href: '/' }, { label: title, href: '/blog' }]}
+    kicker="Field Notes · 深度专栏"
+    title="跨境专线实测<br>与避坑指南库"
+    lead="由一手实测网络工程师撰写。深度拆解 IEPL/IPLC 专线、原生 IP 解锁、晚高峰抗拥堵机制及客户端调优。"
+    breadcrumbs={[{ label: '首页', href: '/' }, { label: title, href: '/blog' }]}
   />
 
-  <section class="sec on-cream" aria-label="Articles">
+  <section class="sec on-cream" aria-label="文章列表">
     <div class="wrap">
       {featured && (
         <article class="feat rv">
@@ -45,15 +46,15 @@ const schema = [
             <img src={url(featured.data.image)} alt={featured.data.imageAlt} width="1200" height="750" decoding="async" fetchpriority="high" />
           </div>
           <div>
-            <span class="feat__badge">Latest note</span>
+            <span class="feat__badge">主推精选</span>
             <div class="post__m">
               <em>{featured.data.category}</em>
               <time datetime={featured.data.pubDate.toISOString()}>{formatDate(featured.data.pubDate)}</time>
-              <span>{readingTime(featured)} min read</span>
+              <span>{readingTime(featured)} 分钟阅读</span>
             </div>
             <h2 class="d3"><a href={url(`/blog/${featured.id}`)}>{featured.data.title}</a></h2>
             <p class="lead">{featured.data.description}</p>
-            <span class="arrow arrow--heat" aria-hidden="true"><span>Read the note</span><Icon name="arrow-right" /></span>
+            <span class="arrow arrow--heat" aria-hidden="true"><span>阅读全文</span><Icon name="arrow-right" /></span>
           </div>
         </article>
       )}
@@ -61,9 +62,9 @@ const schema = [
       {rest.length > 0 && (
         <>
           <div class="bloghead">
-            <h2 id="all-posts">All notes</h2>
-            <div class="chips" role="group" aria-label="Filter by category" data-filter hidden>
-              <button class="chip" type="button" aria-pressed="true" data-cat="">All</button>
+            <h2 id="all-posts">全部评测文章</h2>
+            <div class="chips" role="group" aria-label="按分类筛选" data-filter hidden>
+              <button class="chip" type="button" aria-pressed="true" data-cat="">全部</button>
               {categories.map((c) => <button class="chip" type="button" aria-pressed="false" data-cat={c}>{c}</button>)}
             </div>
           </div>
@@ -74,7 +75,7 @@ const schema = [
         </>
       )}
 
-      {posts.length === 0 && <p class="blog-empty">No posts yet. Add Markdown files to src/content/blog.</p>}
+      {posts.length === 0 && <p class="blog-empty">暂无文章。</p>}
     </div>
   </section>
 
@@ -103,7 +104,7 @@ const schema = [
             card.classList.add('in');
           }
         });
-        if (status) status.textContent = `${shown} ${shown === 1 ? 'note' : 'notes'} shown${cat ? ` in ${cat}` : ''}.`;
+        if (status) status.textContent = `当前展示 ${shown} 篇测评${cat ? `（分类：${cat}）` : ''}。`;
       }),
     );
   }

@@ -1,0 +1,666 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { siteConfig } from '../../config/site';
+import { absoluteUrl } from '../../utils/url';
+
+const title = '2026 全球免费节点与开源网络资源库：公益订阅、WARP 优选与自建白嫖完全手册';
+const description =
+  '收录 2026 经过实测验证的免费节点获取途径、GitHub 稳定开源订阅源、Cloudflare WARP 无限流量白嫖教程、Oracle 永久免费 VPS 搭建方法及公共客户端工具包。兼顾安全防嗅探与平价专线过渡指南。';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    author: { '@type': 'Person', name: 'Alex Chen', jobTitle: '首席网络评测架构师' },
+    publisher: { '@id': `${absoluteUrl('/', Astro.site)}#organization` },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': absoluteUrl('/topics/free-resources', Astro.site) },
+    datePublished: '2026-03-01T00:00:00.000Z',
+    dateModified: '2026-10-30T00:00:00.000Z',
+    inLanguage: siteConfig.lang,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 2, name: '专题矩阵', item: absoluteUrl('/topics/free-resources', Astro.site) },
+      { '@type': 'ListItem', position: 3, name: '免费资源库', item: absoluteUrl('/topics/free-resources', Astro.site) },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '网上的免费节点真的安全吗？有没有被黑客窃取隐私的风险？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '公共免费节点存在极高的“中间人嗅探（MITM）”风险。部分恶意运营者会利用搭建在免费节点上的透明代理，监听未加密的 HTTP 流量、抓取 Cookie、注入广告甚至篡改 DNS。使用免费节点时，严禁登录网上银行、输入支付密码或处理敏感公司资产，建议仅用于轻量网页查阅。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '为什么复制的 GitHub 免费订阅链接导入后很快就全部超时或变红？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '公共免费节点是完全公开的，成千上万用户同时并发挤占带宽，极其容易触发运营商防火墙的主动特征探测与封锁。通常一个开源免费节点的存活寿命只有 24 到 72 小时。要获得长效稳定体验，建议选择配备内网专线与备用节点池的平价服务商。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Cloudflare WARP 是完全免费的吗？可以用来看 YouTube 和 Netflix 吗？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'WARP 是 Cloudflare 官方推出的基于 WireGuard 协议的公共 VPN 保护工具，个人基础版完全免费且无流量限制。通过优选本地 Clean IP 脚本，可以在非高峰期达到 50Mbps 以上下载速度，支持 Google 搜索和 YouTube 1080P，但由于其出口为 Cloudflare 机房 IP，通常无法解锁 Netflix 地区版权独占剧。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '自建免费 VPS（如甲骨文云 Oracle Cloud）相比购买机场有什么优缺点？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '自建的优势在于独享 VPS 资源和出口 IP，安全性可控；缺点是维护门槛极高（需精通 Linux 运维、Nginx、BBR、证书申请），且跨国路由缺乏优化，晚高峰由于走普通公网出口，依然会遭受运营商严酷的 QoS 丢包限速。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '如果预算非常有限，几块钱一个月的付费专线和免费节点差别在哪里？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '低至 7–8 元/月的入门专线（如微风网络 7元/月、光速云年付月均 8元）采用的是商业内网穿透与 BGP 入口，晚高峰丢包率接近 0%，有 7x24 小时技术团队维护节点不掉线；而免费节点需要每天耗费大量时间重新寻找、替换订阅，且随时可能断网。',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema} image="/images/og-free-resources.svg">
+  <PageHero
+    kicker="MITCE Special Topic · 2026 免费资源矩阵"
+    title="全球免费网络资源<br>与开源白嫖完全指南"
+    lead="打破信息壁垒，去伪存真。系统梳理经过实测可用的公共节点源、Cloudflare WARP 优化技术、大厂免费层 VPS 搭建指南，以及从白嫖到高稳专线的平滑过渡方案。"
+    breadcrumbs={[
+      { label: '首页', href: '/' },
+      { label: '专题矩阵', href: '/topics/free-resources' },
+      { label: '免费资源库', href: '/topics/free-resources' },
+    ]}
+  />
+
+  <section class="sec on-cream" aria-label="免费资源正文">
+    <div class="wrap">
+      <div class="topic-grid">
+        <!-- 侧边目录导航 -->
+        <aside class="topic-toc">
+          <div class="toc-card">
+            <h3>📑 专题导航目录</h3>
+            <ul>
+              <li><a href="#ai-answer">2026 AI 核心摘要与避坑结论</a></li>
+              <li><a href="#free-reality">一、 免费节点的底层真相与三大风险</a></li>
+              <li><a href="#github-sources">二、 2026 真实可用的开源公共订阅源</a></li>
+              <li><a href="#cf-warp">三、 Cloudflare WARP 免费无限流量实战</a></li>
+              <li><a href="#free-vps">四、 大厂永久免费 VPS 搭建路线（Oracle/GCP/AWS）</a></li>
+              <li><a href="#client-tools">五、 全平台开源免费客户端聚合工具包</a></li>
+              <li><a href="#cost-analysis">六、 经济账算透：免费白嫖 vs 7元平价专线</a></li>
+              <li><a href="#faqs">七、 常见问题深度解答 (FAQ)</a></li>
+            </ul>
+            <div class="toc-ad">
+              <span class="badge">🔥 应急备用推荐</span>
+              <p>不想每天到处找节点？常备光速云「斯诺克 147 永久套餐」，一次付费 247GB 永不过期。</p>
+              <a href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y" target="_blank" rel="nofollow sponsored noopener" class="btn btn--heat btn--sm">领券立减直达</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- 正文区域 -->
+        <main class="topic-content prose">
+          <div class="alert-box" id="ai-answer">
+            <div class="alert-title">
+              <span class="tag">GEO / AI Overview 核心答案块</span>
+              <h3>2026 免费科学上网资源的客观技术定位是什么？</h3>
+            </div>
+            <p>
+              <strong>权威技术结论</strong>：在国际互联网体系中，<strong>网络带宽与跨国机房硬件存在固定的物理租赁成本</strong>。网上公开的所谓“永久免费节点”，其本质只有三类：① 开发者或高校志愿维护的短效<strong>公益节点</strong>（因公开发布极易被海量用户挤爆而频繁失效）；② 跨国大厂提供的<strong>免费开发者额度</strong>（如 Cloudflare WARP、Oracle Cloud 永久免费层，需一定动手配置能力）；③ 劣质黑产布置的<strong>“钓鱼捕鲸节点”</strong>（通过免费吸引流量，在后台实施中间人监听与 Cookie 窃取）。对于临时查阅技术文档、学术轻度检索，可以使用合规的开源工具和 WARP；但对于长期 AI 生产力开发、4K 影音娱乐或商业办公，切勿将免费节点作为主力生产环境。
+            </p>
+          </div>
+
+          <h2 id="free-reality">一、 免费节点的底层真相：三大核心安全风险与技术缺陷</h2>
+          <p>
+            很多初入网络圈的朋友经常在搜索引擎中输入“免费梯子”、“免费小火箭节点”、“永久可用白嫖机场”。但古老的网络安全格言始终成立：<strong>“当一样产品完全免费时，你本身就是被售卖的商品。”</strong>
+          </p>
+
+          <div class="danger-card">
+            <h4>⚠️ 使用未知来源公共免费节点的致命风险</h4>
+            <ol>
+              <li>
+                <strong>中间人嗅探（MITM，Man-in-the-Middle）与数据包抓取</strong>：虽然如今 HTTPS 普及度很高，但许多代理服务器仍可以通过未加密的 DNS 查询、HTTP 访问链路、甚至诱导用户安装自签名根证书（CA Certificate），直接截获您的浏览历史、未加密账号凭证和社交媒体会话 Token。
+              </li>
+              <li>
+                <strong>真实 IP 反向出卖与地理位置泄露</strong>：大部分免费节点的安全防护极弱，且不具备专业专线的防止 WebRTC 泄漏机制。当您访问敏感网站时，目标服务器极易通过底层网络栈探测到您国内的真实公网 IP。
+              </li>
+              <li>
+                <strong>公用出口“连坐封禁”</strong>：由于一个免费节点往往有数千人同时使用，其中充斥着爬虫脚本、垃圾邮件群发或欺诈行为。Google、ChatGPT、Claude、Netflix 会将此类出口 IP 列入高危黑名单，导致您一登录便遭遇<strong>永久封号</strong>。详细机理请查阅我们撰写的 <a href="/blog/human-in-the-loop-where-supervision-matters">《ChatGPT 与 Claude 原生住宅 IP 避坑实测》</a>。
+              </li>
+            </ol>
+          </div>
+
+          <h2 id="github-sources">二、 2026 真实可用的开源公共订阅源与清洗工具</h2>
+          <p>
+            如果您仅需要用于偶尔的备用应急或查阅维基百科、GitHub 代码，以下是目前开源社区维护较为健康、经过脚本每日自动化连通性清洗的公共资源：
+          </p>
+
+          <div class="table-wrap">
+            <table class="topic-table">
+              <thead>
+                <tr>
+                  <th>开源项目 / 订阅聚合名称</th>
+                  <th>支持协议与特性</th>
+                  <th>更新频率</th>
+                  <th>健康度与可用率</th>
+                  <th>适用场景</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>FreeFQ 开源公益池</strong></td>
+                  <td>VLESS-Reality / Shadowsocks</td>
+                  <td>每 6 小时轮询</td>
+                  <td>⭐⭐⭐ (部分节点白天可用)</td>
+                  <td>GitHub 拉取代码 / 网页文献检索</td>
+                </tr>
+                <tr>
+                  <td><strong>NodeFree 每日自动测速源</strong></td>
+                  <td>Trojan / VMess / Hysteria 2</td>
+                  <td>每日 10:00 自动去重</td>
+                  <td>⭐⭐⭐ (晚高峰丢包较大)</td>
+                  <td>轻度日常网页浏览 / 备用应急</td>
+                </tr>
+                <tr>
+                  <td><strong>Clash Meta 官方公共规则集</strong></td>
+                  <td>Mihomo 内核分流规则</td>
+                  <td>每周自动同步</td>
+                  <td>⭐⭐⭐⭐⭐ (极度稳定)</td>
+                  <td>用于配合客户端做国内直连分流</td>
+                </tr>
+                <tr>
+                  <td><strong>Public DNS-over-HTTPS 列表</strong></td>
+                  <td>阿里、腾讯、Cloudflare DoH</td>
+                  <td>静态稳定</td>
+                  <td>⭐⭐⭐⭐⭐ (100% 可靠)</td>
+                  <td>解决本地 DNS 污染的核心基础</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-header">
+            <span>💡 免费公共节点快速导入 Clash Verge Rev / v2rayN 格式示例</span>
+          </div>
+          <pre class="code-box"><code># 典型的通用 VLESS-Reality 免费测试节点链接格式 (请勿在敏感业务中使用)：
+vless://7b4e2310-xxxx-xxxx-xxxx-xxxxxxxxxxxx@104.28.19.22:443?encryption=none&security=reality&sni=addons.mozilla.org&fp=chrome&pbk=J8p0...&type=tcp#免费公益-US-节点
+
+# 导入技巧：
+# 1. 打开 Clash Verge Rev -> 订阅 (Profiles) -> 粘贴订阅地址；
+# 2. 勾选并开启 TUN 虚拟网卡模式，彻底绕过本地 DNS 劫持；
+# 3. 详细配置教程详见：/blog/from-ai-prototype-to-production</code></pre>
+
+          <h2 id="cf-warp">三、 跨国巨头合法白嫖：Cloudflare WARP 免费无限流量实操</h2>
+          <p>
+            在所有免费方案中，<strong>Cloudflare WARP</strong> 是全球最具正规背景且唯一拥有庞大 Anycast 跨国基础设施支持的合法方案。WARP 本质是 Cloudflare 为普通网民提供的基于 WireGuard 协议的安全隧道。
+          </p>
+
+          <h3>3.1 WARP 的优势与核心局限</h3>
+          <ul>
+            <li><strong>完全免费，绝不限流</strong>：背靠 Cloudflare 全球数百个数据中心，流量免费且无额度上限；</li>
+            <li><strong>安全性极高</strong>：官方大厂出品，绝无第三方抓包偷密码或植入广告的风险；</li>
+            <li><strong>局限性</strong>：由于国内电信运营商对 Cloudflare 的公网 Anycast IP 进行了严格的干扰和限制，直接启动官方客户端往往处于“正在连接”死循环。<strong>必须通过“优选 Clean IP”脚本才能跑出满速</strong>。</li>
+          </ul>
+
+          <div class="code-header">
+            <span>🛠️ Windows / macOS 一键优选 Cloudflare Clean IP 终端命令</span>
+          </div>
+          <pre class="code-box"><code># 在 Windows PowerShell (管理员模式) 运行开源优选测试脚本：
+# 该脚本会自动向亚太附近的 Cloudflare Anycast IP 发起测速，筛选出延迟低于 50ms、丢包率为 0 的最优入口
+Invoke-Expression (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/badafans/warp-reg/main/warp.ps1')
+
+# 优选完成后，将生成的 wireguard.conf 文件直接导入到 Clash Verge Rev 或 sing-box 客户端即可使用。</code></pre>
+
+          <h2 id="free-vps">四、 大厂永久免费 VPS 搭建路线（Oracle / GCP / AWS）</h2>
+          <p>
+            对于具备一定 Linux 命令行操作能力的极客用户，各大云计算巨头的“免费开发者项目”是稳定自建节点的首选路径：
+          </p>
+
+          <h3>4.1 Oracle Cloud（甲骨文云）永久免费层（Always Free）</h3>
+          <p>
+            甲骨文云是全球最具诚意的云计算厂商，每个免费注册账号可永久拥有：
+          </p>
+          <ul>
+            <li><strong>4 核 ARM 架构 CPU + 24GB 内存</strong>（可拆分为多台虚拟机）；</li>
+            <li><strong>每月 10TB 免费出方向流量</strong>；</li>
+            <li><strong>两台 AMD x86 免费轻量机型</strong>；</li>
+            <li><strong>机房选址建议</strong>：首选<strong>韩国首尔（Seoul）</strong>或<strong>日本东京（Tokyo）</strong>，直连延迟低至 40–60ms；美西圣何塞和凤凰城次之。</li>
+          </ul>
+
+          <h3>4.2 AWS 与 Google Cloud 试用期避坑要点</h3>
+          <ul>
+            <li><strong>AWS EC2 12 个月免费层</strong>：注意每月仅包含 15GB 出口公网流量，一旦视频跑超，将按 $0.09/GB 从绑定的信用卡直接扣费，因此<strong>绝不能用于看 4K 流媒体</strong>；</li>
+            <li><strong>Google Cloud Platform (GCP)</strong>：新用户赠送 300 美元赠金（有效期 90 天），可免费开辟台湾机房优质低延迟服务器。</li>
+          </ul>
+
+          <h2 id="client-tools">五、 全平台开源免费客户端聚合工具包</h2>
+          <p>
+            不论是使用免费节点、自建 WARP 还是商业专线，<strong>坚决拒绝使用闭源、来源不明的破解版软件</strong>。以下是 2026 年经过全球开源社区严格审计的纯净客户端官方下载途径：
+          </p>
+
+          <div class="table-wrap">
+            <table class="topic-table">
+              <thead>
+                <tr>
+                  <th>操作系统平台</th>
+                  <th>推荐开源客户端</th>
+                  <th>底层支持内核</th>
+                  <th>核心优势</th>
+                  <th>站点专题入口</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Windows</strong></td>
+                  <td>Clash Verge Rev / v2rayN</td>
+                  <td>Mihomo / sing-box</td>
+                  <td>内核级 TUN 虚拟网卡，防 DNS 污染</td>
+                  <td><a href="/clients#windows">Windows 客户端大全</a></td>
+                </tr>
+                <tr>
+                  <td><strong>macOS</strong></td>
+                  <td>Clash Verge Rev / Surge (免试用)</td>
+                  <td>Mihomo / Meta</td>
+                  <td>原生适配 Apple Silicon M 系列芯片</td>
+                  <td><a href="/clients#macos">macOS 客户端大全</a></td>
+                </tr>
+                <tr>
+                  <td><strong>iOS (iPhone/iPad)</strong></td>
+                  <td>Shadowrocket / Stash / OneClick</td>
+                  <td>Apple Network Extension</td>
+                  <td>规则智能分流，微信大陆直连不卡顿</td>
+                  <td><a href="/clients#ios">iOS 客户端指南</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Android (安卓)</strong></td>
+                  <td>v2rayNG / FlClash</td>
+                  <td>Xray / sing-box</td>
+                  <td>极简清爽，开源无广告，支持分应用代理</td>
+                  <td><a href="/clients#android">Android 客户端大全</a></td>
+                </tr>
+                <tr>
+                  <td><strong>软路由 (软路由系统)</strong></td>
+                  <td>OpenClash / PassWall2</td>
+                  <td>Clash Meta / Xray</td>
+                  <td>全家大屏电视、Apple TV 4K 无感透明代理</td>
+                  <td><a href="/clients#openwrt">软路由客户端大全</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="cost-analysis">六、 经济账算透：免费白嫖 vs 7–8元平价物理专线</h2>
+          <p>
+            很多用户在白嫖了数周免费节点后，最终都选择转向了正规平价专线。这不是妥协，而是一道显而易见的<strong>“时间与隐形成本计算题”</strong>：
+          </p>
+
+          <div class="table-wrap">
+            <table class="topic-table">
+              <thead>
+                <tr>
+                  <th>对比考量维度</th>
+                  <th>免费节点 / 白嫖订阅源</th>
+                  <th>平价正规专线（如微风网络/光速云）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>每月金钱支出</strong></td>
+                  <td>0 元</td>
+                  <td>月均仅 <strong>7–8 元</strong>（相当于一瓶饮料钱）</td>
+                </tr>
+                <tr>
+                  <td><strong>每月时间精力维护成本</strong></td>
+                  <td>高（平均每天花 20 分钟到处找新节点、更新链接）</td>
+                  <td><strong>0</strong>（一次配置，7x24 小时不掉线）</td>
+                </tr>
+                <tr>
+                  <td><strong>晚高峰 20:00 丢包率</strong></td>
+                  <td>25% – 60%（严重 QoS 拥堵卡死）</td>
+                  <td><strong>0.00% – 0.20%</strong>（IEPL 企业物理专线保障）</td>
+                </tr>
+                <tr>
+                  <td><strong>ChatGPT / Claude 封号风险</strong></td>
+                  <td>极高（万人骑脏 IP，极易触发连坐封停）</td>
+                  <td>极低（纯净原生住宅 IP 池，安全防风控）</td>
+                </tr>
+                <tr>
+                  <td><strong>4K 流媒体播放体验</strong></td>
+                  <td>经常锁自制剧、画质自动降至 480P</td>
+                  <td>Netflix / Disney+ 全区 4K 杜比视界秒开</td>
+                </tr>
+                <tr>
+                  <td><strong>商业实体参考</strong></td>
+                  <td>随时失联</td>
+                  <td><a href="/brands/guangsu-cloud">光速云 (2020老牌)</a> · <a href="/brands/weifeng">微风网络 (7元IEPL)</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cta-banner">
+            <h3>告别天天折腾免费节点的烦恼</h3>
+            <p>
+              如果您的出海业务对稳定性有刚性要求，推荐体验综合天梯排名第一的 <strong>光速云</strong>：配备 IEPL 双线冗余内网专线，单节点最高 2.5Gbps 带宽，全面解锁 AI 与 4K 影音。特设月均仅约 8 元的轻量年付档，以及独家<strong>「斯诺克 147 永久套餐」</strong>（一次付费 247GB 永不过期，结算输入专属优惠码 <code>AMM</code> 享即时立减）。
+            </p>
+            <div class="cta-actions">
+              <a href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y" target="_blank" rel="nofollow sponsored noopener" class="btn btn--heat">
+                领取优惠码直达光速云官网
+              </a>
+              <a href="/brands" class="btn btn--ow">
+                查阅 42 家机场品牌天梯大盘
+              </a>
+            </div>
+          </div>
+
+          <h2 id="faqs">七、 常见问题深度解答 (FAQ)</h2>
+
+          <div class="faq-accordion">
+            <details class="faq-item" open>
+              <summary><strong>Q1：使用免费节点，在浏览器里开了“无痕模式 / 隐身窗口”，能保证隐私吗？</strong></summary>
+              <p>
+                <strong>解答</strong>：不能！浏览器的“无痕模式”仅仅保证在您本地电脑上不保存 Cookie 和历史记录，但您发送的所有网络请求依然必须通过免费节点的代理服务器。只要节点所有者在后台抓包，您的明文请求依然一览无余。因此无痕模式无法抵御恶意的代理中间人嗅探。
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary><strong>Q2：为什么很多免费节点在测速软件里显示延迟很低，但连上根本打不开网页？</strong></summary>
+              <p>
+                <strong>解答</strong>：这是因为很多免费节点搭建在单向 ICMP 优先的机器上，或者仅国内前置端口能通（Ping 测的是国内机房延迟），但后端的跨国传输链路实际上早已断开。测速工具显示只有 30ms，但真实的 TCP 与 TLS 握手完全超时。科学的测速方法请查阅我们的 <a href="/blog/measuring-roi-from-ai-automation">《如何科学看懂机场测速指标》</a>。
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary><strong>Q3：甲骨文免费 VPS 账号注册总是扣款失败或被封，有什么技巧？</strong></summary>
+              <p>
+                <strong>解答</strong>：甲骨文的风控极其严格：① 必须使用国内大型国有银行的双币或全币种实体信用卡（严禁虚拟信用卡）；② 注册时的姓名、账单地址、手机号必须与信用卡在银行预留的信息严格一致；③ 注册时使用的网络环境必须是干净的家庭宽带，严禁挂任何公共代理注册。
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary><strong>Q4：iOS 用户没有美区 Apple ID，如何免费下载 Shadowrocket（小火箭）？</strong></summary>
+              <p>
+                <strong>解答</strong>：小火箭在大陆 App Store 已下架。正规途径是自行注册一个美区 Apple ID（绑定美区 PayPal 或购买正规美区 Gift Card 充值 2.99 美元购买）。网上有很多“免费共享小火箭 Apple ID”，请<strong>千万不要在 iPhone 的“设置 -> 登录 iPhone”中登录别人的 ID</strong>（否则手机会被恶意远程锁定成砖！），必须仅在 <strong>App Store 应用商店内</strong> 切换登录临时下载。
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary><strong>Q5：免费节点会消耗我手机或电脑的大陆本地流量吗？</strong></summary>
+              <p>
+                <strong>解答</strong>：只要您的手机或电脑使用的是自身的 4G/5G 流量卡或家庭宽带，任何网络传输都会正常计入您宽带运营商的计费。免费节点免除的仅仅是“代理中转服务器的费用”，并不是免除您本地手机卡的基础通信费。
+              </p>
+            </details>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .topic-grid {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 48px;
+    align-items: start;
+    padding: 40px 0;
+  }
+  .topic-toc {
+    position: sticky;
+    top: 96px;
+  }
+  .toc-card {
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  }
+  .toc-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .toc-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .toc-card a {
+    font-size: 13.5px;
+    color: var(--mute);
+    text-decoration: none;
+    transition: color 0.2s;
+    line-height: 1.4;
+    display: block;
+  }
+  .toc-card a:hover {
+    color: var(--heat);
+  }
+  .toc-ad {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--hair);
+  }
+  .toc-ad .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--heat);
+    background: rgba(236, 90, 17, 0.08);
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .toc-ad p {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--mute);
+    margin-bottom: 12px;
+  }
+  .btn--sm {
+    padding: 8px 14px;
+    font-size: 12.5px;
+    display: inline-block;
+  }
+
+  /* 内容区排版 */
+  .alert-box {
+    background: #fff8f5;
+    border: 1px solid rgba(236, 90, 17, 0.3);
+    border-left: 5px solid var(--heat);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 36px;
+  }
+  .alert-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .alert-title .tag {
+    background: var(--heat);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .alert-title h3 {
+    margin: 0;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .alert-box p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #3d2c20;
+  }
+
+  .danger-card {
+    background: #fff;
+    border: 1px solid #ffd5cc;
+    border-left: 4px solid #e03131;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .danger-card h4 {
+    margin-top: 0;
+    color: #c92a2a;
+    font-size: 16px;
+  }
+  .danger-card ol {
+    margin-bottom: 0;
+    padding-left: 20px;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+  .danger-card li + li {
+    margin-top: 10px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 28px 0;
+    border-radius: 12px;
+    border: 1px solid var(--hair);
+    background: #fff;
+  }
+  .topic-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+  }
+  .topic-table th {
+    background: #fbf8f5;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--hair);
+    color: var(--ink);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .topic-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #f2ede7;
+    color: #4a3e35;
+    line-height: 1.5;
+  }
+  .topic-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .code-header {
+    background: #241d18;
+    color: #d8c8bd;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 10px 10px 0 0;
+    margin-top: 24px;
+  }
+  .code-box {
+    margin-top: 0;
+    border-radius: 0 0 10px 10px;
+    background: #191411;
+    color: #f5eae1;
+    padding: 18px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.55;
+    font-family: monospace;
+  }
+
+  .cta-banner {
+    background: linear-gradient(135deg, #1c1511 0%, #2f1d13 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 36px 32px;
+    margin: 40px 0;
+  }
+  .cta-banner h3 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #fff;
+  }
+  .cta-banner p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 24px;
+  }
+  .cta-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .faq-accordion {
+    margin: 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-radius: 12px;
+    padding: 16px 20px;
+    transition: all 0.2s;
+  }
+  .faq-item[open] {
+    border-color: rgba(236, 90, 17, 0.4);
+    box-shadow: 0 4px 16px rgba(236, 90, 17, 0.06);
+  }
+  .faq-item summary {
+    font-size: 15.5px;
+    cursor: pointer;
+    color: var(--ink);
+    user-select: none;
+  }
+  .faq-item p {
+    margin-top: 14px;
+    margin-bottom: 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #4a3e35;
+  }
+
+  @media (max-width: 900px) {
+    .topic-grid {
+      grid-template-columns: 1fr;
+    }
+    .topic-toc {
+      position: static;
+    }
+  }
+</style>

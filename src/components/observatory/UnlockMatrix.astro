@@ -1,0 +1,235 @@
+---
+import type { UnlockService } from '../../data/brands';
+
+interface Props {
+  brandName: string;
+  testNode?: string;
+  testTool?: string;
+  services?: UnlockService[];
+}
+
+const {
+  brandName,
+  testNode = '香港 IEPL 01 / 日本专线 / 新加坡原生',
+  testTool = 'RegionRestrictionCheck & Real-time AI Query Test',
+  services = [
+    { name: 'ChatGPT (OpenAI)', category: 'ai', status: 'supported', note: '原生 IP 支持，低风控' },
+    { name: 'Claude 3.5 Sonnet', category: 'ai', status: 'supported', note: '支持长上下文交互' },
+    { name: 'Google Gemini', category: 'ai', status: 'partial', note: '部分节点需手动切换' },
+    { name: 'Netflix', category: 'streaming', status: 'supported', note: '全区非自制剧解锁' },
+    { name: 'Disney+', category: 'streaming', status: 'supported', note: 'Star / IMAX 全解锁' },
+    { name: 'YouTube 4K/8K', category: 'streaming', status: 'supported', note: '4K 极速秒开无缓冲' },
+    { name: 'TikTok', category: 'streaming', status: 'supported', note: '跨区直播/原生运营' },
+    { name: 'Spotify', category: 'streaming', status: 'supported', note: '无封锁流畅串流' },
+  ],
+} = Astro.props;
+
+const aiServices = services.filter((s) => s.category === 'ai');
+const streamServices = services.filter((s) => s.category !== 'ai');
+---
+
+<div class="matrix-box">
+  <div class="matrix-head">
+    <div class="matrix-head__title">
+      <span class="matrix-icon">🎬</span>
+      <b>{brandName} 流媒体 & AI 解锁矩阵 (Service Availability Matrix)</b>
+    </div>
+    <span class="matrix-badge">Node Audited · 实机核验</span>
+  </div>
+
+  <div class="matrix-sub">
+    <span>核验节点: {testNode}</span>
+    <span>测试工具: {testTool}</span>
+  </div>
+
+  <!-- AI Section -->
+  <div class="matrix-sec">
+    <div class="matrix-sec__label">AI 生产力工具可用性</div>
+    <div class="matrix-grid">
+      {aiServices.map((item) => (
+        <div class:list={['m-card', `m-card--${item.status}`]}>
+          <div class="m-card__top">
+            <span class="m-card__status-dot"></span>
+            <b>{item.name}</b>
+            <span class="m-card__tag">
+              {item.status === 'supported' ? 'Operational' : item.status === 'partial' ? 'Partial' : 'Unavailable'}
+            </span>
+          </div>
+          <p>{item.note || (item.status === 'supported' ? '正常可用' : '需甄选节点')}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Streaming Section -->
+  <div class="matrix-sec">
+    <div class="matrix-sec__label">全球主流流媒体解锁</div>
+    <div class="matrix-grid">
+      {streamServices.map((item) => (
+        <div class:list={['m-card', `m-card--${item.status}`]}>
+          <div class="m-card__top">
+            <span class="m-card__status-dot"></span>
+            <b>{item.name}</b>
+            <span class="m-card__tag">
+              {item.status === 'supported' ? 'Operational' : item.status === 'partial' ? 'Partial' : 'Unavailable'}
+            </span>
+          </div>
+          <p>{item.note || (item.status === 'supported' ? '全区解锁' : '部分限制')}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="matrix-foot">
+    <span>状态说明: 🟢 Operational (稳定支持) · 🟡 Partial (视节点与IP规则) · 🔴 Unavailable (受限)</span>
+    <span class="matrix-watermark">[mitce.my]</span>
+  </div>
+</div>
+
+<style>
+  .matrix-box {
+    background: #0B0F17;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 20px;
+    color: #E2E8F0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    margin: 20px 0;
+  }
+  .matrix-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .matrix-head__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #F8FAFC;
+  }
+  .matrix-icon {
+    font-size: 1.1rem;
+  }
+  .matrix-badge {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #38BDF8;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .matrix-sub {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: #94A3B8;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .matrix-sec {
+    margin-bottom: 16px;
+  }
+  .matrix-sec__label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748B;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 10px;
+  }
+  .m-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    padding: 10px 12px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .m-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+  }
+  .m-card__top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .m-card__top b {
+    font-size: 0.88rem;
+    color: #F1F5F9;
+  }
+  .m-card__status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .m-card__tag {
+    margin-left: auto;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  .m-card p {
+    font-size: 0.75rem;
+    color: #94A3B8;
+    margin: 0;
+  }
+
+  /* Status Colors */
+  .m-card--supported .m-card__status-dot {
+    background: #10B981;
+    box-shadow: 0 0 6px #10B981;
+  }
+  .m-card--supported .m-card__tag {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+  }
+
+  .m-card--partial .m-card__status-dot {
+    background: #F59E0B;
+    box-shadow: 0 0 6px #F59E0B;
+  }
+  .m-card--partial .m-card__tag {
+    background: rgba(245, 158, 11, 0.15);
+    color: #FBBF24;
+  }
+
+  .m-card--unsupported .m-card__status-dot {
+    background: #EF4444;
+  }
+  .m-card--unsupported .m-card__tag {
+    background: rgba(239, 68, 68, 0.15);
+    color: #F87171;
+  }
+
+  .matrix-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.76rem;
+    color: #64748B;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 12px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .matrix-watermark {
+    color: rgba(255, 255, 255, 0.35);
+  }
+</style>

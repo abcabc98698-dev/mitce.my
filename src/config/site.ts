@@ -1,54 +1,62 @@
 import type { SiteConfig } from '../types';
 
 /**
- * Central theme configuration.
- * Change the values below to rebrand the theme — every component reads from here.
- * All contact details are placeholders for the demo.
+ * MITCE 指南 — 跨境网络与机场评测指南中心配置
  */
 export const siteConfig: SiteConfig = {
-  name: 'ST AI Agency',
-  brand: { prefix: 'ST', accent: 'AI', suffix: 'Agency' },
-  tagline: 'AI agents that run the work, not the demo.',
+  name: 'MITCE 指南',
+  brand: { prefix: 'MITCE', accent: '指南', suffix: '' },
+  tagline: '2026 跨境网络与机场评测指南 · 专线实测与网络可观测性实验室',
   description:
-    'ST AI Agency builds and runs AI agents for support, sales and back-office teams. Always on, fully audited, live in six weeks.',
-  lang: 'en',
-  locale: 'en_US',
+    'MITCE指南深度收录42家主流机场品牌实测数据，提供晚高峰测速、IEPL/IPLC专线拓扑、ChatGPT/流媒体解锁矩阵，以及全平台代理客户端下载与配置指南。客观、真实、无虚标。',
+  lang: 'zh-CN',
+  locale: 'zh_CN',
 
-  email: 'hello@example.com',
-  phone: '+1 (000) 123-456',
-  phoneHref: '+1000123456',
+  email: 'contact@mitce.my',
+  phone: '+60 3-2100 8888',
+  phoneHref: '+60321008888',
   location: {
-    label: 'Studio',
-    lines: ['742 Evergreen Terrace', 'Springfield, United States'],
+    label: '网络实验室',
+    lines: ['MITCE Network Observatory', 'Kuala Lumpur, Malaysia'],
   },
-  responseTime: 'Under one business day, always in writing first',
+  responseTime: '数据定期轮巡测试更新，问题 1 个工作日内回复',
 
   footerBlurb:
-    'AI agents for operations teams who have to answer for the result. Built, measured and run from Springfield.',
-  copyright: `© ${new Date().getFullYear()} ST AI Agency. All rights reserved.`,
+    'MITCE指南致力于提供客观、透明、可验证的跨境网络评测数据。所有测速与流媒体解锁均标明测试环境与时间节点，谢绝虚标与不实承诺。',
+  copyright: `© ${new Date().getFullYear()} MITCE 指南 (mitce.my). All rights reserved.`,
 
-  // Replace with your own profiles. Remove an entry to hide its icon.
   social: [
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/', icon: 'linkedin' },
-    { label: 'X', href: 'https://x.com/', icon: 'x' },
-    { label: 'GitHub', href: 'https://github.com/', icon: 'github' },
-    { label: 'RSS feed', href: '/rss.xml', icon: 'rss' },
+    { label: '品牌库', href: '/brands', icon: 'bars' },
+    { label: '客户端', href: '/clients', icon: 'shield-check' },
+    { label: '测评专栏', href: '/blog', icon: 'rss' },
+    { label: 'RSS 订阅', href: '/rss.xml', icon: 'rss' },
   ],
 
   seo: {
     titleSeparator: ' — ',
-    defaultTitle: 'ST AI Agency — AI agents that run the work',
-    ogImage: '/preview.jpg',
-    ogImageAlt: 'ST AI Agency theme preview showing the homepage on desktop and mobile.',
-    twitterHandle: undefined,
+    defaultTitle: 'MITCE 指南 — 2026 42家机场专线实测天梯榜与客户端下载库',
+    ogImage: '/images/mitce-og-cover.svg',
+    ogImageAlt: 'MITCE 指南 42家机场专线实测、测速面板与客户端下载配置指南',
+    twitterHandle: '@mitce_my',
     themeColor: '#EC5A11',
   },
 
-  cta: { label: 'Book a demo', shortLabel: 'Book demo', href: '/#contact' },
+  cta: {
+    label: '主推光速云（年付8元起）',
+    shortLabel: '主推·光速云',
+    href: 'https://sahude.gsyvipaff.com/#/?code=keqgvT5Y',
+  },
 
   forms: {
     contactAction: '',
     newsletterAction: '',
     netlify: false,
+  },
+
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || '',
+    bing: process.env.BING_SITE_VERIFICATION || '',
+    shenma: process.env.SHENMA_SITE_VERIFICATION || '',
+    baidu: process.env.BAIDU_SITE_VERIFICATION || '',
   },
 };

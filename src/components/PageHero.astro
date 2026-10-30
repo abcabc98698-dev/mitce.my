@@ -37,7 +37,7 @@ const { kicker, title, lead, breadcrumbs, center = false, size = 'd1', class: cl
       )}
       <slot name="before" />
       {kicker && <span class="kicker kicker--w rv" style="--d:40ms">{kicker}</span>}
-      <h1 class={`${size} rv`} style="--d:70ms" id="page-title">{title}</h1>
+      <h1 class={`${size} rv`} style="--d:70ms" id="page-title"><Fragment set:html={title} /></h1>
       {lead && <p class="lead rv" style="--d:130ms">{lead}</p>}
       <slot />
     </div>

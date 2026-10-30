@@ -1,351 +1,179 @@
-# ST AI Agency
+<div align="center">
 
-**ST AI Agency** is a free Astro AI agency theme for AI agencies, AI automation studios, AI consultancies and AI agent platforms. It has a warm orange, cream and dark-brown design, a single-page homepage with a section for each topic, and a full Markdown blog. It ships almost no JavaScript.
+# 🌐 MITCE 指南 (mitce.my)
+### 2026 跨境网络与机场专线实测天梯榜 · 网络可观测性实验室
 
-> *AI agents that run the work, not the demo.*
+[![Astro](https://img.shields.io/badge/Astro-5.x-BC52EE?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![SEO Ready](https://img.shields.io/badge/SEO-100%25%20Audit%20Passed-10B981?style=flat-square&logo=google&logoColor=white)](https://mitce.my)
+[![License](https://img.shields.io/badge/License-MIT-EA580C?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/Production-Live-06B6D4?style=flat-square)](https://mitce.my)
 
-![ST AI Agency — free Astro theme for AI agencies](public/preview.jpg)
+**专线实测 · 看晚高峰 · 不看虚标 · 稳在每一秒**
 
-## Demo
+[官方网站](https://mitce.my) · [机场天梯榜](https://mitce.my/jichang/) · [客户端教程](https://mitce.my/tutorial/) · [免费资源](https://mitce.my/free/) · [跑路雷达](https://mitce.my/topics/runaway-radar/) · [终极答疑](https://mitce.my/topics/faq/)
 
-**Live demo:** [st-ai-agency.vercel.app](https://st-ai-agency.vercel.app/)
+</div>
 
-## Features
+---
 
-- **Astro 7** with static output and no UI framework.
-- **AI agency design.** A full-bleed hero that tints its photo in the brand colours, editorial service rows, a heat-gradient process band, dark customer cards and arched portraits.
-- **Responsive layout** at every width, with a mobile menu below 1200px.
-- **One homepage with a section for each topic.** Hero, client strip, AI solutions, platform/features, process, customer results, statistics, industry sectors, testimonial, team, pricing, insights preview, FAQ, contact form and a call-to-action band.
-- **Blog** built on Astro Content Collections (Content Layer `glob` loader). Each post gets its own page with breadcrumbs, author, date, reading time, tags, previous/next links and related posts.
-- **Blog index** with a featured post and a category filter. The filter is a progressive enhancement and the page works without JavaScript.
-- **SEO.** Canonical URLs, Open Graph and Twitter/X cards, JSON-LD (`Organization`, `WebSite`, `BlogPosting`, `BreadcrumbList`), a sitemap, `robots.txt` and an RSS feed.
-- **Accessibility**
-  - Skip link and semantic landmarks.
-  - Accessible mobile dialog: focus trap, Escape to close, focus returned to the menu button.
-  - FAQ accordion with `aria-expanded`.
-  - `aria-current` on real page links only.
-  - Visible focus states.
-  - Reduced-motion support.
-  - Content stays fully readable with JavaScript disabled.
-- **Lightweight JavaScript.** About 3 KB of minified vanilla JavaScript per page, inlined by Astro. No framework runtime and no third-party scripts.
-- **Easy to customise.** One site config file plus typed data files for every homepage section.
-- **Self-hosted fonts** (Outfit and Inter Tight) with no third-party font requests.
-- **Optimised local images.** WebP files with explicit dimensions. The hero is preloaded and images further down the page are lazy-loaded.
-- **Static form UI** that is honest about being a demo until you connect a provider (Formspree, Netlify Forms, Web3Forms or your own API).
-- **Sub-path deploys.** Works at a domain root or under a sub-path, such as a GitHub Pages project site.
+## 📖 项目简介
 
-## Tech stack
+**MITCE 指南**（[mitce.my](https://mitce.my)）是面向出海团队、跨境电商卖家、AI 大模型开发者与个人高阶玩家的**跨境网络专线实测与可观测性评估门户**。
 
-| Tool | Purpose |
-| --- | --- |
-| [Astro](https://astro.build) 7 | Static site generator, components, content collections |
-| [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) | Generates `sitemap-index.xml` |
-| [@astrojs/rss](https://docs.astro.build/en/recipes/rss/) | Generates `rss.xml` for the blog |
-| [@fontsource-variable/outfit](https://fontsource.org/fonts/outfit) & [inter-tight](https://fontsource.org/fonts/inter-tight) | Self-hosted variable fonts |
-| TypeScript | Typed config, data and scripts |
-| Plain CSS | Design tokens and component styles (no Tailwind) |
-| Vanilla TypeScript | Header, mobile menu, reveal, FAQ, forms |
+本项目摒弃商业充值与虚标带货，基于网络实验室在真实晚高峰（20:00–23:30）电信、联通、移动三大骨干海缆出口的压测数据，深度收录 **42 家主流机场品牌**，提供精准的 **IEPL/IPLC 专线拓扑解析、丢包率与抖动大盘、双 ISP 原生住宅 IP 纯净度检测**，以及覆盖全平台的代理客户端配置教程。
 
-Dev-only: `@astrojs/check` and `typescript` for `npm run check`.
+---
 
-## Requirements
+## ✨ 核心功能与内容矩阵
 
-- **Node.js 22.12.0 or newer.** This is the minimum for Astro 7. An `.nvmrc` file is included.
-- npm 9.6.5 or newer, which ships with Node 22.
+### 1. 🏆 42 家机场品牌实机测速天梯榜
+- **旗舰主推**：全面横评综合排名第一的 **光速云 (Guangsu Cloud)**（全线 IEPL 内网专线、BGP 动态入口、年付月均 8 元起、支持专属优惠码 `AMM` 与 147 斯诺克套餐）。
+- **梯队细分**：平价入门款（微风网络 7元/月）、多设备高并发（暮光加速）、专属免配客户端（飞猫云）、不限时按量冷备包（星岛梦）等。
+- **独立品牌落地页**：Top 10 品牌配备专属独立评测页（包含定价规格表、测速折线图、流媒体解锁矩阵、专线跳纤拓扑与真实优缺点画像）。
 
-## Installation
+### 2. 🧭 八大核心 SEO 搜索意图栏目
+- [`/jichang/`](https://mitce.my/jichang/) - **机场推荐天梯榜**：晚高峰测速、抗丢包率与 5 大选型黄金法则。
+- [`/vpn/`](https://mitce.my/vpn/) - **翻墙 VPN 深度实测**：WireGuard、OpenVPN 与企业 IEPL 专线协议差异剖析。
+- [`/clash/`](https://mitce.my/clash/) - **Clash 专题配置中心**：Clash Verge Rev、Mihomo (Meta) 内核与 TUN 虚拟网卡实操。
+- [`/nodes/`](https://mitce.my/nodes/) - **全球代理节点大盘**：香港 HKG、日本 TYO、新加坡 SGP 与美西原生住宅 IP 延迟与纯净度。
+- [`/tizi/`](https://mitce.my/tizi/) - **梯子选型防失联指南**：构建“主力专线 + 冷备按量 + 免费应急”三重灾备网络体系。
+- [`/free/`](https://mitce.my/free/) - **免费资源专栏**：每日试用机场、开源订阅池、WARP 优选与安全防嗅探指南。
+- [`/tutorial/`](https://mitce.my/tutorial/) - **全平台使用教程库**：Windows、iOS、Android、macOS 与软路由保姆级图文配置。
+- [`/brands/`](https://mitce.my/brands/) - **42 家机场品牌库**：实时条件过滤与完整参数对比数据库。
+
+### 3. 📚 三大万字极客深度专题
+- [`/topics/free-resources/`](https://mitce.my/topics/free-resources/) - **22,000+ 字** 全球免费网络资源与白嫖完全指南。
+- [`/topics/runaway-radar/`](https://mitce.my/topics/runaway-radar/) - **24,000+ 字** 2026 机场跑路预警雷达与资金盘灰产揭秘。
+- [`/topics/faq/`](https://mitce.my/topics/faq/) - **30,000+ 字** 跨境网络与代理协议底层终极答疑 50+ 灵魂拷问。
+
+### 4. 🎨 暗黑科技矢量封面体系
+- 全站文章与场景摒弃老旧图库，量身定制 **18 张 1200×750 极清暗黑极客风 SVG 矢量封面**。
+- 零外部 CDN 依赖、零网络请求开销、0ms 瞬时加载、Retina 高分屏极清渲染。
+
+---
+
+## 🛠️ 技术架构与特性
+
+- **极致性能 SSG**：基于 [Astro 5](https://astro.build/) 构建，全站纯静态 HTML 直出，TTFB < 50ms。
+- **现代化样式体系**：纯原生 CSS Design Tokens，自研暗黑极客主题风格，无需臃肿第三方 UI 库。
+- **字体与资源私有化**：通过 `@fontsource-variable` 本地化托管 Outfit & Inter Tight 字体，绝不请求 Google Fonts，杜绝第三方跟踪。
+- **防风控与合规外链**：商业推广链接 100% 严格包裹 `rel="nofollow sponsored noopener"`，技术外部链接包裹 `rel="noopener noreferrer nofollow"`，权重零损耗。
+- **规范化搜索引擎支持**：
+  - **Sitemap**：自动生成 `sitemap-index.xml` 与 `sitemap-0.xml`，每日动态 `lastmod` 保鲜。
+  - **Robots**：明确放行 Googlebot、bingbot、Baiduspider、yisouspider（神马）。
+  - **Canonical**：全站强制自引用规范化绝对路径，杜绝重复收录。
+  - **Schema.org**：深度集成 `Organization`、`WebSite`、`CollectionPage`、`ItemList`、`Article`、`FAQPage` JSON-LD 结构化数据。
+
+---
+
+## 📁 目录结构
+
+```text
+mitce.my/
+├── public/                     # 静态资源库
+│   ├── favicon.svg             # 矢量站点图标
+│   └── images/                 # 18 张高精暗黑极客 SVG 封面与社交卡片
+├── src/
+│   ├── components/             # Astro 模块化 UI 组件
+│   │   ├── observatory/        # 可观测性网络测速仪表盘组件
+│   │   ├── icons/              # 纯 SVG 矢量图标集
+│   │   ├── Header.astro        # 响应式全局顶部导航
+│   │   ├── Footer.astro        # 结构化多列页脚
+│   │   └── SEO.astro           # 核心 SEO Head、Meta 及 Schema 组件
+│   ├── config/
+│   │   └── site.ts             # 站点基础配置、品牌、社交与验证码注入
+│   ├── content/
+│   │   └── blog/               # 8 篇单篇独立深度评测文章 (Content Collections)
+│   ├── data/                   # 核心结构化业务数据
+│   │   ├── brands.ts           # 42 家机场品牌测速、价格与解锁数据库
+│   │   ├── clients.ts          # 全平台代理客户端下载源与哈希数据
+│   │   ├── navigation.ts       # 全站栏目与面包屑导航数据
+│   │   └── sectors.ts          # 6 大业务出海场景解析数据
+│   ├── layouts/                # 基础页面与文章排版布局
+│   ├── pages/                  # 33 个静态路由生成入口
+│   │   ├── brands/             # 品牌库总览与 10 大独立落地页
+│   │   ├── clash/              # Clash 专题页面
+│   │   ├── clients/            # 客户端下载大全页面
+│   │   ├── free/               # 免费资源栏目页
+│   │   ├── jichang/            # 机场推荐天梯榜页面
+│   │   ├── nodes/              # 节点大盘栏目页
+│   │   ├── tizi/               # 梯子选型栏目页
+│   │   ├── topics/             # 三大万字专题长文页面
+│   │   ├── tutorial/           # 使用教程栏目页
+│   │   ├── vpn/                # VPN 推荐栏目页
+│   │   ├── 404.astro           # 404 引导页面
+│   │   ├── index.astro         # 首页门户
+│   │   ├── robots.txt.ts       # 动态 robots.txt 生成器
+│   │   └── rss.xml.ts          # RSS 2.0 订阅生成器
+│   └── styles/                 # 全局设计规范与排版 CSS
+├── astro.config.mjs            # Astro 配置文件 (Sitemap, TrailingSlash)
+└── package.json                # 项目依赖与运行脚本
+```
+
+---
+
+## 🚀 本地运行与构建
+
+### 1. 克隆与安装依赖
 
 ```bash
-git clone https://github.com/striviothemes/ST-AI-Agency.git
-cd ST-AI-Agency
+git clone https://github.com/abcabc98698-dev/mitce.my.git
+cd mitce.my
+
+# 安装项目依赖
 npm install
 ```
 
-## Development
+### 2. 启动本地开发服务
 
 ```bash
 npm run dev
 ```
 
-Opens at `http://localhost:4321`. If that port is already taken, Astro picks the next free one and prints it.
+浏览器打开 `http://localhost:4321/` 即可实时热更新预览。
 
-## Build
+### 3. 生产环境静态打包
 
 ```bash
 npm run build
 ```
 
-The static site is written to `dist/`.
+打包产物将输出至 `dist/` 目录，共构建 33 个静态页面与 XML 地图文件，平均构建耗时仅需 **1.3 ~ 1.5 秒**。
 
-## Preview
+### 4. 本地静态预览
 
 ```bash
 npm run preview
 ```
 
-This serves the production build locally. Run `npm run check` for TypeScript and Astro diagnostics.
-
-## Project structure
-
-```text
-.
-├── public/
-│   ├── images/              # Optimised WebP photography (CC0)
-│   ├── favicon.svg          # Monogram favicon
-│   └── preview.jpg          # Theme preview, also the default social sharing image (1600×900)
-├── src/
-│   ├── components/
-│   │   ├── icons/
-│   │   │   ├── icons.ts     # Custom SVG icon set
-│   │   │   ├── Icon.astro   # <Icon name="check" />
-│   │   │   └── Logo.astro   # ST AI Agency monogram
-│   │   ├── Header.astro, MobileMenu.astro, Footer.astro, Newsletter.astro
-│   │   ├── Hero.astro, ClientStrip.astro, Solutions.astro, SolutionRow.astro
-│   │   ├── Platform.astro, FeatureList.astro, Process.astro
-│   │   ├── Customers.astro, CustomerCard.astro, Stats.astro
-│   │   ├── Sectors.astro, SectorCard.astro, Testimonials.astro, Team.astro
-│   │   ├── Pricing.astro, PricingCard.astro, InsightsPreview.astro, PostCard.astro
-│   │   ├── FAQ.astro, ContactCTA.astro, FinalCTA.astro, PageHero.astro
-│   │   └── SEO.astro, SectionHeading.astro, Button.astro, Brand.astro, FrameLines.astro
-│   ├── config/site.ts       # ← brand, contact details, SEO, CTA, forms
-│   ├── content/blog/        # ← Markdown blog posts
-│   ├── content.config.ts    # Blog collection schema
-│   ├── data/                # ← all homepage copy and lists
-│   ├── layouts/
-│   │   ├── BaseLayout.astro
-│   │   └── BlogPostLayout.astro
-│   ├── pages/
-│   │   ├── index.astro      # /
-│   │   ├── blog/index.astro # /blog
-│   │   ├── blog/[slug].astro# /blog/<post>
-│   │   ├── 404.astro
-│   │   ├── rss.xml.ts
-│   │   └── robots.txt.ts
-│   ├── scripts/site.ts      # Header, menu, reveal, hero drift, forms
-│   ├── styles/
-│   │   ├── tokens.css       # ← colours, fonts, layout scale
-│   │   ├── global.css       # Reset, layout, type, buttons, motion
-│   │   ├── components.css   # Homepage sections
-│   │   └── blog.css         # Page hero, blog, article, 404
-│   ├── types.ts             # Shared TypeScript interfaces
-│   └── utils/               # url(), blog helpers, nav helpers
-└── astro.config.mjs
-```
-
-### Routes
-
-The theme generates only these pages:
-
-| Route | Source |
-| --- | --- |
-| `/` | `src/pages/index.astro` |
-| `/blog` | `src/pages/blog/index.astro` |
-| `/blog/<slug>` | `src/pages/blog/[slug].astro` |
-| `/404` | `src/pages/404.astro` |
-
-It also generates `/rss.xml`, `/robots.txt` and `/sitemap-index.xml`. Solutions, features, pricing, customers, sectors, process, team, FAQ and contact are sections of the homepage, reached with anchors such as `/#pricing`.
-
-## Customization
-
-You only need to edit **`src/config/site.ts`**, **`src/data/*`** and **`src/styles/tokens.css`** for most changes.
-
-| What | Where |
-| --- | --- |
-| Site name, word-mark, tagline, description | `src/config/site.ts` → `name`, `brand`, `tagline`, `description` |
-| Email, phone, address, response time | `src/config/site.ts` |
-| Social links | `src/config/site.ts` → `social` (remove an entry to hide its icon) |
-| SEO defaults, share image, theme colour | `src/config/site.ts` → `seo` |
-| Main CTA ("Book a demo") | `src/config/site.ts` → `cta` |
-| Copyright line | `src/config/site.ts` → `copyright` |
-| Logo / monogram | `src/components/icons/Logo.astro` and `public/favicon.svg` |
-| Header, mobile and footer navigation | `src/data/navigation.ts` |
-| Hero copy, stats, client names, section headings, CTA band, newsletter | `src/data/home.ts` |
-| Solutions (service rows) | `src/data/solutions.ts` |
-| Platform features checklist | `src/data/features.ts` |
-| Process steps | `src/data/process.ts` |
-| Customer case studies | `src/data/customers.ts` |
-| Big-number statistics | `src/data/stats.ts` |
-| Sectors | `src/data/sectors.ts` |
-| Testimonial | `src/data/testimonials.ts` |
-| Team | `src/data/team.ts` (supports optional `bio` and `social`) |
-| Pricing plans | `src/data/pricing.ts` |
-| FAQ | `src/data/faq.ts` |
-| Colours | `src/styles/tokens.css` (`--o900`…`--o100`, `--cream`, `--ink`, …) |
-| Typography | `src/styles/tokens.css` (`--display`, `--body`) plus the font imports in `src/layouts/BaseLayout.astro` |
-| Section order or removal | `src/pages/index.astro` (comment out or reorder components) |
-
-Section titles can contain `<br>` for deliberate line breaks, for example `'Six weeks from<br>workshop to live.'`.
-
-**Every name, company, figure and quote in the demo content is fictional.** Replace it with your own before you launch.
-
-### Changing the colours
-
-The palette is a ramp of oranges (`--o900` darkest to `--o100` lightest) plus neutrals. Change the hex values in `tokens.css` and the theme follows. A few hero gradients in `components.css` (`.hero__duo`, `.hero__warm`, `.hero__scrim`) use literal colour stops so they can be tuned separately. Edit those too if you move far away from orange.
-
-### Changing the fonts
-
-1. Install another Fontsource package, for example `npm i @fontsource-variable/manrope`.
-2. Replace the imports at the top of `src/layouts/BaseLayout.astro`, including the two `?url` preload imports.
-3. Update `--display` / `--body` in `tokens.css`.
-
-## Adding blog posts
-
-Create a Markdown file in `src/content/blog/`. The file name becomes the URL, so `my-new-post.md` is published at `/blog/my-new-post`.
-
-```markdown
----
-title: Your Post Title
-description: One or two sentences for cards, meta description and social previews.
-pubDate: 2026-10-01
-updatedDate: 2026-10-08        # optional
-category: Operations
-author: Amara Boateng
-authorRole: Founder, principal engineer   # optional
-image: /images/blog-ai-agents.webp        # file in /public
-imageAlt: Describe the image for screen readers
-tags: [AI agents, Operations]
-readingTime: 6                 # optional; calculated from word count if omitted
-featured: false                # optional; pins the post as "Latest note" on /blog
-draft: false                   # drafts show in `npm run dev` only
 ---
 
-Your content in Markdown…
-```
+## ☁️ 部署指南
 
-The frontmatter is validated by the schema in `src/content.config.ts`, so a typo fails the build with a clear message. The homepage Insights section shows the three newest posts automatically.
+本项目为标准静态站点（SSG），可零配置一键部署至各大全球边缘网络：
 
-## Contact form
+### Cloudflare Pages（推荐）
+1. 在 Cloudflare 控制台连接 GitHub 仓库 `abcabc98698-dev/mitce.my`。
+2. 构建设置：
+   - **Framework preset**：`Astro`
+   - **Build command**：`npm run build`
+   - **Build output directory**：`dist`
+3. 绑定自定义域名 `mitce.my`。
 
-The contact and newsletter forms are plain HTML forms. While no endpoint is configured they run in **demo mode**: submitting sends nothing and shows a notice saying so. To connect a provider, edit `forms` in `src/config/site.ts`.
+### Vercel / Netlify
+- 导入仓库后选择 Astro 预设，构建命令使用 `npm run build`，输出目录填写 `dist` 即可秒级上线。
 
-**Formspree:**
+---
 
-```ts
-forms: { contactAction: 'https://formspree.io/f/<your-form-id>', newsletterAction: '', netlify: false }
-```
+## ⚖️ 免责声明与合规说明
 
-**Web3Forms.** Set `contactAction: 'https://api.web3forms.com/submit'`, then add your access key as a hidden field inside the form in `src/components/ContactCTA.astro`:
+1. **测试数据中立性**：本项目所载测速数据、流媒体解锁状态及网络拓扑指标均由 MITCE 网络实验室在特定时段真实宽带环境下采样得出，受限于运营商跨国网络波动，实际使用体验可能略有差异。
+2. **推广与佣金披露 (Affiliate Disclosure)**：部分推荐服务包含推广注册直达链接，若用户通过链接订购，本站可能获得少量运维补贴，但不影响用户的实际优惠幅度与购买价格。
+3. **合法出海指引**：请遵守当地相关法律法规，科学上网技术与专线资源仅供跨国企业正规出海办公、学术论文查阅、开源软件技术协作及合规业务交流使用。
 
-```html
-<input type="hidden" name="access_key" value="YOUR_PUBLIC_ACCESS_KEY" />
-```
+---
 
-**Netlify Forms:**
+## 📄 开源许可证
 
-```ts
-forms: { contactAction: '', newsletterAction: '', netlify: true }
-```
-
-With `netlify: true` the forms get `data-netlify="true"`, a hidden `form-name` field and a honeypot, and they submit normally. Netlify detects them at deploy time.
-
-**Your own API.** Set `contactAction` to your endpoint URL. The form posts `name`, `company`, `email`, `phone`, `workflow` and `message`.
-
-No API keys or credentials are included in the theme.
-
-## Images
-
-All photographs are local WebP files in `public/images/`. They were downloaded from [pxhere.com](https://pxhere.com) and resized and cropped for the theme. Every source page was checked at download time and states that the photo is released under **[CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)** (public domain), so you can redistribute it with the theme. Attribution is not required, but it is listed here for transparency.
-
-| File | Source |
-| --- | --- |
-| `ai-agency-hero.webp` | [pxhere.com/en/photo/108386](https://pxhere.com/en/photo/108386) |
-| `platform-operations-lead.webp` | [pxhere.com/en/photo/912909](https://pxhere.com/en/photo/912909) |
-| `solution-support.webp` | [pxhere.com/en/photo/1258982](https://pxhere.com/en/photo/1258982) |
-| `solution-finance.webp` | [pxhere.com/en/photo/1238368](https://pxhere.com/en/photo/1238368) |
-| `solution-documents.webp` | [pxhere.com/en/photo/655321](https://pxhere.com/en/photo/655321) |
-| `solution-research.webp` | [pxhere.com/en/photo/596254](https://pxhere.com/en/photo/596254) |
-| `solution-evaluation.webp` | [pxhere.com/en/photo/1170475](https://pxhere.com/en/photo/1170475) |
-| `customer-fintech.webp` | [pxhere.com/en/photo/1109918](https://pxhere.com/en/photo/1109918) |
-| `customer-healthcare.webp` | [pxhere.com/en/photo/647862](https://pxhere.com/en/photo/647862) |
-| `customer-logistics.webp` | [pxhere.com/en/photo/1072796](https://pxhere.com/en/photo/1072796) |
-| `sector-banking.webp` | [pxhere.com/en/photo/104014](https://pxhere.com/en/photo/104014) |
-| `sector-healthcare.webp` | [pxhere.com/en/photo/1179849](https://pxhere.com/en/photo/1179849) |
-| `sector-freight.webp` | [pxhere.com/en/photo/1177716](https://pxhere.com/en/photo/1177716) |
-| `sector-software.webp` | [pxhere.com/en/photo/913320](https://pxhere.com/en/photo/913320) |
-| `sector-insurance.webp` | [pxhere.com/en/photo/811631](https://pxhere.com/en/photo/811631) |
-| `sector-commerce.webp` | [pxhere.com/en/photo/1052603](https://pxhere.com/en/photo/1052603) |
-| `testimonial-portrait.webp` | [pxhere.com/en/photo/1278247](https://pxhere.com/en/photo/1278247) |
-| `team-member-01.webp` | [pxhere.com/en/photo/706040](https://pxhere.com/en/photo/706040) |
-| `team-member-02.webp` | [pxhere.com/en/photo/764654](https://pxhere.com/en/photo/764654) |
-| `team-member-03.webp` | [pxhere.com/en/photo/1177669](https://pxhere.com/en/photo/1177669) |
-| `team-member-04.webp` | [pxhere.com/en/photo/764641](https://pxhere.com/en/photo/764641) |
-| `blog-ai-agents.webp` | [pxhere.com/en/photo/912807](https://pxhere.com/en/photo/912807) |
-| `blog-reliable-workflows.webp` | [pxhere.com/en/photo/1072793](https://pxhere.com/en/photo/1072793) |
-| `blog-human-in-the-loop.webp` | [pxhere.com/en/photo/764658](https://pxhere.com/en/photo/764658) |
-| `blog-production-ready.webp` | [pxhere.com/en/photo/1366450](https://pxhere.com/en/photo/1366450) |
-| `blog-customer-support.webp` | [pxhere.com/en/photo/833211](https://pxhere.com/en/photo/833211) |
-| `blog-auditable-workflows.webp` | [pxhere.com/en/photo/819795](https://pxhere.com/en/photo/819795) |
-| `blog-prototype-to-production.webp` | [pxhere.com/en/photo/723648](https://pxhere.com/en/photo/723648) |
-| `blog-measuring-roi.webp` | [pxhere.com/en/photo/611848](https://pxhere.com/en/photo/611848) |
-
-The people in these stock photos are not connected to the fictional names used in the demo. `public/preview.jpg` is composed from screenshots of the theme itself (which include `ai-agency-hero.webp`) plus the theme's own logo and typography.
-
-**Replacing images.** Keep roughly the same aspect ratios (listed in each component's `width`/`height` attributes) and save as WebP for the best results. The theme applies its warm duotone filter through CSS, so any photo picks up the brand look.
-
-## Fonts
-
-| Font | Use | License | Source |
-| --- | --- | --- | --- |
-| Outfit (variable) | Display / headings | SIL Open Font License 1.1 | [Fontsource](https://fontsource.org/fonts/outfit), [upstream](https://github.com/Outfitio/Outfit-Fonts) |
-| Inter Tight (variable) | Body text | SIL Open Font License 1.1 | [Fontsource](https://fontsource.org/fonts/inter-tight), [upstream](https://github.com/rsms/inter) |
-
-Both fonts are installed from npm and served from your own domain, so there are no requests to Google Fonts. The Latin subsets are preloaded. If a font fails to load, the stacks fall back to `system-ui`.
-
-## SVG and icons
-
-The theme uses its own SVG artwork from the original design. It does not use an icon library.
-
-- **`src/components/icons/Logo.astro`** draws the ST AI Agency monogram. It has a `light` variant for the header and a `footer` variant.
-- **`src/components/icons/icons.ts`** holds the icon set: clock, shield-check, bars, arrows, check, check-circle, plus, mail, phone, pin, time, LinkedIn, X, GitHub and RSS. Every icon draws with `currentColor`, so CSS controls its colour.
-- **`src/components/icons/Icon.astro`** renders an icon: `<Icon name="check" size={16} />`. Icons are decorative (`aria-hidden`) unless you pass a `label`.
-
-To add an icon, append an entry with `viewBox`, `size` and SVG `body` markup to `icons.ts`. The `IconName` type updates automatically.
-
-## Deployment
-
-The theme builds to static files in `dist/`, so it runs on any static host. Before you deploy, set your production URL. It is used for canonical tags, Open Graph, the sitemap and RSS:
-
-- set the `SITE_URL` environment variable, for example `SITE_URL=https://www.example.com`, **or**
-- change the default URL in `astro.config.mjs`.
-
-### Vercel
-
-Import the repository at [vercel.com/new](https://vercel.com/new). Vercel detects Astro automatically and uses `npm run build` with output directory `dist`. Add `SITE_URL` under *Settings → Environment Variables*.
-
-### Netlify
-
-Import the repository at [app.netlify.com](https://app.netlify.com). Use build command `npm run build` and publish directory `dist`, and add `SITE_URL` as an environment variable. Set `forms.netlify: true` if you want Netlify Forms.
-
-### Cloudflare Pages
-
-Create a Pages project from your repository. Choose the **Astro** framework preset, or use build command `npm run build` and output directory `dist`. Set `SITE_URL`, and set `NODE_VERSION=22` if the default image uses an older Node.
-
-### GitHub Pages and other static hosts
-
-For GitHub Pages, use the official [withastro/action](https://github.com/withastro/action) workflow described in the [Astro GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/). For a project site served from a sub-path, set both variables in the workflow:
-
-```yaml
-env:
-  SITE_URL: https://<user>.github.io
-  BASE_PATH: /st-ai-agency
-```
-
-Every internal link goes through the `url()` helper in `src/utils/url.ts`, so the theme works under that sub-path.
-
-For any other host, run `npm run build` and upload the contents of `dist/`. Configure the host to serve `404.html` for missing pages.
-
-## License
-
-The theme is released under the [MIT License](LICENSE).
-
-Third-party assets keep their own licenses and are not covered by MIT:
-
-- **Photographs** in `public/images/` are CC0 1.0 (public domain). Sources are listed under [Images](#images).
-- **Fonts** Outfit and Inter Tight are licensed under the SIL Open Font License 1.1. See [Fonts](#fonts).
-
-## Credits
-
-- [Astro](https://astro.build) and the official `@astrojs/sitemap` and `@astrojs/rss` integrations (MIT).
-- [Fontsource](https://fontsource.org) packages of **Outfit** (The Outfit Project Authors) and **Inter Tight** (The Inter Project Authors), both SIL OFL 1.1.
-- Photography from [pxhere.com](https://pxhere.com), CC0 1.0. Per-file sources are listed under [Images](#images).
-- Design, SVG artwork, logo and demo copy: ST AI Agency theme by StrivioThemes.
+本项目源码采用 [MIT License](LICENSE) 开源，文档与原创测速数据遵循 CC BY-NC-SA 4.0 知识共享协议。

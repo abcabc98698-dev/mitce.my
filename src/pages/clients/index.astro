@@ -1,0 +1,461 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { platformGuides } from '../../data/clients';
+import { absoluteUrl } from '../../utils/url';
+import { siteConfig } from '../../config/site';
+
+const pageTitle = '2026 机场代理客户端大全【全平台下载与配置教程】';
+const pageDescription =
+  '收录 Windows、Android、iOS（小火箭/Stash/圈X）、macOS、Linux 及 OpenWrt 软路由主流代理客户端（Clash Verge Rev、v2rayN、FlClash、v2rayNG、OpenClash）。提供项目官方地址、内核解析与订阅导入指南。';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '客户端大全', href: '/clients' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: '全平台网络代理客户端大全',
+    description: pageDescription,
+    itemListElement: platformGuides.flatMap((pg) =>
+      pg.clients.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: `${c.name} (${pg.title})`,
+        url: c.projectUrl,
+        description: c.features,
+      })),
+    ),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 2, name: '客户端大全', item: absoluteUrl('/clients', Astro.site) },
+    ],
+  },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={schema}>
+  <PageHero
+    kicker="Tools & Tutorials · 客户端矩阵"
+    title="全平台代理客户端<br>下载与订阅配置中心"
+    lead="汇总 Windows、Android、iOS、macOS、Linux 及软路由各大平台主流代理工具。收录官方项目地址、架构区别与防踩坑指南。"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="sec on-cream">
+    <div class="wrap">
+      <!-- Architecture Explainer Bar -->
+      <div class="client-intro rv">
+        <div class="ci-item">
+          <b>📦 两种核心客户端形态：</b>
+          <p>
+            <strong>① 第三方开源通用客户端：</strong>如 Clash Verge Rev、v2rayN、Shadowrocket，支持各大标准机场订阅链接导入，自由度高，规则灵活。<br />
+            <strong>② 机场官方专属客户端：</strong>如光速云、飞猫云等提供的定制 App，下载登录账号即可一键直连，免去配置订阅与挑选软件的繁琐步骤。
+          </p>
+        </div>
+      </div>
+
+      <!-- Platform Navigation Tabs -->
+      <div class="plat-nav rv" role="tablist" aria-label="操作系统选择">
+        {platformGuides.map((p, index) => (
+          <button
+            class:list={['p-btn', { on: index === 0 }]}
+            type="button"
+            role="tab"
+            data-target={p.id}
+            aria-selected={index === 0 ? 'true' : 'false'}
+          >
+            {p.id === 'windows' && '💻 Windows'}
+            {p.id === 'android' && '🤖 Android'}
+            {p.id === 'ios' && '🍏 iPhone / iPad'}
+            {p.id === 'macos' && '🍎 macOS'}
+            {p.id === 'linux' && '🐧 Linux'}
+            {p.id === 'openwrt' && '📡 OpenWrt 软路由'}
+          </button>
+        ))}
+      </div>
+
+      <!-- Platform Content Sections -->
+      <div class="plat-container">
+        {platformGuides.map((guide, index) => (
+          <section
+            class:list={['plat-panel', { on: index === 0 }]}
+            id={guide.id}
+            data-panel={guide.id}
+          >
+            <div class="plat-header rv">
+              <div class="ph-info">
+                <span class="kicker kicker--heat">{guide.title}</span>
+                <h2 class="d3">{guide.title} 首选客户端矩阵</h2>
+                <p class="lead">{guide.subtitle}</p>
+              </div>
+
+              <!-- SEO Keywords cloud -->
+              <div class="ph-keywords">
+                <span class="ph-k-label">核心热搜词：</span>
+                {guide.primaryKeywords.map((kw) => (
+                  <span class="k-tag">{kw}</span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Platform Pro Tips -->
+            <div class="tips-box rv">
+              <b>💡 平台配置必看提示：</b>
+              <ul>
+                {guide.tips.map((tip) => (
+                  <li>{tip}</li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Client Cards Grid -->
+            <div class="client-grid">
+              {guide.clients.map((c) => (
+                <div class:list={['c-card rv', { 'c-card--rec': c.recommended }]}>
+                  <div class="c-card__top">
+                    {c.badge && <span class="c-badge">{c.badge}</span>}
+                    <h3 class="c-name">{c.name}</h3>
+                    <span class="c-kernel">内核: {c.kernel}</span>
+                  </div>
+
+                  <p class="c-features">{c.features}</p>
+
+                  {c.priceNote && <div class="c-price-note">{c.priceNote}</div>}
+
+                  <div class="c-card__foot">
+                    <a
+                      href={c.projectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      class="btn btn--heat c-download-btn"
+                    >
+                      访问 {c.urlType} 项目直链 ↗
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <!-- General FAQ for Clients -->
+      <div class="c-faq-sec rv">
+        <h2 class="d3">客户端配置高频问题与答疑</h2>
+        <div class="c-faq-list">
+          <details class="c-faq-card" open>
+            <summary><b>Q: 为什么订阅链接导入客户端后，节点测速全部超时或显示 -1？</b></summary>
+            <p>
+              A: 90% 的原因是本机系统时间不同步。协议（尤其是 VLESS 与 Shadowsocks）要求本地时间与国际标准时间误差在 60 秒以内。请打开电脑/手机的「日期和时间」设置，关闭并重新开启「自动设置时间」即可恢复。
+            </p>
+          </details>
+          <details class="c-faq-card">
+            <summary><b>Q: Clash Verge Rev 中的「系统代理」和「TUN 模式」有什么区别？</b></summary>
+            <p>
+              A: 「系统代理」只接管遵循系统代理设置的浏览器和普通应用；而「TUN 模式」会创建虚拟网卡，将整台电脑的所有流量（包括命令行、游戏客户端、不遵循系统代理的应用）全面接管分流，稳定性更强。
+            </p>
+          </details>
+          <details class="c-faq-card">
+            <summary><b>Q: iOS 国区 App Store 搜索不到小火箭（Shadowrocket）怎么办？</b></summary>
+            <p>
+              A: 国区应用商店已全量下架网络代理工具。您需要注册或借用一个美区/港区等非国区 Apple ID，登录 App Store 搜索购买（Shadowrocket 售价约 $2.99）。切勿在「设置」的主 iCloud 处登录陌生外区账号，仅在 App Store 登录即可保证安全。
+            </p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>
+
+<script>
+  // Tab switching logic
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.p-btn');
+  const panels = document.querySelectorAll<HTMLElement>('.plat-panel');
+
+  function switchTab(targetId: string) {
+    tabs.forEach((t) => {
+      const isMatch = t.dataset.target === targetId;
+      t.classList.toggle('on', isMatch);
+      t.setAttribute('aria-selected', String(isMatch));
+    });
+
+    panels.forEach((p) => {
+      p.classList.toggle('on', p.dataset.panel === targetId);
+    });
+
+    // Update URL hash without jump
+    history.replaceState(null, '', `#${targetId}`);
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.target;
+      if (target) switchTab(target);
+    });
+  });
+
+  // Handle direct hash navigation
+  if (window.location.hash) {
+    const hashId = window.location.hash.replace('#', '');
+    if (document.getElementById(hashId)) {
+      switchTab(hashId);
+    }
+  }
+</script>
+
+<style>
+  .client-intro {
+    background: #FFF;
+    border: 1px solid #E5D9CE;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 15px rgba(28, 15, 7, 0.03);
+  }
+  .ci-item b {
+    color: #1C0F07;
+    font-size: 0.95rem;
+  }
+  .ci-item p {
+    color: #5C4A3E;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin: 8px 0 0;
+  }
+
+  /* Platform Tabs */
+  .plat-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+    background: #EFE4D8;
+    padding: 6px;
+    border-radius: 12px;
+  }
+  .p-btn {
+    flex: 1 1 auto;
+    background: transparent;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #5C4A3E;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .p-btn:hover {
+    color: #EC5A11;
+  }
+  .p-btn.on {
+    background: #1C0F07;
+    color: #FFF;
+    box-shadow: 0 4px 12px rgba(28, 15, 7, 0.15);
+  }
+
+  /* Panel */
+  .plat-panel {
+    display: none;
+  }
+  .plat-panel.on {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .plat-header {
+    background: #FFF;
+    border: 1px solid #E5D9CE;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .ph-info h2 {
+    margin: 6px 0 8px;
+  }
+  .ph-info .lead {
+    color: #6C5A4E;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  .ph-keywords {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .ph-k-label {
+    font-size: 0.75rem;
+    color: #8C7869;
+    font-weight: 600;
+  }
+  .k-tag {
+    background: #FDF4EB;
+    border: 1px solid #F6D6BA;
+    color: #C2410C;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .tips-box {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: #92400E;
+  }
+  .tips-box ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* Grid */
+  .client-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  @media (min-width: 680px) {
+    .client-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1040px) {
+    .client-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .c-card {
+    background: #FFF;
+    border: 1px solid #E5D9CE;
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(28, 15, 7, 0.03);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .c-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(28, 15, 7, 0.08);
+    border-color: #EC5A11;
+  }
+  .c-card--rec {
+    border-color: #FDBA74;
+    background: linear-gradient(180deg, #FFFAF6 0%, #FFFFFF 100%);
+  }
+  .c-card__top {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+  }
+  .c-badge {
+    align-self: flex-start;
+    background: #EC5A11;
+    color: #FFF;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+  }
+  .c-name {
+    font-size: 1.15rem;
+    color: #1C0F07;
+    margin: 0;
+  }
+  .c-kernel {
+    font-size: 0.75rem;
+    color: #7A695C;
+    background: #F3ECE4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    align-self: flex-start;
+  }
+  .c-features {
+    font-size: 0.85rem;
+    color: #5C4A3E;
+    line-height: 1.5;
+    margin: 0;
+    flex-grow: 1;
+  }
+  .c-price-note {
+    font-size: 0.75rem;
+    color: #0369A1;
+    background: #E0F2FE;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .c-card__foot {
+    margin-top: 6px;
+  }
+  .c-download-btn {
+    width: 100%;
+    text-align: center;
+    font-size: 0.82rem;
+    padding: 9px 12px;
+  }
+
+  /* FAQ */
+  .c-faq-sec {
+    background: #FFF;
+    border: 1px solid #E5D9CE;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-top: 30px;
+  }
+  .c-faq-sec h2 {
+    margin-bottom: 20px;
+  }
+  .c-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .c-faq-card {
+    background: #FDF9F5;
+    border: 1px solid #EFE4D8;
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+  .c-faq-card summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1C0F07;
+  }
+  .c-faq-card p {
+    margin-top: 10px;
+    font-size: 0.88rem;
+    color: #5C4A3E;
+    line-height: 1.6;
+  }
+</style>

@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ClientStrip from '../components/ClientStrip.astro';
 import Solutions from '../components/Solutions.astro';
+import ObservatorySection from '../components/ObservatorySection.astro';
 import Platform from '../components/Platform.astro';
 import Process from '../components/Process.astro';
 import Customers from '../components/Customers.astro';
@@ -12,17 +13,37 @@ import Testimonials from '../components/Testimonials.astro';
 import Team from '../components/Team.astro';
 import Pricing from '../components/Pricing.astro';
 import InsightsPreview from '../components/InsightsPreview.astro';
-import FAQ from '../components/FAQ.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import FinalCTA from '../components/FinalCTA.astro';
 import { hero } from '../data/home';
-import { url } from '../utils/url';
+import { brandsData } from '../data/brands';
+import { url, absoluteUrl } from '../utils/url';
+
+const topBrands = brandsData.slice(0, 10);
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: '2026 跨境网络与机场专线天梯榜推荐列表',
+    description: 'MITCE 网络实验室多维度实测推荐的优质机场品牌天梯列表。',
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    numberOfItems: topBrands.length,
+    itemListElement: topBrands.map((b, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: b.name,
+      url: b.isFeatured ? absoluteUrl(`/brands/${b.slug}`, Astro.site) : b.affLink,
+      description: b.summary,
+    })),
+  },
+];
 ---
 
-<BaseLayout preloadImage={url(hero.image)}>
+<BaseLayout preloadImage={url(hero.image)} schema={schema}>
   <Hero />
   <ClientStrip />
   <Solutions />
+  <ObservatorySection />
   <Platform />
   <Process />
   <Customers />
@@ -32,7 +53,6 @@ import { url } from '../utils/url';
   <Team />
   <Pricing />
   <InsightsPreview />
-  <FAQ />
   <ContactCTA />
   <FinalCTA />
 </BaseLayout>

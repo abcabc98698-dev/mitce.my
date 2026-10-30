@@ -26,14 +26,15 @@ const { preloadImage, ...seo } = Astro.props;
 <html lang={siteConfig.lang}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
     <!-- Marks JS as available before first paint so reveal / accordion styles only apply with JS. -->
     <script is:inline>document.documentElement.classList.add('js');</script>
     <link rel="preload" href={outfitLatin} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
     <SEO {...seo} />
     {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
-    <meta name="generator" content={Astro.generator} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

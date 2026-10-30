@@ -36,7 +36,7 @@ import { phoneDisplay, url } from '../utils/url';
       ))}
 
       <div class="fcol">
-        <h2>Contact</h2>
+        <h2>联系我们</h2>
         <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
         <a href={`tel:${siteConfig.phoneHref}`}>{phoneDisplay(siteConfig.phone)}</a>
         <address>{siteConfig.location.lines.map((line, i) => <>{i > 0 && <br />}{line}</>)}</address>

@@ -3,47 +3,47 @@ import type { Solution } from '../types';
 export const solutions: Solution[] = [
   {
     number: '01',
-    title: 'Customer support',
+    title: '全线 IEPL / IPLC 内网物理专线',
     description:
-      'Tier-1 resolution across email, chat and voice, grounded in your real help centre. Refuses anything outside scope and writes a clean handoff packet when a person is needed.',
+      '端到端点对点内网穿透，不经公网国际出口 GFW 过滤。晚高峰 0% 丢包率，亚洲近端延迟稳定在 20–50ms 区间。',
     image: '/images/solution-support.webp',
-    href: '/#contact',
-    category: 'Support',
+    href: '/brands',
+    category: '专线架构',
   },
   {
     number: '02',
-    title: 'Back office & finance',
+    title: 'AI 生产力大模型原生支持',
     description:
-      "Invoice reconciliation, onboarding checks, refunds and renewals. The repeat work that quietly eats a third of your team's week, done overnight with an audit trail.",
+      '深度适配 ChatGPT (OpenAI)、Claude 3.5 Sonnet 及 Google Gemini。选用原生纯净 IP 池，大幅降低账号风控与图形验证码几率。',
     image: '/images/solution-finance.webp',
-    href: '/#contact',
-    category: 'Operations',
+    href: '/brands',
+    category: 'AI 协同',
   },
   {
     number: '03',
-    title: 'Documents & claims',
+    title: '全球 4K/8K 流媒体全解锁',
     description:
-      'Extract, verify against policy, file. Built for the messy PDF, the scanned fax and the supplier who redesigns their invoice every quarter.',
+      'Netflix 非自制剧全区解锁、Disney+、YouTube Premium、TikTok 跨境直播、HBO Max 及 Spotify 极速秒开无缓冲。',
     image: '/images/solution-documents.webp',
-    href: '/#contact',
-    category: 'Documents',
+    href: '/brands',
+    category: '影音娱乐',
   },
   {
     number: '04',
-    title: 'Revenue research',
+    title: '自研免配 App + 开源客户端双轨支持',
     description:
-      "Enrich inbound leads, read the account's public footprint, and hand the rep a two-paragraph brief before the call — sourced, dated and linked.",
+      '不仅有适合新手的自研一键登录客户端（光速云、飞猫云等），更完全开放 Clash、Shadowrocket、sing-box 通用订阅导出。',
     image: '/images/solution-research.webp',
-    href: '/#contact',
-    category: 'Sales',
+    href: '/clients',
+    category: '客户端生态',
   },
   {
     number: '05',
-    title: 'Evaluation & supervision',
+    title: '灵活资费与永久不过期流量包',
     description:
-      'The part most agencies skip. Labelled test sets, regression runs on every prompt change, and an alert the day quality starts to slip.',
+      '从折合约 8 元/月的高性价比年付，到光速云「致敬斯诺克 147 永久套餐」（¥147 享 247GB 永不过期），用量再少也不浪费。',
     image: '/images/solution-evaluation.webp',
-    href: '/#contact',
-    category: 'Quality',
+    href: '/brands',
+    category: '资费透明',
   },
 ];

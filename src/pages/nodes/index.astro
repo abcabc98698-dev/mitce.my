@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { getPosts } from '../../utils/blog';
+import { absoluteUrl, url } from '../../utils/url';
+
+const allPosts = await getPosts();
+const relatedPosts = allPosts.filter((p) =>
+  p.data.tags.some((t) => ['测速指标', '延迟抖动', '住宅IP', '流媒体解锁'].includes(t))
+).slice(0, 3);
+
+const title = '全球代理节点拓扑分析 — 香港、日本、新加坡与美西原生 IP 延迟对比';
+const description =
+  '深度剖析跨境网络节点分布与落地质量。对比香港 HKG、日本 NRT/HND、新加坡 SGP 与美国 SJC/LAX 节点的物理跳纤延迟、BGP 路由走向与原生住宅 IP 纯净度。';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '节点专题', href: '/nodes/' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: absoluteUrl('/nodes/', Astro.site),
+    breadcrumb: { '@id': `${absoluteUrl('/nodes/', Astro.site)}#breadcrumb` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${absoluteUrl('/nodes/', Astro.site)}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 2, name: '节点专题', item: absoluteUrl('/nodes/', Astro.site) },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '为什么香港节点的延迟最低，但有时刷 TikTok 或用 ChatGPT 反而推荐选新加坡或美国？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '香港节点因地理距离近（广州到香港光缆往返仅 2–5ms），整体延迟最低，适合日常网页浏览和高频查询；但 OpenAI 对香港 IP 实施全面锁区阻断，TikTok 亦对香港 IP 实施免推荐风控。因此，涉及 AI 生产力（ChatGPT/Claude）或海外社媒营销时，必须选择新加坡 (SGP)、日本 (TYO) 或美国原生住宅节点。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '节点列表里的“0.1x / 1.0x / 3.0x”倍率到底代表什么意思？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '倍率代表流量消耗系数。例如：当使用 0.1x 倍率节点下载 1GB 文件时，机场后台仅扣除 0.1GB（100MB）套餐流量，适合大文件下载；使用 3.0x 倍率的高成本高级专线节点时，消耗 1GB 实际扣除 3GB 流量。选节点时务必关注倍率标签，避免流量意外耗尽。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '为什么很多节点显示的 ping 延迟很低，但实际看 YouTube 依然卡顿？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '客户端显示的延迟测试通常只是“入口握手延迟（TCP Handshake RTT）”，只代表您本地到国内专线入口的毫秒数，不能反映海外落地节点到目标服务器（如 Google CDN）的真实带宽吞吐和晚高峰丢包率。真正的网络质量必须结合单线程/多线程下载测速综合判断。',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <PageHero
+    kicker="Global Node Telemetry · 2026 观测大盘"
+    title="全球跨境代理节点池<br>延迟与落地拓扑深度解析"
+    lead="用客观物理数据说话。深度拆解香港 HKG、日本 NRT、新加坡 SGP 与美西 SJC 节点的跳纤时延、BGP 互联质量、流媒体解锁范围与双 ISP 纯净度指标。"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="sec on-cream" aria-label="节点专题核心正文">
+    <div class="wrap">
+      <!-- Answer Block -->
+      <div class="answer-block rv">
+        <div class="answer-header">
+          <span class="badge">🌐 2026 节点选型核心法则</span>
+          <span class="date">光速物理常数基准: ~20.4 万公里/秒 (石英光纤)</span>
+        </div>
+        <div class="answer-content">
+          <p>
+            <strong>节点选型黄金定律：</strong>不同业务对节点属性的诉求完全不同。<strong>追求极致低延迟</strong>（电竞加速、即时通讯）首选 <strong>香港 HKG (25~35ms)</strong>；<strong>追求 AI 生产力与无风控</strong>（ChatGPT/Claude）首选 <strong>新加坡 SGP / 美西 SJC 原生住宅 IP</strong>；<strong>追求超清影音与动漫</strong>（Netflix/Disney+/DMM）首选 <strong>日本 TYO / 台湾 TPE</strong>。
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Category Navigation -->
+      <div class="cat-pills-bar rv">
+        <span class="cp-title">快捷入口：</span>
+        <div class="cp-list">
+          <a href="/jichang/" class="cp-item">42 家机场天梯榜</a>
+          <a href="/brands/" class="cp-item">品牌数据库全览</a>
+          <a href="/clash/" class="cp-item">Clash 规则分流配置</a>
+          <a href="/free/" class="cp-item">免费节点获取</a>
+          <a href="/tutorial/" class="cp-item">全平台使用教程</a>
+          <a href="/topics/faq/" class="cp-item">终极答疑 50+ 问</a>
+        </div>
+      </div>
+
+      <!-- Telemetry Comparison Table -->
+      <div class="topic-block rv">
+        <h2 class="d3">全球五大核心区域节点物理性能对照表</h2>
+        <p class="tb-lead">以下延迟基于企业级 IEPL 专线在真实国内骨干网接入点的采样中位数：</p>
+        <div class="tbl-wrap">
+          <table class="d-table">
+            <thead>
+              <tr>
+                <th>节点区域 / 代码</th>
+                <th>专线往返延迟 (RTT)</th>
+                <th>晚高峰丢包率</th>
+                <th>流媒体 / AI 解锁能力</th>
+                <th>最优适用业务</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>中国香港 (HKG)</b></td>
+                <td>20ms ~ 38ms</td>
+                <td>0.00%</td>
+                <td>Netflix 港区、Disney+、YouTube 4K</td>
+                <td>网页冲浪、跨境电商后台、高速下载</td>
+              </tr>
+              <tr>
+                <td><b>日本东京 (NRT/HND)</b></td>
+                <td>42ms ~ 65ms</td>
+                <td>0.00%</td>
+                <td>全区 Netflix、AbemaTV、DMM、ChatGPT</td>
+                <td>流媒体追剧、主机游戏加速、AI 开发</td>
+              </tr>
+              <tr>
+                <td><b>新加坡 (SGP)</b></td>
+                <td>48ms ~ 75ms</td>
+                <td>0.00%</td>
+                <td>ChatGPT、Claude 3.5、TikTok、Disney+</td>
+                <td>AI 大模型交互、东南亚电商、TikTok 直播</td>
+              </tr>
+              <tr>
+                <td><b>美国加州 (SJC/LAX)</b></td>
+                <td>125ms ~ 155ms</td>
+                <td>0.00%</td>
+                <td>US 原生住宅、OpenAI 官方服务、Amazon</td>
+                <td>美国电商开店、跨境金融、海外学术</td>
+              </tr>
+              <tr>
+                <td><b>德国法兰克福 (FRA)</b></td>
+                <td>160ms ~ 210ms</td>
+                <td>0.05%</td>
+                <td>欧洲主流流媒体、合规 GDPR 跨境业务</td>
+                <td>外贸欧洲专线、多区域备用容灾</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Residential IP vs Datacenter IP Comparison -->
+      <div class="topic-block rv">
+        <h2 class="d3">原生住宅 IP 与机房广播 IP 的本质区别</h2>
+        <div class="pros-cons-grid">
+          <div class="pc-box pc-box--pro">
+            <h3>🟢 双 ISP 原生住宅 IP (Residential IP)</h3>
+            <ul>
+              <li><strong>ASN 属性</strong>：识别为当地正规民用宽带运营商（如 AT&T, Comcast, NTT, HKBN）。</li>
+              <li><strong>风控优势</strong>：欺诈值接近 0 分，访问 OpenAI、Claude、Gemini 极度顺畅，不弹人机验证。</li>
+              <li><strong>流媒体表现</strong>：100% 解锁 Netflix 非自制剧（版权限制剧集）与各类受限金融服务。</li>
+            </ul>
+          </div>
+          <div class="pc-box pc-box--con">
+            <h3>🔴 机房广播托管 IP (Hosting / Broadcast IP)</h3>
+            <ul>
+              <li><strong>ASN 属性</strong>：识别为机房 IDC（如 Cloudflare, DigitalOcean, OVH, AWS）。</li>
+              <li><strong>风控短板</strong>：频繁触发 Cloudflare 5秒盾，OpenAI 直接提示“Access Denied”。</li>
+              <li><strong>流媒体表现</strong>：常被流媒体平台列入风控黑名单，只能观看 Netflix 自制剧。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Blog Guides -->
+      <div class="topic-block rv">
+        <h2 class="d3">节点与网络架构相关深度评测</h2>
+        <div class="posts-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 20px;">
+          {relatedPosts.map((post) => (
+            <article class="post rv" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+              <span class="feat__badge" style="display:inline-block; margin-bottom: 8px;">{post.data.category}</span>
+              <h3 class="d4" style="font-size: 20px; line-height: 1.4; margin-bottom: 12px;">
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              </h3>
+              <p style="color: #64748B; font-size: 14px; line-height: 1.6; margin-bottom: 16px;">{post.data.description}</p>
+              <a href={`/blog/${post.id}/`} class="arrow arrow--heat"><span>阅读深度评测</span><Icon name="arrow-right" /></a>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="topic-block rv">
+        <h2 class="d3">关于节点的常见疑问 (FAQ)</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-q">为什么香港节点的延迟最低，但有时刷 TikTok 或用 ChatGPT 反而推荐选新加坡或美国？</summary>
+            <div class="faq-a">
+              <p>香港节点因地理距离近（广州到香港光缆往返仅 2–5ms），整体延迟最低，适合日常网页浏览和高频查询；但 OpenAI 对香港 IP 实施全面锁区阻断，TikTok 亦对香港 IP 实施免推荐风控。因此，涉及 AI 生产力（ChatGPT/Claude）或海外社媒营销时，必须选择新加坡 (SGP)、日本 (TYO) 或美国原生住宅节点。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">节点列表里的“0.1x / 1.0x / 3.0x”倍率到底代表什么意思？</summary>
+            <div class="faq-a">
+              <p>倍率代表流量消耗系数。例如：当使用 0.1x 倍率节点下载 1GB 文件时，机场后台仅扣除 0.1GB（100MB）套餐流量，适合大文件下载；使用 3.0x 倍率的高成本高级专线节点时，消耗 1GB 实际扣除 3GB 流量。选节点时务必关注倍率标签，避免流量意外耗尽。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">为什么很多节点显示的 ping 延迟很低，但实际看 YouTube 依然卡顿？</summary>
+            <div class="faq-a">
+              <p>客户端显示的延迟测试通常只是“入口握手延迟（TCP Handshake RTT）”，只代表您本地到国内专线入口的毫秒数，不能反映海外落地节点到目标服务器（如 Google CDN）的真实带宽吞吐和晚高峰丢包率。真正的网络质量必须结合单线程/多线程下载测速综合判断。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>

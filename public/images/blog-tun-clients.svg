@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0D14" />
+      <stop offset="50%" stop-color="#111624" />
+      <stop offset="100%" stop-color="#080A10" />
+    </linearGradient>
+    <linearGradient id="radarSweep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0.0" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bgGrad)" />
+  <rect width="1200" height="750" fill="url(#grid)" />
+
+  <circle cx="200" cy="150" r="250" fill="#8B5CF6" fill-opacity="0.07" />
+  <circle cx="1000" cy="600" r="300" fill="#10B981" fill-opacity="0.06" />
+
+  <g transform="translate(80, 70)">
+    <rect x="0" y="0" width="140" height="32" rx="16" fill="#8B5CF6" fill-opacity="0.15" stroke="#8B5CF6" stroke-width="1"/>
+    <text x="70" y="21" fill="#8B5CF6" font-size="14" font-family="sans-serif" font-weight="bold" text-anchor="middle">客户端</text>
+    <text x="160" y="22" fill="#64748B" font-size="14" font-family="sans-serif">MITCE 跨境网络实测实验室 · 2026</text>
+  </g>
+
+  <text x="80" y="160" fill="#FFFFFF" font-size="40" font-family="sans-serif" font-weight="bold" letter-spacing="-0.5">全平台客户端极速配置指南</text>
+  <text x="80" y="205" fill="#94A3B8" font-size="18" font-family="sans-serif">Clash Verge Rev、v2rayN 与小火箭 TUN 模式进阶图文教程</text>
+
+  
+      <g transform="translate(250, 340)">
+        <rect x="0" y="0" width="140" height="160" rx="12" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+        <text x="70" y="50" fill="#3B82F6" font-size="24" font-weight="bold" font-family="sans-serif" text-anchor="middle">Win</text>
+        <text x="70" y="85" fill="#FFFFFF" font-size="16" font-weight="bold" font-family="sans-serif" text-anchor="middle">Clash Verge</text>
+        <text x="70" y="120" fill="#10B981" font-size="14" font-family="sans-serif" text-anchor="middle">TUN 虚拟网卡</text>
+      </g>
+      <g transform="translate(430, 340)">
+        <rect x="0" y="0" width="140" height="160" rx="12" fill="#1E293B" stroke="#EA580C" stroke-width="2"/>
+        <text x="70" y="50" fill="#EA580C" font-size="24" font-weight="bold" font-family="sans-serif" text-anchor="middle">iOS</text>
+        <text x="70" y="85" fill="#FFFFFF" font-size="16" font-weight="bold" font-family="sans-serif" text-anchor="middle">小火箭</text>
+        <text x="70" y="120" fill="#10B981" font-size="14" font-family="sans-serif" text-anchor="middle">Shadowrocket</text>
+      </g>
+      <g transform="translate(610, 340)">
+        <rect x="0" y="0" width="140" height="160" rx="12" fill="#1E293B" stroke="#10B981" stroke-width="2"/>
+        <text x="70" y="50" fill="#10B981" font-size="24" font-weight="bold" font-family="sans-serif" text-anchor="middle">macOS</text>
+        <text x="70" y="85" fill="#FFFFFF" font-size="16" font-weight="bold" font-family="sans-serif" text-anchor="middle">Surge / Verge</text>
+        <text x="70" y="120" fill="#10B981" font-size="14" font-family="sans-serif" text-anchor="middle">全协议接管</text>
+      </g>
+      <g transform="translate(790, 340)">
+        <rect x="0" y="0" width="140" height="160" rx="12" fill="#1E293B" stroke="#8B5CF6" stroke-width="2"/>
+        <text x="70" y="50" fill="#8B5CF6" font-size="24" font-weight="bold" font-family="sans-serif" text-anchor="middle">软路由</text>
+        <text x="70" y="85" fill="#FFFFFF" font-size="16" font-weight="bold" font-family="sans-serif" text-anchor="middle">OpenClash</text>
+        <text x="70" y="120" fill="#10B981" font-size="14" font-family="sans-serif" text-anchor="middle">全局透明网关</text>
+      </g>
+    
+
+  <g transform="translate(80, 670)">
+    <rect x="0" y="0" width="1040" height="1" fill="#1E293B" />
+    <text x="0" y="35" fill="#64748B" font-size="14" font-family="sans-serif">支持内核: Mihomo / Xray / Sing-box</text>
+    <text x="1040" y="35" fill="#F8FAFC" font-size="15" font-family="sans-serif" font-weight="bold" text-anchor="end">Windows / macOS / iOS / Android / 软路由</text>
+  </g>
+</svg>

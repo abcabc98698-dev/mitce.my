@@ -7,9 +7,14 @@ interface Props {
   size?: 'sm';
   class?: string;
   style?: string;
+  target?: string;
+  rel?: string;
 }
 
-const { href, variant = 'heat', size, class: className, style } = Astro.props;
+const { href, variant = 'heat', size, class: className, style, target, rel } = Astro.props;
+const isExt = /^https?:\/\//.test(href);
+const finalTarget = target || (isExt ? '_blank' : undefined);
+const finalRel = rel || (isExt ? 'nofollow sponsored noopener' : undefined);
 ---
 
-<a href={url(href)} class:list={['btn', `btn--${variant}`, size && `btn--${size}`, className]} style={style}><slot /></a>
+<a href={url(href)} target={finalTarget} rel={finalRel} class:list={['btn', `btn--${variant}`, size && `btn--${size}`, className]} style={style}><slot /></a>

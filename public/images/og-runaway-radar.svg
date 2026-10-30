@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0D14" />
+      <stop offset="50%" stop-color="#111624" />
+      <stop offset="100%" stop-color="#080A10" />
+    </linearGradient>
+    <linearGradient id="radarSweep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0.0" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bgGrad)" />
+  <rect width="1200" height="750" fill="url(#grid)" />
+
+  <circle cx="200" cy="150" r="250" fill="#EF4444" fill-opacity="0.07" />
+  <circle cx="1000" cy="600" r="300" fill="#F59E0B" fill-opacity="0.06" />
+
+  <g transform="translate(80, 70)">
+    <rect x="0" y="0" width="140" height="32" rx="16" fill="#EF4444" fill-opacity="0.15" stroke="#EF4444" stroke-width="1"/>
+    <text x="70" y="21" fill="#EF4444" font-size="14" font-family="sans-serif" font-weight="bold" text-anchor="middle">避坑雷达</text>
+    <text x="160" y="22" fill="#64748B" font-size="14" font-family="sans-serif">MITCE 跨境网络实测实验室 · 2026</text>
+  </g>
+
+  <text x="80" y="160" fill="#FFFFFF" font-size="40" font-family="sans-serif" font-weight="bold" letter-spacing="-0.5">2026 机场跑路预警雷达与黑名单</text>
+  <text x="80" y="205" fill="#94A3B8" font-size="18" font-family="sans-serif">万字避坑风控百科 · 42 家机场存活时长、资金盘特征与自救 SOP</text>
+
+  
+      <circle cx="600" cy="430" r="140" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="4 4"/>
+      <circle cx="600" cy="430" r="90" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="4 4"/>
+      <circle cx="600" cy="430" r="40" fill="none" stroke="#EF4444" stroke-width="2" fill-opacity="0.1"/>
+      <line x1="600" y1="290" x2="600" y2="570" stroke="#334155" stroke-width="1"/>
+      <line x1="460" y1="430" x2="740" y2="430" stroke="#334155" stroke-width="1"/>
+      <path d="M600 430 L 720 340 A 140 140 0 0 0 600 290 Z" fill="url(#radarSweep)" opacity="0.6"/>
+      <circle cx="680" cy="370" r="6" fill="#EF4444"/>
+      <text x="695" y="375" fill="#EF4444" font-size="14" font-weight="bold" font-family="sans-serif">高危: 9折年付套路</text>
+      <circle cx="530" cy="470" r="6" fill="#F59E0B"/>
+      <text x="420" y="475" fill="#F59E0B" font-size="14" font-weight="bold" font-family="sans-serif">预警: 虚标千兆中转</text>
+    
+
+  <g transform="translate(80, 670)">
+    <rect x="0" y="0" width="1040" height="1" fill="#1E293B" />
+    <text x="0" y="35" fill="#64748B" font-size="14" font-family="sans-serif">MITCE 跑路风险雷达</text>
+    <text x="1040" y="35" fill="#F8FAFC" font-size="15" font-family="sans-serif" font-weight="bold" text-anchor="end">42 家主流品牌 24H 监控</text>
+  </g>
+</svg>

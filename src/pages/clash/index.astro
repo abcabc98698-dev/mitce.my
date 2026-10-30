@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { getPosts } from '../../utils/blog';
+import { absoluteUrl, url } from '../../utils/url';
+
+const allPosts = await getPosts();
+const relatedPosts = allPosts.filter((p) =>
+  p.data.tags.some((t) => ['客户端配置', 'TUN模式', '规则分流'].includes(t))
+).slice(0, 3);
+
+const title = 'Clash 专题配置中心 — Clash Verge Rev、Meta 内核与全平台订阅配置教程';
+const description =
+  '全网最详尽的 Clash 使用与规则分流指南。涵盖 Clash Verge Rev 安装包下载、TUN 虚拟网卡模式开启、防 DNS 泄漏设置、一键订阅导入与自动化节点更新。';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: 'Clash 专题', href: '/clash/' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: absoluteUrl('/clash/', Astro.site),
+    breadcrumb: { '@id': `${absoluteUrl('/clash/', Astro.site)}#breadcrumb` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${absoluteUrl('/clash/', Astro.site)}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 2, name: 'Clash 专题', item: absoluteUrl('/clash/', Astro.site) },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '原版 Clash for Windows 停更后，为什么推荐使用 Clash Verge Rev？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '原版 Clash for Windows 已于 2023 年底停更并删除代码仓库。Clash Verge Rev 是由开源社区基于 Tauri 框架重构的下一代客户端，内存占用低（仅原版的 1/3）、原生搭载 Mihomo (Clash Meta) 内核，全面支持 Hysteria 2、VLESS-Reality、TUIC 等新协议，且对 Windows 11 与 macOS 新架构有极佳的适配。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '什么是 TUN 虚拟网卡模式？什么时候必须开启 TUN 模式？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '系统代理模式仅能接管遵循系统代理设置的浏览器流量；而 TUN 模式会在操作系统中创建一个虚拟网卡，接管底层所有 TCP/UDP 流量。当您需要让命令行终端 (Git/CMD/PowerShell)、Steam/Discord 客户端、Android 模拟器或游戏全局走代理时，必须开启 TUN 模式。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '为什么 Clash 节点延迟测试全部超时或提示“Request Timeout”？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '通常原因有三：1. 节点订阅地址已过期或流量耗尽；2. 本地系统时间与网络授时误差超过 60 秒，导致 TLS 证书握手失败；3. 本地安全软件或企业防火墙拦截了 Mihomo 内核的外部出站连接。校对本地系统时间并尝试重启客户端通常即可解决。',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <PageHero
+    kicker="Clash Ecosystem & Tutorials · 2026 专题"
+    title="Clash 专题配置中心<br>Verge Rev 与 Meta 内核指南"
+    lead="从零到精通。深度解析开源跨平台 Clash Verge Rev 客户端的安装部署、订阅导入、TUN 虚拟网卡全局接管与复杂规则分流配置方案。"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="sec on-cream" aria-label="Clash 专题核心解读">
+    <div class="wrap">
+      <!-- Answer Block -->
+      <div class="answer-block rv">
+        <div class="answer-header">
+          <span class="badge">⚡ Clash 2026 核心演进结论</span>
+          <span class="date">内核版本: Mihomo / Meta v1.18+</span>
+        </div>
+        <div class="answer-content">
+          <p>
+            <strong>2026 Clash 客户端终极推荐：</strong> Windows 与 macOS 平台首推 <strong>Clash Verge Rev</strong>，其采用 Rust + Tauri 深度优化，启动迅速且内存占用低于 80MB；Android 移动端首推 <strong>FlClash</strong> 或 <strong>Clash Meta for Android</strong>；软路由平台首推 <strong>OpenClash</strong>。全面告别老旧的 Premium 内核，全面转向支持新协议与自适应分流的 <strong>Mihomo (Clash Meta)</strong> 架构。
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Category Navigation -->
+      <div class="cat-pills-bar rv">
+        <span class="cp-title">快捷入口：</span>
+        <div class="cp-list">
+          <a href="/tutorial/" class="cp-item">客户端使用教程大全</a>
+          <a href="/clients/" class="cp-item">官方客户端下载库</a>
+          <a href="/jichang/" class="cp-item">专线机场天梯榜</a>
+          <a href="/nodes/" class="cp-item">节点延迟大盘</a>
+          <a href="/free/" class="cp-item">免费节点获取</a>
+          <a href="/topics/faq/" class="cp-item">常见排障百科</a>
+        </div>
+      </div>
+
+      <!-- Clash Verge Rev Configuration SOP -->
+      <div class="topic-block rv">
+        <h2 class="d3">Clash Verge Rev 三步极速配置 SOP</h2>
+        <div class="sop-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 24px; font-weight: bold; color: #EA580C; margin-bottom: 8px;">Step 1</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">导入订阅并保存</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              在优质机场后台（如光速云）复制 <strong>Clash / 订阅链接</strong>，进入 Clash Verge Rev 的「订阅 (Profiles)」界面，粘贴 URL 并点击「导入 (Import)」。
+            </p>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 24px; font-weight: bold; color: #EA580C; margin-bottom: 8px;">Step 2</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">设置分流模式为 Rule</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              在「代理 (Proxies)」页面选择 <strong>规则分流 (Rule)</strong> 模式，国内流量直连直通，国外流量智能走专线节点，兼顾本地网络速度与出海加速。
+            </p>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 24px; font-weight: bold; color: #EA580C; margin-bottom: 8px;">Step 3</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">开启系统代理或 TUN 模式</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              在「设置 (Settings)」中勾选开启 <strong>系统代理 (System Proxy)</strong>；如需接管 Git、终端命令行或外服游戏，切换开启 <strong>TUN Mode (虚拟网卡)</strong>。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Blog Guides -->
+      <div class="topic-block rv">
+        <h2 class="d3">Clash 相关高阶实操与避坑文章</h2>
+        <div class="posts-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 20px;">
+          {relatedPosts.map((post) => (
+            <article class="post rv" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+              <span class="feat__badge" style="display:inline-block; margin-bottom: 8px;">{post.data.category}</span>
+              <h3 class="d4" style="font-size: 20px; line-height: 1.4; margin-bottom: 12px;">
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              </h3>
+              <p style="color: #64748B; font-size: 14px; line-height: 1.6; margin-bottom: 16px;">{post.data.description}</p>
+              <a href={`/blog/${post.id}/`} class="arrow arrow--heat"><span>阅读深度评测</span><Icon name="arrow-right" /></a>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="topic-block rv">
+        <h2 class="d3">关于 Clash 的常见疑问 (FAQ)</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-q">原版 Clash for Windows 停更后，为什么推荐使用 Clash Verge Rev？</summary>
+            <div class="faq-a">
+              <p>原版 Clash for Windows 已于 2023 年底停更并删除代码仓库。Clash Verge Rev 是由开源社区基于 Tauri 框架重构的下一代客户端，内存占用低（仅原版的 1/3）、原生搭载 Mihomo (Clash Meta) 内核，全面支持 Hysteria 2、VLESS-Reality、TUIC 等新协议，且对 Windows 11 与 macOS 新架构有极佳的适配。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">什么是 TUN 虚拟网卡模式？什么时候必须开启 TUN 模式？</summary>
+            <div class="faq-a">
+              <p>系统代理模式仅能接管遵循系统代理设置的浏览器流量；而 TUN 模式会在操作系统中创建一个虚拟网卡，接管底层所有 TCP/UDP 流量。当您需要让命令行终端 (Git/CMD/PowerShell)、Steam/Discord 客户端、Android 模拟器或游戏全局走代理时，必须开启 TUN 模式。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">为什么 Clash 节点延迟测试全部超时或提示“Request Timeout”？</summary>
+            <div class="faq-a">
+              <p>通常原因有三：1. 节点订阅地址已过期或流量耗尽；2. 本地系统时间与网络授时误差超过 60 秒，导致 TLS 证书握手失败；3. 本地安全软件或企业防火墙拦截了 Mihomo 内核的外部出站连接。校对本地系统时间并尝试重启客户端通常即可解决。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>

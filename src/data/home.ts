@@ -1,38 +1,35 @@
 import type { HeroStat, SectionHeading } from '../types';
 
-/** Copy for the homepage hero. Line breaks in the headline are intentional. */
+/** Copy for the homepage hero */
 export const hero = {
-  eyebrow: '14 agents live in production',
-  /** Each entry is one line of the headline; `tint` lines use the light-peach accent. */
+  eyebrow: '2026 跨境网络实测天梯榜 · 主推光速云',
   headline: [
-    { text: 'AI agents', tint: false },
-    { text: 'that run', tint: false },
-    { text: 'the work,', tint: true },
-    { text: 'not the demo.', tint: true },
+    { text: '专线实测，', tint: false },
+    { text: '看晚高峰，', tint: false },
+    { text: '不看虚标，', tint: true },
+    { text: '稳在每一秒。', tint: true },
   ],
-  lead: 'We build and run the agents that handle your support queue, your invoice runs and your claims desk — and hand back to a human the moment they should.',
-  primaryCta: { label: 'Book a demo', href: '/#contact' },
-  secondaryCta: { label: 'See our work', href: '/#work' },
-  image: '/images/ai-agency-hero.webp',
+  lead: 'MITCE指南深度收录 42 家主流机场一手评测数据。首推光速云（IEPL+自研客户端+年付8元起+147永久套餐），涵盖微风网络、暮光加速等专线梯队，提供全平台客户端下载与订阅配置教程。',
+  primaryCta: { label: '主推·光速云领券直达', href: 'https://sahude.gsyvipaff.com/#/?code=keqgvT5Y' },
+  secondaryCta: { label: '查阅 42 家天梯大盘', href: '/brands' },
+  image: '/images/mitce-og-cover.svg',
   credentials: [
-    { icon: 'clock', label: 'Always on' },
-    { icon: 'shield-check', label: 'Fully audited' },
-    { icon: 'bars', label: 'Measured against your baseline' },
+    { icon: 'clock', label: '2020 稳定老牌' },
+    { icon: 'shield-check', label: 'IEPL / IPLC 物理专线' },
+    { icon: 'bars', label: '晚高峰 0% 丢包率基线' },
   ] as const,
 };
 
-/** The four figures pinned to the bottom of the hero. Demo numbers — replace with your own. */
 export const heroStats: HeroStat[] = [
-  { value: '92%', label: 'Tier-1 tickets closed without a human' },
-  { value: '6 weeks', label: 'From first workshop to live traffic' },
-  { value: '4,200 hrs', label: 'Queue work moved off desks each month' },
-  { value: '24/7', label: 'Shared on-call with your operations lead' },
+  { value: '42 家', label: '主流跨境机场深度收录与持续核验' },
+  { value: '¥8 起', label: '光速云等核心专线年付入门月均价' },
+  { value: '147 永久', label: '斯诺克不过期大流量经典套餐' },
+  { value: '6 大平台', label: 'Win/iOS/安卓/Mac/软路由客户端覆盖' },
 ];
 
 export const clients = {
-  label: 'Operating inside',
-  /** Fictional company names used as a word-mark strip. */
-  names: ['Northwind', 'Kestrel Health', 'Meridian', 'Halcyon', 'Orbit Retail', 'Palisade'],
+  label: '评测覆盖头部品牌',
+  names: ['光速云 (主推)', '微风网络', '暮光加速', '飞猫云', '星岛梦', '二猫云', '唯兔云', 'Firefly'],
 };
 
 export const sections: Record<
@@ -40,85 +37,84 @@ export const sections: Record<
   SectionHeading
 > = {
   solutions: {
-    kicker: 'What we build',
-    title: 'Five agents. One operating standard.',
-    lead: 'Each one ships with its own evaluation set, spend cap and escalation rule. You get the agent, the harness around it, and the screen your team runs it from.',
+    kicker: '选型维度',
+    title: '五大专线指标。一份严谨标准。',
+    lead: '拒绝虚假千兆宣传。从物理专线出口、原生IP洁净度、晚高峰抗拥堵、全协议支持到免配置客户端，提供全方位可信赖的选型参考。',
   },
   platform: {
-    kicker: 'How it holds up',
-    title: 'Built to be handed<br>over, not rented.',
-    lead: 'You own the code, the prompts, the test set and the infrastructure definitions from day one. We are the team that runs it until your team wants to.',
+    kicker: '专线架构解析',
+    title: '为长效稳定而生，<br>绝非普通中转。',
+    lead: '点对点企业级内网穿透（IEPL/IPLC），绕过公网拥堵与国际出口限制。无论晚高峰跨国追剧还是海外大模型交互，始终保持低延迟无感直连。',
   },
   process: {
-    kicker: 'How we work',
-    title: 'Six weeks from<br>workshop to live.',
-    lead: 'The order matters. We will not build before we have watched the work done by hand, and we will not launch before the test set passes.',
+    kicker: '新手三步上手',
+    title: '三分钟从小白<br>到高速直连。',
+    lead: '选型明确、配置极简。告别复杂的规则编写与报错调试，轻松畅享全球互联网自由。',
   },
   work: {
-    kicker: 'Selected work',
-    title: 'Twelve months<br>of receipts.',
-    lead: 'Every number below is measured against the manual baseline we recorded in week one — not against a vendor benchmark.',
+    kicker: '实机测速报告',
+    title: '晚高峰实测数据，<br>不靠口头承诺。',
+    lead: '所有测速均在 20:30–22:30 晚高峰黄金时段实机采样，记录真实丢包率、TLS 握手延迟与 4K 缓冲表现。',
   },
   sectors: {
-    kicker: 'Where we work',
-    title: 'Sectors with rules worth respecting',
-    lead: 'We take work in regulated and operationally heavy industries, because that is exactly where supervision earns its keep.',
+    kicker: '业务赋能场景',
+    title: '高风控与大流量业务的坚实底座',
+    lead: '无论是跨境电商出海、海外 AI 生产力协同，还是 4K 影音与学术科研，原生洁净 IP 护航每一项关键业务。',
   },
-  testimonial: { kicker: 'Client voice', title: '' },
+  testimonial: { kicker: '真实用户声音', title: '' },
   team: {
-    kicker: 'The team',
-    title: 'Small on purpose',
-    lead: 'Nine people. The person who scopes your engagement is the person who writes the test set and answers the pager.',
+    kicker: '评测实验室',
+    title: '客观·中立·独立维护',
+    lead: '由专业网络工程师与出海开发者共同维护，坚持实机复核、标注数据来源，不收录劣质跑路盘。',
   },
   pricing: {
-    kicker: 'Engagements',
-    title: 'Priced by the agent, not by the seat',
-    lead: 'A fixed monthly fee covering build, supervision and on-call. Model and infrastructure costs pass through at cost, itemised on every invoice.',
+    kicker: '核心推荐方案',
+    title: '按需选购，丰俭由人',
+    lead: '涵盖月付灵活档、年付特惠档与独家永久不限时包。明码标价，无隐藏倍率套路。',
   },
   insights: {
-    kicker: 'Insights',
-    title: 'Notes from the run log',
-    lead: 'What we learned shipping agents into places where a wrong answer costs real money.',
+    kicker: '避坑指南',
+    title: '网络前沿评测与选型干货',
+    lead: '解析协议演进、辨析专线真伪、传授客户端高阶分流技巧，助您少走弯路。',
   },
   faq: {
-    kicker: 'Questions',
-    title: 'Before you<br>get in touch',
-    lead: 'If yours is not here, ask it in the form below. We answer in writing before any call.',
+    kicker: '常见答疑',
+    title: '购买与使用前<br>必看避坑指南',
+    lead: '汇总新手最常遇到的退款政策、节点超时、客户端报错与流媒体解锁问题。',
   },
   contact: {
-    kicker: 'Get in touch',
-    title: 'Bring us one<br>annoying workflow',
-    lead: 'Tell us the task your team dreads on a Monday. Within a week we will tell you whether an agent can hold it, what it would cost, and where it would break.',
+    kicker: '联系实验室',
+    title: '提交机场测评<br>或数据纠错',
+    lead: '如果您是机场服务商或出海用户，欢迎向我们提交最新线路动态或测速反馈，我们会在核实后更新大盘。',
   },
 };
 
 export const platformImage = {
   src: '/images/platform-operations-lead.webp',
-  alt: 'An operations lead working at a desktop computer',
-  tag: 'Handover in 4 weeks',
+  alt: '网络工程师在监控多地区专线出口节点稳定性',
+  tag: 'IEPL 晚高峰 0 丢包',
 };
 
-/** Orange call-to-action band above the footer. */
 export const finalCta = {
-  kicker: 'Two pilot slots open this quarter',
-  title: 'Stop evaluating AI. Start operating it.',
-  lead: 'Ninety minutes with your operations lead and one of our engineers. You leave with a scoped workflow, an honest feasibility call and a number.',
+  kicker: '2026 跨境网络首选推荐',
+  title: '告别断流卡顿。立即体验光速云 IEPL 专线。',
+  lead: '输入独家优惠码 AMM 享即时减免。特设致敬斯诺克 147 永久套餐，一次付费 247GB 永不过期。',
 };
 
 export const contactForm = {
   workflows: [
-    'Customer support queue',
-    'Back office and reconciliation',
-    'Claims or document processing',
-    'Revenue research and enrichment',
-    'Something else entirely',
+    '机场品牌测速数据纠错',
+    '新机场品牌收录评测申请',
+    '客户端教程优化建议',
+    '商务合作与咨询',
+    '其他反馈',
   ],
-  submitLabel: 'Send enquiry',
-  note: 'No sales sequence. One reply, written by an engineer.',
+  submitLabel: '提交反馈信息',
+  note: '人工审核每一条反馈，确保大盘数据真实可信。',
 };
 
 export const newsletter = {
-  title: 'The run log, monthly',
-  description: 'One email a month: what shipped, what broke, and the numbers behind it. No launch announcements.',
-  submitLabel: 'Subscribe',
+  title: '订阅网络评测速递',
+  description: '每月一期：新测速结果、跑路风险预警与高性价比专线特惠。绝无垃圾广告。',
+  submitLabel: '免费订阅',
 };

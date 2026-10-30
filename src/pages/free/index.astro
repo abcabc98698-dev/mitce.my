@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { getPosts } from '../../utils/blog';
+import { absoluteUrl, url } from '../../utils/url';
+
+const allPosts = await getPosts();
+const relatedPosts = allPosts.filter((p) =>
+  p.data.tags.some((t) => ['免费资源', '测速指标', '避坑指南'].includes(t))
+).slice(0, 3);
+
+const title = '2026 免费资源与白嫖机场节点专栏 — 公共订阅源与每日试用避坑';
+const description =
+  '系统整理经过实测可用的免费科学上网资源、每日签到试用机场、Cloudflare WARP 优选 IP，以及免费节点的隐私安全边界与防护指南。';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '免费资源', href: '/free/' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: absoluteUrl('/free/', Astro.site),
+    breadcrumb: { '@id': `${absoluteUrl('/free/', Astro.site)}#breadcrumb` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${absoluteUrl('/free/', Astro.site)}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 2, name: '免费资源', item: absoluteUrl('/free/', Astro.site) },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '网上免费分享的节点真的安全吗？有没有隐私泄露风险？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '公共免费节点存在极高的“中间人嗅探（MITM）”与 DNS 劫持风险。恶意运营者可在节点服务器上记录未加密的访问流量或劫持 Cookie。建议免费节点仅用于轻度查阅开源资料或技术文档，严禁在免费节点下输入银行密码、支付凭据或登录高价值公司账号。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '有没有真正稳定、长久不失效的免费科学上网方法？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '从网络工程角度而言，国际跨境带宽与高密机房具有高昂的物理成本，不存在真正“永久免费且高速稳定”的服务。相对可靠的免费方案是利用 Cloudflare WARP 优选 IP，或申请 Oracle Cloud / AWS 永久免费层 VPS 自建轻量节点；商业免费节点通常生命周期仅有几小时至数天。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '预算只有几元钱，低价付费专线和免费节点差别有多大？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '微风网络（7元/月）或光速云（年付月均 8元）这类入门专线，采用的是商业级内网穿透与 BGP 入口，晚高峰 0 丢包且有专业技术团队维护；而免费节点每天需要花费大量时间寻找和替换订阅，且连接随时中断。几元钱即可彻底买断时间成本。',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <PageHero
+    kicker="Free Resources & Public Proxies · 2026 专栏"
+    title="2026 免费资源与白嫖机场<br>公共节点池与避坑安全大盘"
+    lead="打破信息壁垒，去伪存真。系统梳理每日试用机场、GitHub 热门开源订阅池、Cloudflare WARP 优选技术以及从免费到高稳专线的平滑升级路线。"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="sec on-cream" aria-label="免费资源核心解读">
+    <div class="wrap">
+      <!-- Answer Block -->
+      <div class="answer-block rv">
+        <div class="answer-header">
+          <span class="badge">🎁 免费资源利用法则 (Answer-First)</span>
+          <span class="date">每日轮巡更新 · 验证有效率: 35%+</span>
+        </div>
+        <div class="answer-content">
+          <p>
+            <strong>白嫖节点安全守则：</strong>免费节点是优秀的<strong>应急救砖工具与技术学习途径</strong>，但切勿将其作为唯一的生产力工具。免费节点由于高并发公用，晚高峰拥塞率高达 90% 以上。如需处理高频日常出海业务，建议结合 <strong>7~8 元/月的平价专线（如微风网络、光速云）</strong> 作为主力，免费节点作为备用冗余。
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Category Navigation -->
+      <div class="cat-pills-bar rv">
+        <span class="cp-title">快捷入口：</span>
+        <div class="cp-list">
+          <a href="/topics/free-resources/" class="cp-item">📖 万字免费资源终极大盘</a>
+          <a href="/jichang/" class="cp-item">平价专线机场推荐</a>
+          <a href="/tutorial/" class="cp-item">客户端使用教程</a>
+          <a href="/clash/" class="cp-item">Clash 订阅配置</a>
+          <a href="/topics/runaway-radar/" class="cp-item">跑路预警雷达</a>
+          <a href="/brands/" class="cp-item">42 家品牌全库</a>
+        </div>
+      </div>
+
+      <!-- Free Resource Archetypes -->
+      <div class="topic-block rv">
+        <h2 class="d3">四类常见免费科学上网资源全面体检</h2>
+        <div class="sop-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 18px; font-weight: bold; color: #10B981; margin-bottom: 8px;">1. 商业机场每日签到白嫖</div>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              部分新晋机场为推广用户，提供每日签到送 1GB~5GB 流量的试用福利。<strong>优势：</strong>走的是正常中转或专线链路；<strong>劣势：</strong>需要每天手动签到，且可能随时下线免费档位。
+            </p>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 18px; font-weight: bold; color: #3B82F6; margin-bottom: 8px;">2. GitHub 开源抓取订阅池</div>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              由开源爬虫从全网 Telegram 频道和公开论坛抓取的节点池。<strong>优势：</strong>节点数量庞大（成百上千）；<strong>劣势：</strong>存活率极低（通常只有 10%~20% 可连），且存在嗅探风险。
+            </p>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 18px; font-weight: bold; color: #8B5CF6; margin-bottom: 8px;">3. Cloudflare WARP 优选节点</div>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              利用 Cloudflare 遍布全球的 Anycast CDN 节点和 WireGuard 协议直连。<strong>优势：</strong>流量无限，正规大厂基础设施；<strong>劣势：</strong>晚高峰直连 IP 易被运营商 QoS 强制限速。
+            </p>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 18px; font-weight: bold; color: #EA580C; margin-bottom: 8px;">4. 大厂免费层 VPS 自建</div>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              申请 Oracle Cloud（甲骨文永久免费云主机）或 AWS 12个月免费套餐。<strong>优势：</strong>完全独享、环境纯净；<strong>劣势：</strong>信用卡申请门槛高，且封号率高，需要 Linux 运维基础。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Flagship Topic CTA Banner -->
+      <div class="topic-block rv">
+        <div style="background: linear-gradient(135deg, #111827 0%, #1F2937 100%); border-radius: 16px; padding: 36px; color: #fff; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+          <div style="max-width: 680px;">
+            <span style="display:inline-block; background: rgba(16, 185, 129, 0.2); color: #10B981; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; margin-bottom: 12px;">🌟 2026 万字终极大盘</span>
+            <h3 style="font-size: 26px; font-weight: bold; margin-bottom: 10px;">全球免费网络资源与开源白嫖完全指南</h3>
+            <p style="color: #9CA3AF; font-size: 15px; line-height: 1.6;">
+              深入查阅由 MITCE 网络实验室长达 22,000+ 字的超详实专题报告，手把手教您掌握 WARP 优选脚本、开源订阅聚合、安全隔离与应急防封技巧。
+            </p>
+          </div>
+          <a href="/topics/free-resources/" class="btn btn--heat btn--lg">直达万字深度专题 <Icon name="arrow-right" /></a>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="topic-block rv">
+        <h2 class="d3">关于免费资源的常见疑问 (FAQ)</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-q">网上免费分享的节点真的安全吗？有没有隐私泄露风险？</summary>
+            <div class="faq-a">
+              <p>公共免费节点存在极高的“中间人嗅探（MITM）”与 DNS 劫持风险。恶意运营者可在节点服务器上记录未加密的访问流量或劫持 Cookie。建议免费节点仅用于轻度查阅开源资料或技术文档，严禁在免费节点下输入银行密码、支付凭据或登录高价值公司账号。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">有没有真正稳定、长久不失效的免费科学上网方法？</summary>
+            <div class="faq-a">
+              <p>从网络工程角度而言，国际跨境带宽与高密机房具有高昂的物理成本，不存在真正“永久免费且高速稳定”的服务。相对可靠的免费方案是利用 Cloudflare WARP 优选 IP，或申请 Oracle Cloud / AWS 永久免费层 VPS 自建轻量节点；商业免费节点通常生命周期仅有几小时至数天。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">预算只有几元钱，低价付费专线和免费节点差别有多大？</summary>
+            <div class="faq-a">
+              <p>微风网络（7元/月）或光速云（年付月均 8元）这类入门专线，采用的是商业级内网穿透与 BGP 入口，晚高峰 0 丢包且有专业技术团队维护；而免费节点每天需要花费大量时间寻找和替换订阅，且连接随时中断。几元钱即可彻底买断时间成本。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>

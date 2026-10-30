@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { getPosts } from '../../utils/blog';
+import { absoluteUrl, url } from '../../utils/url';
+
+const allPosts = await getPosts();
+const relatedPosts = allPosts.filter((p) =>
+  p.data.tags.some((t) => ['行业黑幕', '避坑指南', 'IEPL专线'].includes(t))
+).slice(0, 3);
+
+const title = '科学上网梯子选型与防失联指南 — 2026 稳定抗封网络梯子推荐';
+const description =
+  '为出海团队与个人开发者量身定制的梯子选型完全手册。深度揭秘低价年付灰产陷阱、敏感时期封锁应对 SOP，手把手教您构建多节点、多协议互为备份的防失联网络体系。';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '梯子推荐', href: '/tizi/' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: absoluteUrl('/tizi/', Astro.site),
+    breadcrumb: { '@id': `${absoluteUrl('/tizi/', Astro.site)}#breadcrumb` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${absoluteUrl('/tizi/', Astro.site)}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 2, name: '梯子推荐', item: absoluteUrl('/tizi/', Astro.site) },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '遇到敏感时期或节点大面积全红断网，个人应该如何应急自救？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '1. 立即更新订阅配置：优质专线服务商通常会在 15–30 分钟内下发全新的 Anycast 入口域名；2. 启用备用容灾通道：切换至不限时按量付费机场的备用节点；3. 临时启用 Cloudflare WARP 或本地直连应急方案。永远不要把所有出海需求押在单一梯子上。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '为什么市面上有很多“十块钱一年”的极低价梯子？背后有什么套路？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '十元一年的梯子通常属于“滚雪球资金盘”。运营者通过免费或白菜价吸引数万用户，前期租用廉价带宽维持，一旦收款规模达到峰值且无法覆盖海缆成本，便会在敏感时期前夕直接关站跑路，并改头换面换域名重新收割。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '使用梯子访问敏感网站，是否会被电信运营商或网络监管发现？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '若使用现代高强加密协议（如 Shadowsocks-2022、VLESS-Reality 或 IEPL 专线），跨国流量在物理层面表现为经过高度混淆的高熵数据或企业内网流量，监管方仅能识别出流量大小而无法解密内部访问的明文网址；但严禁使用未加密的透明 HTTP 代理或来源不明的公共白嫖节点。',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <PageHero
+    kicker="Network Anti-Censorship & Redundancy · 2026 手册"
+    title="科学上网梯子选型<br>与多层防失联容灾指南"
+    lead="拒绝断网恐慌。深度拆解梯子行业灰产套路，构建“主力高稳 IEPL 专线 + 备用不限时按量池 + 免费应急”三重冗余网络灾备体系。"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="sec on-cream" aria-label="梯子专题核心正文">
+    <div class="wrap">
+      <!-- Answer Block -->
+      <div class="answer-block rv">
+        <div class="answer-header">
+          <span class="badge">🛡️ 梯子防失联终极法则 (BLUF)</span>
+          <span class="date">应急响应基准: 敏感时期 100% 在线</span>
+        </div>
+        <div class="answer-content">
+          <p>
+            <strong>出海网络容灾铁律：</strong>没有任何单一梯子服务商敢承诺 100% 永不断连。真正成熟的外贸团队与资深玩家，普遍采用 <strong>“1 家优质 IEPL 专线主套餐（如光速云）+ 1 家不限时按量付费备用包（如星岛梦）+ 收藏本站实时跑路雷达”</strong> 的组合拳，无论遇到多大规模的网络波动均能秒级切换、平稳通畅。
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Category Navigation -->
+      <div class="cat-pills-bar rv">
+        <span class="cp-title">快捷入口：</span>
+        <div class="cp-list">
+          <a href="/topics/runaway-radar/" class="cp-item">🚨 机场跑路预警雷达</a>
+          <a href="/jichang/" class="cp-item">专线机场天梯榜</a>
+          <a href="/tutorial/" class="cp-item">客户端使用教程</a>
+          <a href="/clash/" class="cp-item">Clash 专题配置</a>
+          <a href="/free/" class="cp-item">免费应急资源</a>
+          <a href="/brands/" class="cp-item">42 家品牌全库</a>
+        </div>
+      </div>
+
+      <!-- 3-Layer Redundancy Architecture -->
+      <div class="topic-block rv">
+        <h2 class="d3">科学上网“三层防失联网络冗余体系”</h2>
+        <div class="sop-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 20px; font-weight: bold; color: #10B981; margin-bottom: 8px;">第一层：主力日常专线</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">IEPL 物理内网专线</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              承担 95% 以上的日常大流量使用。首选 <strong>光速云</strong> 或 <strong>微风网络</strong>，具备 BGP 动态入口与全天候低延迟，保证 4K 影音与 ChatGPT 秒开。
+            </p>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 20px; font-weight: bold; color: #3B82F6; margin-bottom: 8px;">第二层：冷备按量资源包</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">永久不过期流量包</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              选购 1 个 <strong>不限时按量付费机场（如星岛梦）</strong> 作为冷备。平时不花月租，在主力梯子临时维护或突发断网时充当应急生命线。
+            </p>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 20px; font-weight: bold; color: #EA580C; margin-bottom: 8px;">第三层：应急情报与雷达</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">跑路雷达与备用节点</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              收藏 <strong>MITCE 跑路预警雷达与免费资源库</strong>。一旦出现不可逆风险，可在 5 分钟内快速获取最新官方镜像域名或平替专线方案。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scam Analysis -->
+      <div class="topic-block rv">
+        <h2 class="d3">低质劣质梯子跑路前的三大典型前兆</h2>
+        <div class="pros-cons-grid">
+          <div class="pc-box pc-box--con">
+            <h3>🔴 跑路征兆 1：突然推出骨折级长周期年付活动</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              平时月付 20 元的平台，突然推出“99 元 3 年 / 199 元永久不限流量”，利用贪便宜心理快速吸拢资金。
+            </p>
+          </div>
+          <div class="pc-box pc-box--con">
+            <h3>🔴 跑路征兆 2：官方社群开启全员禁言并删除差评</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6;">
+              Telegram 交流群被管理员开启全员永久禁言，工单系统响应时间从 1 小时拉长到数天甚至直接自动关闭。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Blog Guides -->
+      <div class="topic-block rv">
+        <h2 class="d3">梯子行业内幕与防坑专栏</h2>
+        <div class="posts-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 20px;">
+          {relatedPosts.map((post) => (
+            <article class="post rv" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+              <span class="feat__badge" style="display:inline-block; margin-bottom: 8px;">{post.data.category}</span>
+              <h3 class="d4" style="font-size: 20px; line-height: 1.4; margin-bottom: 12px;">
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              </h3>
+              <p style="color: #64748B; font-size: 14px; line-height: 1.6; margin-bottom: 16px;">{post.data.description}</p>
+              <a href={`/blog/${post.id}/`} class="arrow arrow--heat"><span>阅读深度评测</span><Icon name="arrow-right" /></a>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="topic-block rv">
+        <h2 class="d3">关于科学上网梯子的常见疑问 (FAQ)</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-q">遇到敏感时期或节点大面积全红断网，个人应该如何应急自救？</summary>
+            <div class="faq-a">
+              <p>1. 立即更新订阅配置：优质专线服务商通常会在 15–30 分钟内下发全新的 Anycast 入口域名；2. 启用备用容灾通道：切换至不限时按量付费机场的备用节点；3. 临时启用 Cloudflare WARP 或本地直连应急方案。永远不要把所有出海需求押在单一梯子上。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">为什么市面上有很多“十块钱一年”的极低价梯子？背后有什么套路？</summary>
+            <div class="faq-a">
+              <p>十元一年的梯子通常属于“滚雪球资金盘”。运营者通过免费或白菜价吸引数万用户，前期租用廉价带宽维持，一旦收款规模达到峰值且无法覆盖海缆成本，便会在敏感时期前夕直接关站跑路，并改头换面换域名重新收割。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">使用梯子访问敏感网站，是否会被电信运营商或网络监管发现？</summary>
+            <div class="faq-a">
+              <p>若使用现代高强加密协议（如 Shadowsocks-2022、VLESS-Reality 或 IEPL 专线），跨国流量在物理层面表现为经过高度混淆的高熵数据或企业内网流量，监管方仅能识别出流量大小而无法解密内部访问的明文网址；但严禁使用未加密的透明 HTTP 代理或来源不明的公共白嫖节点。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>

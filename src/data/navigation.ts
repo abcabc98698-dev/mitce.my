@@ -1,19 +1,26 @@
 import type { Link, NavigationItem } from '../types';
 
 /**
- * Header navigation. Homepage sections use "/#id" so the links work from every page.
- * Items with `matchPath` get aria-current when the visitor is on that page.
+ * 顶部全局主导航
  */
 export const mainNav: NavigationItem[] = [
-  { label: 'Solutions', href: '/#services' },
-  { label: 'Features', href: '/#platform' },
-  { label: 'Pricing', href: '/#pricing' },
-  { label: 'Customers', href: '/#work' },
-  { label: 'Insights', href: '/blog', matchPath: '/blog' },
+  { label: '首页', href: '/' },
+  { label: '机场推荐', href: '/jichang/', matchPath: '/jichang' },
+  { label: 'VPN推荐', href: '/vpn/', matchPath: '/vpn' },
+  { label: 'Clash专题', href: '/clash/', matchPath: '/clash' },
+  { label: '节点大盘', href: '/nodes/', matchPath: '/nodes' },
+  { label: '梯子选型', href: '/tizi/', matchPath: '/tizi' },
+  { label: '免费资源', href: '/free/', matchPath: '/free' },
+  { label: '使用教程', href: '/tutorial/', matchPath: '/tutorial' },
+  { label: '品牌库', href: '/brands/', matchPath: '/brands' },
+  { label: '深度测评', href: '/blog/', matchPath: '/blog' },
 ];
 
-/** Mobile menu adds a direct Contact link below the main items. */
-export const mobileNav: NavigationItem[] = [...mainNav, { label: 'Contact', href: '/#contact' }];
+/** 移动端弹出导航 */
+export const mobileNav: NavigationItem[] = [
+  ...mainNav,
+  { label: '主推光速云', href: 'https://sahude.gsyvipaff.com/#/?code=keqgvT5Y' },
+];
 
 export interface FooterColumn {
   title: string;
@@ -22,44 +29,40 @@ export interface FooterColumn {
 
 export const footerColumns: FooterColumn[] = [
   {
-    title: 'Solutions',
+    title: '核心推荐',
     links: [
-      { label: 'Customer support', href: '/#services' },
-      { label: 'Back office', href: '/#services' },
-      { label: 'Documents & claims', href: '/#services' },
-      { label: 'Revenue research', href: '/#services' },
-      { label: 'Evaluation', href: '/#services' },
+      { label: '光速云 (综合主推第一)', href: '/brands/guangsu-cloud/' },
+      { label: '微风网络 (7元IEPL入门)', href: '/brands/weifeng/' },
+      { label: '暮光加速 (多设备BGP专线)', href: '/brands/muguang/' },
+      { label: '飞猫云 (专属免配客户端)', href: '/brands/feimao/' },
+      { label: '星岛梦 (永久不限时包)', href: '/brands/xingdaomeng/' },
     ],
   },
   {
-    title: 'Company',
+    title: '客户端教程',
     links: [
-      { label: 'About', href: '/#team' },
-      { label: 'Customers', href: '/#work' },
-      { label: 'How we work', href: '/#process' },
-      { label: 'Insights', href: '/blog' },
-      { label: 'FAQ', href: '/#faq' },
+      { label: '全平台教程库', href: '/tutorial/' },
+      { label: 'Clash 专题配置', href: '/clash/' },
+      { label: '客户端下载中心', href: '/clients/' },
+      { label: '终极答疑 50+ 问', href: '/topics/faq/' },
     ],
   },
   {
-    title: 'Sectors',
+    title: '栏目与雷达',
     links: [
-      { label: 'Banking & fintech', href: '/#sectors' },
-      { label: 'Healthcare', href: '/#sectors' },
-      { label: 'Logistics', href: '/#sectors' },
-      { label: 'Insurance', href: '/#sectors' },
-      { label: 'Commerce', href: '/#sectors' },
+      { label: '2026 专线机场天梯榜', href: '/jichang/' },
+      { label: '翻墙 VPN 深度实测', href: '/vpn/' },
+      { label: '全球节点延迟大盘', href: '/nodes/' },
+      { label: '科学上网梯子防失联', href: '/tizi/' },
+      { label: '免费资源与白嫖节点', href: '/free/' },
+      { label: '跑路预警雷达黑名单', href: '/topics/runaway-radar/' },
+      { label: '42 家机场品牌库', href: '/brands/' },
     ],
   },
 ];
 
-/**
- * Links in the bottom bar of the footer. The theme ships without legal pages,
- * so only real routes are listed. Add your own once the pages exist, e.g.
- *   { label: 'Privacy', href: '/privacy' },
- *   { label: 'Terms', href: '/terms' },
- */
 export const legalLinks: Link[] = [
-  { label: 'RSS', href: '/rss.xml' },
-  { label: 'Sitemap', href: '/sitemap-index.xml' },
+  { label: '推广佣金与合规声明', href: '/#disclosure' },
+  { label: 'RSS 订阅源', href: '/rss.xml' },
+  { label: '站点地图 Sitemap', href: '/sitemap-index.xml' },
 ];

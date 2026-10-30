@@ -58,6 +58,12 @@ export interface SiteConfig {
     /** Adds the attributes Netlify Forms needs to detect the form at build time. */
     netlify: boolean;
   };
+  verification?: {
+    google?: string;
+    bing?: string;
+    shenma?: string;
+    baidu?: string;
+  };
 }
 
 export interface HeroStat {

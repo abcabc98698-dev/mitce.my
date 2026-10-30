@@ -6,6 +6,7 @@ import { url } from '../utils/url';
 import { ariaCurrent } from '../utils/nav';
 
 const path = Astro.url.pathname;
+const isExternalCta = /^https?:\/\//.test(siteConfig.cta.href);
 ---
 
 <header class="hdr" id="hdr">
@@ -19,7 +20,14 @@ const path = Astro.url.pathname;
           ))}
         </ul>
       </nav>
-      <a href={url(siteConfig.cta.href)} class="btn btn--ow">{siteConfig.cta.shortLabel}</a>
+      <a
+        href={url(siteConfig.cta.href)}
+        target={isExternalCta ? '_blank' : undefined}
+        rel={isExternalCta ? 'nofollow sponsored noopener' : undefined}
+        class="btn btn--ow"
+      >
+        {siteConfig.cta.shortLabel}
+      </a>
       <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mob">
         <span></span><span></span><span></span>
       </button>

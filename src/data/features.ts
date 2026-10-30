@@ -1,9 +1,9 @@
 import type { Feature } from '../types';
 
-/** Checklist in the "How it holds up" platform section. */
+/** Checklist in the platform section */
 export const features: Feature[] = [
-  { title: 'Runs in your cloud', description: 'Deployed into your account, or fully on premise for regulated work.' },
-  { title: 'Spend capped per run', description: 'A hard budget per task. Past it, the work goes to a human queue instead.' },
-  { title: 'Model-agnostic routing', description: 'Whichever model wins on your test set, re-checked every quarter.' },
-  { title: '400-day replay', description: 'Reconstruct any decision step by step, long after the invoice cleared.' },
+  { title: 'IEPL 物理专线直连', description: '不经过公网国际海缆出口，彻底免疫晚高峰跨国丢包与流量 QoS 限速。' },
+  { title: '原生 IP 独立纯净池', description: '杜绝万人骑脏 IP，保障 ChatGPT、Claude 与跨境电商店铺的稳定运行。' },
+  { title: '全协议兼容自适应', description: '全面支持 VLESS、Trojan、Shadowsocks 及 Hysteria 2 先进抗封锁加密协议。' },
+  { title: '双向客户端自由选择', description: '支持专属 App 一键免配登录，亦支持导入 Clash Verge Rev、小火箭与软路由。' },
 ];

@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { getPosts } from '../../utils/blog';
+import { absoluteUrl, url } from '../../utils/url';
+
+const allPosts = await getPosts();
+const relatedPosts = allPosts.filter((p) =>
+  p.data.tags.some((t) => ['客户端配置', 'TUN模式', '规则分流', '链路解析'].includes(t))
+).slice(0, 3);
+
+const title = '科学上网与客户端使用教程库 — Windows / iOS / Android / Mac 全平台指南';
+const description =
+  '零基础保姆级网络代理图文教程。涵盖 Clash Verge、v2rayN、小火箭 Shadowrocket、Sing-box、Surge 与 OpenClash 软路由的订阅导入、分流规则设置与故障排查。';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '使用教程', href: '/tutorial/' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: absoluteUrl('/tutorial/', Astro.site),
+    breadcrumb: { '@id': `${absoluteUrl('/tutorial/', Astro.site)}#breadcrumb` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${absoluteUrl('/tutorial/', Astro.site)}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 2, name: '使用教程', item: absoluteUrl('/tutorial/', Astro.site) },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '为什么导入订阅后节点显示延迟，但浏览器就是打不开 Google 或 YouTube？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '最常见的原因是本地电脑或手机的“系统代理（System Proxy）”没有真正开启，或者浏览器被某些第三方插件（如 SwitchyOmega）强行接管了代理设置。此外，若系统时间与北京时间误差超过 60 秒，会导致 TLS 握手证书校验失败，校准系统时钟即可恢复。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '苹果 iOS 手机上的“小火箭（Shadowrocket）”在中国大陆 App Store 搜不到怎么办？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '受区域版权与政策限制，Shadowrocket 未在中国大陆区 App Store 上架。您需要准备一个美区或港区 Apple ID，在 App Store 登录海外账号后搜索下载（价格约为 2.99 美元）。切勿在系统设置 iCloud 中登录未知海外账号，仅在 App Store 商店内登录即可。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '开启代理软件后，国内应用（微信、淘宝、百度、网易云）变卡甚至无法登录怎么办？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '请检查客户端的运行模式是否错误设置为了“全局模式 (Global)”。日常使用务必切换至“规则分流 (Rule)”模式，让国内域名和 IP 走 Direct 直连通道，海外受限网站走 Proxy 代理通道，既保证出海速度，又不影响国内应用访问。',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <PageHero
+    kicker="Client Guides & Knowledge Base · 2026 教程"
+    title="全平台科学上网与代理客户端<br>保姆级图文配置与排障宝典"
+    lead="覆盖 Windows、macOS、iOS、Android 与软路由五大平台。从一键订阅导入、TUN 模式开启到本地 DNS 泄漏防御，助您轻松打通出海网络生命线。"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="sec on-cream" aria-label="教程核心解读">
+    <div class="wrap">
+      <!-- Answer Block -->
+      <div class="answer-block rv">
+        <div class="answer-header">
+          <span class="badge">🛠️ 客户端故障三步自检法 (BLUF)</span>
+          <span class="date">全平台通用 SOP</span>
+        </div>
+        <div class="answer-content">
+          <p>
+            <strong>遇到“连接成功但无法上网”时按顺序排查：</strong>1. <strong>校准时间</strong>：检查设备时间与互联网标准授时是否同步（误差需 &lt; 30s）；2. <strong>检查分流</strong>：确保选中的是“Rule 规则分流”而非 Global，且代理组未选中有报错的超时节点；3. <strong>网卡重置</strong>：若开启过 TUN 模式后断网，关闭客户端并以管理员权限执行 <code>netsh winsock reset</code> 并重启网络。
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Category Navigation -->
+      <div class="cat-pills-bar rv">
+        <span class="cp-title">快捷入口：</span>
+        <div class="cp-list">
+          <a href="/clients/" class="cp-item">📥 官方客户端下载大全</a>
+          <a href="/clash/" class="cp-item">Clash 专题配置中心</a>
+          <a href="/jichang/" class="cp-item">专线机场天梯榜</a>
+          <a href="/nodes/" class="cp-item">节点延迟大盘</a>
+          <a href="/free/" class="cp-item">免费节点获取</a>
+          <a href="/topics/faq/" class="cp-item">终极答疑 50+ 问</a>
+        </div>
+      </div>
+
+      <!-- Five Platform Quick Guides -->
+      <div class="topic-block rv">
+        <h2 class="d3">五大主流操作系统配置指南</h2>
+        <div class="sop-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 20px; font-weight: bold; color: #3B82F6; margin-bottom: 8px;">Windows 平台</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">Clash Verge Rev / v2rayN</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6; margin-bottom: 12px;">
+              首选 <strong>Clash Verge Rev</strong>，开启 TUN 模式后可完美接管 Git 命令行与游戏进程。亦可选老牌轻量 <strong>v2rayN</strong>。
+            </p>
+            <a href="/clients#windows" class="arrow arrow--heat"><span>查看 Windows 图文教程</span><Icon name="arrow-right" /></a>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 20px; font-weight: bold; color: #EA580C; margin-bottom: 8px;">iOS (iPhone / iPad)</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">小火箭 (Shadowrocket) / Stash</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6; margin-bottom: 12px;">
+              美区 Apple ID 下载 <strong>Shadowrocket</strong>，支持扫码导入订阅、HTTPS 解密重写与按需连接。高级用户首选 <strong>Surge iOS</strong> 或 <strong>Stash</strong>。
+            </p>
+            <a href="/clients#ios" class="arrow arrow--heat"><span>查看 iOS 图文教程</span><Icon name="arrow-right" /></a>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 20px; font-weight: bold; color: #10B981; margin-bottom: 8px;">Android (安卓机型)</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">v2rayNG / FlClash</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6; margin-bottom: 12px;">
+              免费开源无广告推荐 <strong>v2rayNG</strong> 或跨平台 <strong>FlClash</strong>，原生支持 VpxnService 全局流量接管，耗电控制优异。
+            </p>
+            <a href="/clients#android" class="arrow arrow--heat"><span>查看 Android 图文教程</span><Icon name="arrow-right" /></a>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 20px; font-weight: bold; color: #8B5CF6; margin-bottom: 8px;">macOS (MacBook / iMac)</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">Clash Verge Rev / Surge Mac</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6; margin-bottom: 12px;">
+              完美适配 Apple Silicon (M1/M2/M3/M4) 芯片架构，安装系统增强模式后即可实现全透明无感代理。
+            </p>
+            <a href="/clients#macos" class="arrow arrow--heat"><span>查看 macOS 图文教程</span><Icon name="arrow-right" /></a>
+          </div>
+          <div class="sop-card" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+            <div style="font-size: 20px; font-weight: bold; color: #EC4899; margin-bottom: 8px;">软路由 / 家庭网关</div>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">OpenClash / PassWall</h3>
+            <p style="color: #64748B; font-size: 14px; line-height: 1.6; margin-bottom: 12px;">
+              在 OpenWrt 软路由上部署 <strong>OpenClash</strong>，实现家庭局域网电视、PlayStation/Switch 游戏主机全设备无感知出海。
+            </p>
+            <a href="/clients#openwrt" class="arrow arrow--heat"><span>查看软路由图文教程</span><Icon name="arrow-right" /></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Blog Guides -->
+      <div class="topic-block rv">
+        <h2 class="d3">客户端配置进阶深度专栏</h2>
+        <div class="posts-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 20px;">
+          {relatedPosts.map((post) => (
+            <article class="post rv" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+              <span class="feat__badge" style="display:inline-block; margin-bottom: 8px;">{post.data.category}</span>
+              <h3 class="d4" style="font-size: 20px; line-height: 1.4; margin-bottom: 12px;">
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              </h3>
+              <p style="color: #64748B; font-size: 14px; line-height: 1.6; margin-bottom: 16px;">{post.data.description}</p>
+              <a href={`/blog/${post.id}/`} class="arrow arrow--heat"><span>阅读深度评测</span><Icon name="arrow-right" /></a>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="topic-block rv">
+        <h2 class="d3">关于使用教程的常见疑问 (FAQ)</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-q">为什么导入订阅后节点显示延迟，但浏览器就是打不开 Google 或 YouTube？</summary>
+            <div class="faq-a">
+              <p>最常见的原因是本地电脑或手机的“系统代理（System Proxy）”没有真正开启，或者浏览器被某些第三方插件（如 SwitchyOmega）强行接管了代理设置。此外，若系统时间与北京时间误差超过 60 秒，会导致 TLS 握手证书校验失败，校准系统时钟即可恢复。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">苹果 iOS 手机上的“小火箭（Shadowrocket）”在中国大陆 App Store 搜不到怎么办？</summary>
+            <div class="faq-a">
+              <p>受区域版权与政策限制，Shadowrocket 未在中国大陆区 App Store 上架。您需要准备一个美区或港区 Apple ID，在 App Store 登录海外账号后搜索下载（价格约为 2.99 美元）。切勿在系统设置 iCloud 中登录未知海外账号，仅在 App Store 商店内登录即可。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">开启代理软件后，国内应用（微信、淘宝、百度、网易云）变卡甚至无法登录怎么办？</summary>
+            <div class="faq-a">
+              <p>请检查客户端的运行模式是否错误设置为了“全局模式 (Global)”。日常使用务必切换至“规则分流 (Rule)”模式，让国内域名和 IP 走 Direct 直连通道，海外受限网站走 Proxy 代理通道，既保证出海速度，又不影响国内应用访问。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>

@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { brandsData } from '../../data/brands';
+import { getPosts } from '../../utils/blog';
+import { absoluteUrl, url } from '../../utils/url';
+
+const allPosts = await getPosts();
+const relatedPosts = allPosts.filter((p) =>
+  p.data.tags.some((t) => ['IEPL专线', '晚高峰测速', '丢包率', '客户端配置'].includes(t))
+).slice(0, 3);
+
+const topBrands = brandsData.slice(0, 8);
+
+const title = '2026 机场推荐天梯榜 — 42 家 IEPL 专线机场晚高峰测速与防跑路测评';
+const description =
+  '基于 MITCE 网络实验室一手实机测速数据，全面横评 42 家主流机场品牌。收录光速云、微风网络、暮光加速等 IEPL 内网专线、流媒体与 ChatGPT 纯净解锁指标。';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '机场推荐', href: '/jichang/' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: absoluteUrl('/jichang/', Astro.site),
+    breadcrumb: { '@id': `${absoluteUrl('/jichang/', Astro.site)}#breadcrumb` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${absoluteUrl('/jichang/', Astro.site)}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 2, name: '机场推荐', item: absoluteUrl('/jichang/', Astro.site) },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: '2026 专线机场天梯榜精选列表',
+    description: '实验室多维度测速评选的最佳跨境机场服务商天梯排名。',
+    numberOfItems: topBrands.length,
+    itemListElement: topBrands.map((b, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: b.name,
+      url: b.isFeatured ? absoluteUrl(`/brands/${b.slug}/`, Astro.site) : b.affLink,
+      description: b.summary,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '为什么 2026 年选机场一定要优先考虑“IEPL 物理专线”？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'IEPL（国际以太网私网专线）采用点对点物理光纤跳接，数据传输不经过公网国际海缆出口，彻底免疫晚高峰三大运营商的 QoS 丢包限速策略，且不受 GFW 深度包检测干扰，是目前体验最稳定、延迟最低的跨境传输方案。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '如何辨别一家机场是自建专线还是二手贩子倒卖的劣质节点？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '看晚高峰 20:30–22:30 的持续延迟波动与丢包率。劣质机场在白天测速好看，晚高峰丢包率往往超过 30%；自建优质专线（如光速云）全天 24 小时延迟波动在 2ms 以内，丢包率始终为 0%。此外，查验落地 IP 是否为双 ISP 原生住宅 IP 也是关键判据。',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: '为什么强烈建议新手尽量按月付或按季度订阅，慎选超长年付？',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: '机场行业存在不可抗力的运营风险与政策波动。部分劣质平台通过“超低价打折几年付”进行资金池跑路套利。遵循“能月付不年付、年付只选运营 3 年以上旗舰大厂”的原则，是守住钱包防跑路的最有效手段。',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <PageHero
+    kicker="Airport Benchmark & Observatory · 2026 榜单"
+    title="2026 机场推荐天梯榜<br>专线实测与避坑指南"
+    lead="拒绝商业充值与虚标带货。MITCE 网络实验室基于 42 家主流品牌在真实晚高峰环境下的测速带宽、延迟抖动与流媒体解锁率，为您梳理客观的天梯排名。"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="sec on-cream" aria-label="机场推荐正文">
+    <div class="wrap">
+      <!-- Answer Block -->
+      <div class="answer-block rv">
+        <div class="answer-header">
+          <span class="badge">👑 2026 机场综合选型结论 (BLUF)</span>
+          <span class="date">测速采样样本: 42 家 · 24 小时轮巡</span>
+        </div>
+        <div class="answer-content">
+          <p>
+            <strong>核心选型建议：</strong>综合性价比与稳定性首推 <strong>光速云 (Guangsu Cloud)</strong>（年付月均 8 元起，折后 147 斯诺克套餐极具性价比，全线 IEPL 专线）；追求极低入门门槛可考虑 <strong>微风网络</strong>（7 元/月入门）；多设备家庭或工作室协同推荐 <strong>暮光加速</strong>；小白免配置首推 <strong>飞猫云</strong>（配备专属全平台一键客户端）。
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Category Pills -->
+      <div class="cat-pills-bar rv">
+        <span class="cp-title">快捷专题入口：</span>
+        <div class="cp-list">
+          <a href="/brands/" class="cp-item">42 家品牌全库</a>
+          <a href="/tutorial/" class="cp-item">客户端配置教程</a>
+          <a href="/clash/" class="cp-item">Clash 专题配置</a>
+          <a href="/free/" class="cp-item">免费白嫖节点</a>
+          <a href="/topics/runaway-radar/" class="cp-item">跑路预警雷达</a>
+          <a href="/topics/faq/" class="cp-item">终极答疑 50+ 问</a>
+        </div>
+      </div>
+
+      <!-- Top Brands Ranking Cards -->
+      <div class="topic-block rv">
+        <h2 class="d3">2026 专线机场实机测速天梯排名</h2>
+        <p class="tb-lead">以下品牌按综合性能天梯排序，所有测试均在晚高峰 20:30–22:30 实机采样：</p>
+        <div class="brands-grid">
+          {topBrands.map((brand) => (
+            <div class="bc-card">
+              <div class="bc-card__header">
+                <span class="bc-rank">第 {brand.rank} 位</span>
+                <span class="bc-line">{brand.lineType} 专线</span>
+              </div>
+              <h3 class="bc-name">{brand.name}</h3>
+              <p class="bc-summary">{brand.summary}</p>
+              <div class="bc-tags">
+                <span class="chip active">门槛: {brand.entryPrice}</span>
+                {brand.couponCode && <span class="chip">优惠码: {brand.couponCode}</span>}
+              </div>
+              <div class="bc-actions">
+                {brand.isFeatured ? (
+                  <a href={`/brands/${brand.slug}/`} class="btn btn--ow btn--sm">深度评测报告</a>
+                ) : (
+                  <a href="/brands/" class="btn btn--ow btn--sm">品牌数据库</a>
+                )}
+                <a href={brand.affLink} target="_blank" rel="nofollow sponsored noopener" class="btn btn--heat btn--sm">进入官网</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Selection Criteria -->
+      <div class="topic-block rv">
+        <h2 class="d3">优质专线机场的五大筛选黄金法则</h2>
+        <div class="pros-cons-grid">
+          <div class="pc-box pc-box--pro">
+            <h3>🟢 必须具备的硬指标</h3>
+            <ul>
+              <li><strong>IEPL / IPLC 物理专线</strong>：确保跨国跳纤不走公网，晚高峰丢包稳定为 0%。</li>
+              <li><strong>双 ISP 原生住宅 IP 落地</strong>：轻松秒开 Netflix 全区、Disney+，ChatGPT/Claude 毫无风控。</li>
+              <li><strong>多入口 Anycast BGP 容灾</strong>：全国各省电信、联通、移动用户均可近端接入，单点故障自动秒级切换。</li>
+            </ul>
+          </div>
+          <div class="pc-box pc-box--con">
+            <h3>🔴 必须避开的危险陷阱</h3>
+            <ul>
+              <li><strong>虚标千兆直连 / 公网中转冒充专线</strong>：白天看似 500M，晚高峰延迟直接飙到 300ms 以上且严重丢包。</li>
+              <li><strong>超长年付诱导折上折</strong>：运营不足 1 年的新站开出“9 折甚至半价超低年付”，大概率卷款跑路。</li>
+              <li><strong>无客户端且无客服工单</strong>：节点故障时 Telegram 频道禁言，出现断流求助无门。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Blog Guides -->
+      <div class="topic-block rv">
+        <h2 class="d3">机场选型与避坑关联深度专栏</h2>
+        <div class="posts-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 20px;">
+          {relatedPosts.map((post) => (
+            <article class="post rv" style="background:#fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+              <span class="feat__badge" style="display:inline-block; margin-bottom: 8px;">{post.data.category}</span>
+              <h3 class="d4" style="font-size: 20px; line-height: 1.4; margin-bottom: 12px;">
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              </h3>
+              <p style="color: #64748B; font-size: 14px; line-height: 1.6; margin-bottom: 16px;">{post.data.description}</p>
+              <a href={`/blog/${post.id}/`} class="arrow arrow--heat"><span>阅读深度评测</span><Icon name="arrow-right" /></a>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="topic-block rv">
+        <h2 class="d3">关于机场选型的常见疑问 (FAQ)</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-q">为什么 2026 年选机场一定要优先考虑“IEPL 物理专线”？</summary>
+            <div class="faq-a">
+              <p>IEPL（国际以太网私网专线）采用点对点物理光纤跳接，数据传输不经过公网国际海缆出口，彻底免疫晚高峰三大运营商的 QoS 丢包限速策略，且不受 GFW 深度包检测干扰，是目前体验最稳定、延迟最低的跨境传输方案。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">如何辨别一家机场是自建专线还是二手贩子倒卖的劣质节点？</summary>
+            <div class="faq-a">
+              <p>看晚高峰 20:30–22:30 的持续延迟波动与丢包率。劣质机场在白天测速好看，晚高峰丢包率往往超过 30%；自建优质专线（如光速云）全天 24 小时延迟波动在 2ms 以内，丢包率始终为 0%。此外，查验落地 IP 是否为双 ISP 原生住宅 IP 也是关键判据。</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q">为什么强烈建议新手尽量按月付或按季度订阅，慎选超长年付？</summary>
+            <div class="faq-a">
+              <p>机场行业存在不可抗力的运营风险与政策波动。部分劣质平台通过“超低价打折几年付”进行资金池跑路套利。遵循“能月付不年付、年付只选运营 3 年以上旗舰大厂”的原则，是守住钱包防跑路的最有效手段。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>

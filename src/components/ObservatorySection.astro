@@ -1,0 +1,53 @@
+---
+import SpeedTestChart from './observatory/SpeedTestChart.astro';
+import TopologyGraph from './observatory/TopologyGraph.astro';
+import Icon from './icons/Icon.astro';
+---
+
+<section class="sec on-white" id="observatory" aria-labelledby="obs-section-title">
+  <div class="wrap">
+    <div class="shead">
+      <div>
+        <span class="kicker kicker--heat rv">Network Observatory · 可观测性实验室</span>
+        <h2 class="d2 rv" style="--d:60ms" id="obs-section-title">晚高峰专线实测<br>与底层拓扑全景</h2>
+      </div>
+      <p class="lead muted shead__r rv" style="--d:120ms">
+        拒绝纸面参数。我们坚持在 20:30–22:30 晚高峰黄金时段，在联通千兆环境下实机测试真实出口带宽与端到端丢包率，全景展示 IEPL 点对点专线穿透链路。
+      </p>
+    </div>
+
+    <!-- Live Speed Test for #1 Guangsu Cloud -->
+    <div class="rv" style="--d:180ms">
+      <SpeedTestChart
+        brandName="光速云 (主推第一 · IEPL 专线)"
+        testDate="2026-10-19 晚高峰 20:30 实测"
+        testEnvironment="Clash Verge Rev (Mihomo 内核) · 联通千兆宽带基准"
+        summaryNote="亚洲近端平均延迟 38ms · 下行峰值 529Mbps · 丢包率 0%"
+      />
+    </div>
+
+    <!-- Live Topology Graph -->
+    <div class="rv" style="--d:240ms">
+      <TopologyGraph brandName="光速云" lineType="IEPL" />
+    </div>
+
+    <div class="obs-actions rv" style="--d:300ms">
+      <a href="/brands" class="btn btn--heat">
+        查看全部 42 家机场评测天梯大盘 <Icon name="arrow-right" />
+      </a>
+      <a href="/clients" class="btn btn--ow">
+        全平台客户端下载与订阅配置教程
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .obs-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 32px;
+  }
+</style>

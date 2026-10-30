@@ -1,0 +1,603 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Icon from '../../components/icons/Icon.astro';
+import { brandsData } from '../../data/brands';
+import { absoluteUrl } from '../../utils/url';
+import { siteConfig } from '../../config/site';
+
+const title = '42 家机场品牌库与专线实测天梯榜 (2026 最新)';
+const description =
+  '收录光速云、微风网络、暮光加速、飞猫云等 42 家主流跨境机场与科学上网服务商。支持按 IEPL/IPLC 专线类型、价格区间、自研客户端与 AI 流媒体解锁实时筛选对比。';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '机场品牌库', href: '/brands/' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: absoluteUrl('/brands/', Astro.site),
+    breadcrumb: { '@id': `${absoluteUrl('/brands/', Astro.site)}#breadcrumb` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: '42 家机场品牌库与实测天梯榜',
+    description: description,
+    numberOfItems: brandsData.length,
+    itemListElement: brandsData.map((b, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: b.name,
+      url: b.isFeatured ? absoluteUrl(`/brands/${b.slug}/`, Astro.site) : b.affLink,
+      description: b.summary,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${absoluteUrl('/brands/', Astro.site)}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/', Astro.site) },
+      { '@type': 'ListItem', position: 2, name: '机场品牌库', item: absoluteUrl('/brands/', Astro.site) },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <PageHero
+    kicker="Network Observatory · 品牌雷达"
+    title="42 家机场品牌库<br>与专线实测大盘"
+    lead="汇集 2026 年主流 42 家机场品牌一手资料。拒绝虚标，透明呈现专线架构、测速面板、优惠码与协议支持。"
+    breadcrumbs={breadcrumbs}
+  />
+
+  <section class="sec on-cream">
+    <div class="wrap">
+      <!-- Top Pick Banner: 光速云 -->
+      <div class="top-banner rv">
+        <div class="top-banner__badge">👑 年度综合主推第一位 · 旗舰推荐</div>
+        <div class="top-banner__grid">
+          <div>
+            <h2 class="d3">光速云 (Guangsu Cloud)</h2>
+            <p class="lead">
+              2020 年稳定运营，IEPL 专线 + 企业级内网双线路架构。自研客户端零门槛一键连，兼具 Clash/Shadowrocket 通用订阅。独家「斯诺克 147 永久套餐」¥147 享 247GB 永不过期，年付折合仅 8 元/月起。
+            </p>
+            <div class="top-banner__tags">
+              <span>🌟 2020 年运营老牌</span>
+              <span>⚡ IEPL 专线</span>
+              <span>🔒 VLESS 协议</span>
+              <span>📱 自研+第三方客户端</span>
+              <span>🎫 优惠码: <b>AMM</b></span>
+            </div>
+          </div>
+          <div class="top-banner__cta">
+            <div class="top-banner__price">入门折合约 <b>¥8</b> / 月</div>
+            <a
+              href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y"
+              target="_blank"
+              rel="nofollow sponsored noopener"
+              class="btn btn--heat"
+            >
+              前往光速云官网领券 <Icon name="arrow-right" />
+            </a>
+            <a href="/brands/guangsu-cloud" class="btn btn--ow" style="margin-top: 8px;">
+              查看光速云深度实测报告
+            </a>
+            <small class="disclosure-hint">含推广链接，通过链接注册可能为本站带来佣金，不影响用户支付价格</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compliance Disclaimer -->
+      <div class="disclosure-bar rv" id="disclosure">
+        <div class="disclosure-bar__icon"><Icon name="shield-check" /></div>
+        <div class="disclosure-bar__text">
+          <b>评测透明度与佣金合规披露 (Affiliate Disclosure)</b>：本站所有机场评测均严格基于品牌资料与实机测速。部分品牌包含推广注册链接（已标记 <code>rel="nofollow sponsored noopener"</code>），用户通过推广链接注册可能为本站带来维护佣金，绝不额外增加您的订阅成本。未核实指标均标注「待核实」，确保客观公正。
+        </div>
+      </div>
+
+      <!-- Interactive Search & Filter Controls -->
+      <div class="filter-controls rv" data-filter-root>
+        <div class="search-box">
+          <input
+            type="search"
+            id="brandSearch"
+            placeholder="搜索品牌名称（如：光速云、微风、飞猫、VLESS、IPLC...）"
+            aria-label="搜索品牌"
+          />
+        </div>
+
+        <div class="filter-tabs" role="group" aria-label="线路类型筛选">
+          <button class="ftab on" type="button" data-line="all">全部品牌 ({brandsData.length})</button>
+          <button class="ftab" type="button" data-line="IEPL">IEPL 专线</button>
+          <button class="ftab" type="button" data-line="IPLC">IPLC 专线</button>
+          <button class="ftab" type="button" data-line="BGP中转">BGP 中转</button>
+          <button class="ftab" type="button" data-featured="true">🔥 Top 10 深度评测</button>
+        </div>
+      </div>
+
+      <!-- Brand Cards Grid -->
+      <div class="brands-grid" id="brandsGrid">
+        {brandsData.map((brand) => (
+          <article
+            class="bcard rv"
+            data-brand-name={brand.name.toLowerCase()}
+            data-brand-slug={brand.slug}
+            data-brand-line={brand.lineType}
+            data-brand-featured={String(brand.isFeatured)}
+          >
+            <div class="bcard__top">
+              <div class="bcard__rank" style={`background: ${brand.accentColor}20; color: ${brand.accentColor}`}>
+                #{brand.rank}
+              </div>
+              <div class="bcard__head">
+                <h3 class="bcard__title">
+                  {brand.name}
+                  {brand.englishName && <small>{brand.englishName}</small>}
+                </h3>
+                <span class="bcard__since">运营: {brand.operatingSince}</span>
+              </div>
+              <div class:list={['bcard__status', `bcard__status--${brand.dataStatus}`]}>
+                {brand.dataStatus === 'measured' ? '实测验证' : brand.dataStatus === 'vendor' ? '厂商资料' : '待更新'}
+              </div>
+            </div>
+
+            <div class="bcard__specs">
+              <div class="bspec">
+                <span class="bspec__k">线路类型</span>
+                <span class="bspec__v bspec__v--line">{brand.lineType}</span>
+              </div>
+              <div class="bspec">
+                <span class="bspec__k">门槛起价</span>
+                <span class="bspec__v">{brand.entryPrice}</span>
+              </div>
+              <div class="bspec">
+                <span class="bspec__k">协议支持</span>
+                <span class="bspec__v">{brand.protocols.join(', ')}</span>
+              </div>
+              <div class="bspec">
+                <span class="bspec__k">客户端</span>
+                <span class="bspec__v">
+                  {brand.clientSupport.customClient ? '自研客户端' : ''}
+                  {brand.clientSupport.customClient && brand.clientSupport.clash ? ' + ' : ''}
+                  {brand.clientSupport.clash ? '支持通用订阅' : ''}
+                  {!brand.clientSupport.customClient && !brand.clientSupport.clash ? '详见官网' : ''}
+                </span>
+              </div>
+            </div>
+
+            <p class="bcard__desc">{brand.summary}</p>
+
+            {brand.couponCode && (
+              <div class="bcard__coupon">
+                <span>优惠码: <code>{brand.couponCode}</code></span>
+                {brand.couponDiscount && <small>{brand.couponDiscount}</small>}
+              </div>
+            )}
+
+            <div class="bcard__actions">
+              {brand.isFeatured ? (
+                <a href={`/brands/${brand.slug}`} class="btn btn--white bcard__btn-detail">
+                  深度实测报告 <Icon name="arrow-right" />
+                </a>
+              ) : (
+                <span class="bcard__badge-overview">已收录数据大盘</span>
+              )}
+
+              <a
+                href={brand.affLink}
+                target="_blank"
+                rel="nofollow sponsored noopener"
+                class="btn btn--heat bcard__btn-aff"
+              >
+                官网直达 ↗
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="no-results" id="noResults" hidden>
+        <p>未找到匹配的机场品牌。请尝试不同的关键词（如：专线、IEPL、8元、免配...）。</p>
+      </div>
+    </div>
+  </section>
+
+  <FinalCTA />
+</BaseLayout>
+
+<script>
+  // Client-side instant filter and search
+  const searchInput = document.getElementById('brandSearch') as HTMLInputElement | null;
+  const ftabs = document.querySelectorAll<HTMLButtonElement>('.ftab');
+  const cards = document.querySelectorAll<HTMLElement>('.bcard');
+  const noResults = document.getElementById('noResults');
+
+  let activeLine = 'all';
+  let onlyFeatured = false;
+  let searchQuery = '';
+
+  function applyFilter() {
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const name = card.dataset.brandName || '';
+      const line = card.dataset.brandLine || '';
+      const featured = card.dataset.brandFeatured === 'true';
+
+      const matchSearch = !searchQuery || name.includes(searchQuery) || line.toLowerCase().includes(searchQuery);
+      const matchLine = activeLine === 'all' || line === activeLine;
+      const matchFeatured = !onlyFeatured || featured;
+
+      const isVisible = matchSearch && matchLine && matchFeatured;
+      card.hidden = !isVisible;
+      if (isVisible) visibleCount++;
+    });
+
+    if (noResults) {
+      noResults.hidden = visibleCount > 0;
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = (e.target as HTMLInputElement).value.trim().toLowerCase();
+      applyFilter();
+    });
+  }
+
+  ftabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      ftabs.forEach((t) => t.classList.remove('on'));
+      tab.classList.add('on');
+
+      if (tab.dataset.featured === 'true') {
+        onlyFeatured = true;
+        activeLine = 'all';
+      } else {
+        onlyFeatured = false;
+        activeLine = tab.dataset.line || 'all';
+      }
+      applyFilter();
+    });
+  });
+</script>
+
+<style>
+  /* Top Banner Pick */
+  .top-banner {
+    background: linear-gradient(135deg, #1C0F07 0%, #2A170C 100%);
+    border: 2px solid #EC5A11;
+    border-radius: 16px;
+    padding: 28px 32px;
+    color: #FFF6EC;
+    margin-bottom: 24px;
+    box-shadow: 0 12px 35px rgba(236, 90, 17, 0.2);
+  }
+  .top-banner__badge {
+    display: inline-block;
+    background: #EC5A11;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .top-banner__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 860px) {
+    .top-banner__grid {
+      grid-template-columns: 1.5fr 1fr;
+      align-items: center;
+    }
+  }
+  .top-banner h2 {
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .top-banner p {
+    color: #E2D3C4;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .top-banner__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .top-banner__tags span {
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 0.78rem;
+    padding: 3px 10px;
+    border-radius: 6px;
+    color: #FFF;
+  }
+  .top-banner__cta {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .top-banner__price {
+    font-size: 0.95rem;
+    color: #FFC091;
+    margin-bottom: 4px;
+  }
+  .top-banner__price b {
+    font-size: 1.8rem;
+    color: #FFF;
+  }
+  .disclosure-hint {
+    font-size: 0.7rem;
+    color: #A38F7E;
+    line-height: 1.4;
+    margin-top: 4px;
+  }
+
+  /* Disclosure Bar */
+  .disclosure-bar {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: #FFF;
+    border: 1px solid #E8DDD2;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    font-size: 0.82rem;
+    color: #5C4A3E;
+    line-height: 1.5;
+  }
+  .disclosure-bar__icon {
+    color: #EC5A11;
+    font-size: 1.2rem;
+    margin-top: 2px;
+  }
+  .disclosure-bar code {
+    background: #F3ECE4;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+
+  /* Filter Controls */
+  .filter-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid #D8C8B8;
+    background: #FFF;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .search-box input:focus {
+    border-color: #EC5A11;
+    box-shadow: 0 0 0 3px rgba(236, 90, 17, 0.15);
+  }
+  .filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ftab {
+    background: #FFF;
+    border: 1px solid #D8C8B8;
+    color: #4A3A2F;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .ftab:hover {
+    border-color: #EC5A11;
+    color: #EC5A11;
+  }
+  .ftab.on {
+    background: #1C0F07;
+    color: #FFF;
+    border-color: #1C0F07;
+  }
+
+  /* Brands Grid */
+  .brands-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 680px) {
+    .brands-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .brands-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .bcard {
+    background: #FFF;
+    border: 1px solid #E5D9CE;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 4px 15px rgba(28, 15, 7, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .bcard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(28, 15, 7, 0.08);
+    border-color: #EC5A11;
+  }
+  .bcard__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .bcard__rank {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+  .bcard__head {
+    display: flex;
+    flex-direction: column;
+  }
+  .bcard__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1C0F07;
+    margin: 0;
+  }
+  .bcard__title small {
+    display: block;
+    font-size: 0.75rem;
+    color: #7A695C;
+    font-weight: 400;
+  }
+  .bcard__since {
+    font-size: 0.72rem;
+    color: #9C8C7E;
+  }
+  .bcard__status {
+    margin-left: auto;
+    font-size: 0.7rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .bcard__status--measured {
+    background: #DCFCE7;
+    color: #15803D;
+  }
+  .bcard__status--vendor {
+    background: #E0F2FE;
+    color: #0369A1;
+  }
+  .bcard__status--unverified {
+    background: #F1F5F9;
+    color: #64748B;
+  }
+
+  .bcard__specs {
+    background: #FDF9F5;
+    border: 1px solid #EFE4D8;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .bspec {
+    display: flex;
+    flex-direction: column;
+  }
+  .bspec__k {
+    font-size: 0.68rem;
+    color: #8C7869;
+    text-transform: uppercase;
+  }
+  .bspec__v {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #2D1D13;
+  }
+  .bspec__v--line {
+    color: #EC5A11;
+  }
+
+  .bcard__desc {
+    font-size: 0.84rem;
+    color: #5C4A3E;
+    line-height: 1.5;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .bcard__coupon {
+    background: #FFF7ED;
+    border: 1px dashed #FDBA74;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    color: #9A3412;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bcard__coupon code {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #C2410C;
+  }
+
+  .bcard__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .bcard__btn-detail {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid #D8C8B8;
+  }
+  .bcard__badge-overview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: #8C7869;
+    background: #F7EFE7;
+    border-radius: 6px;
+  }
+  .bcard__btn-aff {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+    text-align: center;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 50px 20px;
+    background: #FFF;
+    border-radius: 12px;
+    border: 1px dashed #D8C8B8;
+    color: #7A695C;
+  }
+</style>
