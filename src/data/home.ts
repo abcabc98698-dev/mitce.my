@@ -12,7 +12,7 @@ export const hero = {
   lead: 'MITCE指南深度收录 42 家主流机场一手评测数据。首推光速云（IEPL+自研客户端+年付8元起+147永久套餐），涵盖微风网络、暮光加速等专线梯队，提供全平台客户端下载与订阅配置教程。',
   primaryCta: { label: '主推·光速云领券直达', href: 'https://sahude.gsyvipaff.com/#/?code=keqgvT5Y' },
   secondaryCta: { label: '查阅 42 家天梯大盘', href: '/brands' },
-  image: '/images/hero-bg.svg',
+  image: '/images/ai-agency-hero.webp',
   credentials: [
     { icon: 'clock', label: '2020 稳定老牌' },
     { icon: 'shield-check', label: 'IEPL / IPLC 物理专线' },
