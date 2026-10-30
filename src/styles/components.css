@@ -12,12 +12,12 @@
 .mainnav { margin-inline: auto; }
 .mainnav ul { display: flex; gap: 9px; }
 .mainnav a {
-  display: block; padding: 11px 20px; border-radius: 9px; border: 1px solid var(--hair-w);
-  font-family: var(--display); font-size: 12.5px; font-weight: 500; letter-spacing: .13em;
-  text-transform: uppercase; color: #fff; transition: .3s var(--ease);
+  display: block; padding: 10px 16px; border-radius: 9px; border: 1px solid var(--hair-w);
+  font-family: var(--display); font-size: 12.5px; font-weight: 500; letter-spacing: .06em;
+  text-transform: uppercase; color: #fff; transition: .3s var(--ease); white-space: nowrap;
 }
 .mainnav a:hover, .mainnav a[aria-current] { background: rgba(255, 255, 255, .16); border-color: var(--hair-w2); }
-.hdr .btn { height: 50px; padding: 0 26px; font-size: 12.5px; letter-spacing: .13em; text-transform: uppercase; border-radius: 9px; }
+.hdr .btn { height: 48px; padding: 0 20px; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; border-radius: 9px; white-space: nowrap; flex-shrink: 0; }
 .burger { display: none; width: 50px; height: 50px; border-radius: 9px; border: 1px solid var(--hair-w); background: none; cursor: pointer; }
 .burger span { display: block; width: 18px; height: 1.5px; background: #fff; margin: 4px auto; }
 

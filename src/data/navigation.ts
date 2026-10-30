@@ -1,25 +1,32 @@
 import type { Link, NavigationItem } from '../types';
 
 /**
- * 顶部全局主导航
+ * 顶部全局主导航 (桌面端保持精简优雅，禁止拥挤换行)
  */
 export const mainNav: NavigationItem[] = [
   { label: '首页', href: '/' },
   { label: '机场推荐', href: '/jichang/', matchPath: '/jichang' },
-  { label: 'VPN推荐', href: '/vpn/', matchPath: '/vpn' },
-  { label: 'Clash专题', href: '/clash/', matchPath: '/clash' },
-  { label: '节点大盘', href: '/nodes/', matchPath: '/nodes' },
-  { label: '梯子选型', href: '/tizi/', matchPath: '/tizi' },
-  { label: '免费资源', href: '/free/', matchPath: '/free' },
-  { label: '使用教程', href: '/tutorial/', matchPath: '/tutorial' },
   { label: '品牌库', href: '/brands/', matchPath: '/brands' },
+  { label: '客户端教程', href: '/tutorial/', matchPath: '/tutorial' },
+  { label: '免费资源', href: '/free/', matchPath: '/free' },
   { label: '深度测评', href: '/blog/', matchPath: '/blog' },
 ];
 
-/** 移动端弹出导航 */
+/** 移动端弹出导航 (全量垂直展示所有核心专题与栏目) */
 export const mobileNav: NavigationItem[] = [
-  ...mainNav,
-  { label: '主推光速云', href: 'https://sahude.gsyvipaff.com/#/?code=keqgvT5Y' },
+  { label: '首页', href: '/' },
+  { label: '机场推荐', href: '/jichang/', matchPath: '/jichang' },
+  { label: '品牌评测库', href: '/brands/', matchPath: '/brands' },
+  { label: '客户端教程', href: '/tutorial/', matchPath: '/tutorial' },
+  { label: 'Clash 专题', href: '/clash/', matchPath: '/clash' },
+  { label: 'VPN 推荐', href: '/vpn/', matchPath: '/vpn' },
+  { label: '节点大盘', href: '/nodes/', matchPath: '/nodes' },
+  { label: '梯子选型', href: '/tizi/', matchPath: '/tizi' },
+  { label: '免费资源', href: '/free/', matchPath: '/free' },
+  { label: '跑路预警雷达', href: '/topics/runaway-radar/', matchPath: '/topics/runaway-radar' },
+  { label: '终极答疑百科', href: '/topics/faq/', matchPath: '/topics/faq' },
+  { label: '深度测评专栏', href: '/blog/', matchPath: '/blog' },
+  { label: '主推·光速云 (年付8元起)', href: 'https://sahude.gsyvipaff.com/#/?code=keqgvT5Y' },
 ];
 
 export interface FooterColumn {
